@@ -7,7 +7,9 @@ from apps.articulo.models import Articulo, Genero
 
 class GeneroModel(admin.ModelAdmin):
     list_display = ('nombre', 'padre')
-    
 
-admin.site.register(Articulo)
+class ArticuloModel(admin.ModelAdmin):
+    list_display = ('fecha', 'titulo','resumen', 'contenido', 'genero')
+
+admin.site.register(Articulo, ArticuloModel)
 admin.site.register(Genero, GeneroModel)

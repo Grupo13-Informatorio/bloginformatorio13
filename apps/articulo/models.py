@@ -1,32 +1,56 @@
+from datetime import *
 from time import strftime
 from django.db import models
 
 # Create your models here.
 
-class Genero(models.Model):
+class Categoria(models.Model):
     nombre = models.CharField(
         max_length=35, 
-        verbose_name="Genero", 
-        help_text="Nombre del genero"
-        )
+        verbose_name="categoria", 
+        help_text="Nombre de la categoria")
     padre = models.ForeignKey(
         'self', 
-        related_name = 'Genero_padre',
+        related_name = 'categoria_padre',
         on_delete = models.CASCADE,
         null = True,
-        blank=True
-        )
+        blank=True)
     
     def __str__(self) -> str:
         return str(self.nombre)
 
 
 class Articulo(models.Model):
-    fecha = models.DateField(auto_now = True, verbose_name = "Fecha de publicacion")
-    titulo = models.CharField(max_length=100, verbose_name="Titulo", help_text="Ingrese el titulo del articulo")
-    resumen = models.TextField(verbose_name= 'Resumen', help_text='Ingrese aqui su resumen')
-    contenido = models.TextField(verbose_name= "Contenido", help_text="Ingrese aqui el contenido del articulo")
-    genero = models.ForeignKey(Genero, on_delete = models.CASCADE, null=True, verbose_name="Genero", help_text="Ingrese el genero")
+    fecha = models.DateField(
+        editable = False, 
+        verbose_name = "Fecha de publicacion")
+    titulo = models.CharField(
+        max_length=100, 
+        verbose_name="Titulo", 
+        help_text="Ingrese el titulo del articulo")
+    resumen = models.TextField(
+        verbose_name= 'Resumen', 
+        help_text='Ingrese aqui su resumen')
+    contenido = models.TextField(
+        verbose_name= "Contenido", 
+        help_text="Ingrese aqui el contenido del articulo")
+    categoria = models.ForeignKey(
+        Categoria, 
+        on_delete = models.CASCADE, 
+        null=True, 
+        verbose_name="Categoria", 
+        help_text="Ingrese la categoria")
+    imagen = models.ImageField(
+        upload_to="media/images/", 
+        default = None
+        )
+    
+    def save(self, *args, **kwargs):
+        if self.id:
+            super(Articulo, self).save(*args, **kwargs)
+        else:
+            self.fecha = datetime.utcnow()
+            super(Articulo, self).save(*args, **kwargs)
     
     
     

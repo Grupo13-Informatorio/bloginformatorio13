@@ -25,7 +25,7 @@ class Articulo(models.Model):
         verbose_name = "Fecha de publicacion"
         )
     modificado = models.DateField(
-        editable = True,
+        editable = False,
         verbose_name = 'Modificado',
         null = True,
         blank = True   
@@ -57,9 +57,9 @@ class Articulo(models.Model):
     
     def save(self, *args, **kwargs):
         if self.id:
-            self.modificado = datetime.utcnow()
+            self.modificado = datetime.now()
         else:
-            self.fecha = datetime.utcnow()
+            self.fecha = datetime.now()
         super(Articulo, self).save(*args, **kwargs)
     
     def __str__(self) -> str:

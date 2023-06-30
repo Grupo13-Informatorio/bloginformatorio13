@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from django.db import models
 from apps.articulo.models import Articulo
 
@@ -20,12 +20,12 @@ class Comentario(models.Model):
         blank = True
         )
     modificado = models.DateField(
-        editable = True,
+        editable = False,
         verbose_name = 'Modificado',
         null = True,
         blank = True   
     )
-    fecha = models.DateField(
+    creado = models.DateField(
         editable = False, 
         verbose_name = "Fecha de publicacion"
         )
@@ -46,9 +46,10 @@ class Comentario(models.Model):
     
     def save(self, *args, **kwargs):
         if self.id:
-            self.modificado = datetime.utcnow()
-        if (self.id_comentario is None) ^ (self.articulo is None):
-            self.fecha = datetime.utcnow()
+            self.modificado = datetime.now()
+        if ((self.id_comentario is None) ^ (self.articulo is None)):
+            if not self.id:
+                self.creado = datetime.now()
             super(Comentario, self).save(*args, **kwargs)        
         else:
             raise Exception("Debe ingresar una clave al menos y solo una")

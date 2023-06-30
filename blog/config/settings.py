@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'apps.usuario',
     'apps.comentario',
     'apps.articulo',
 ]
@@ -83,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blog_grupo13',
         'USER' : 'root',
-        'PASSWORD' : 'root',
+        'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '3306',
     }

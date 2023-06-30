@@ -10,11 +10,11 @@
     <h2>ARTICULOS</h2>
     <ul>
         {% for articulo in articulos %}
-        <li> {articulo.titulo} 
-            <br>
-            <p><strong>{articulo.resumen}</strong></p>
+        <li>
+            <h3>Titulo: {{articulo.titulo}}</h3>
+            <p>Resumen: <strong>{{articulo.resumen}}</strong></p>
+            <p>cat: {{articulo.categoria}}</p>
         </li>
-        
         {% endfor %}
     </ul>
 </body>

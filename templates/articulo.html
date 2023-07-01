@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="es-ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Grupo13</title>
-</head>
-<body>
-    <h1>G13 - NUESTRO BLOG</h1>
-    <h2>ARTICULOS</h2>
+{% extends 'index.html' %}
+{% block articulo %}
+{% block title %} Articulos {% endblock %}
     <ul>
         {% for articulo in articulos %}
         <li>
@@ -17,5 +10,5 @@
         </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+    <a href="{% url 'home' %}">Inicio</a>
+{% endblock %}

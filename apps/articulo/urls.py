@@ -1,7 +1,7 @@
-from django.contrib import admin
-from django.urls import include, path
-from .views import index
+from django.urls import path
+from .views import ArticuloView ##Este articulos hace referencia al de view.py de la app articulo
+
 
 urlpatterns = [
-    path('index/', index, name='index'),
+    path('articulos/', ArticuloView.as_view(), name='articulos'),
 ]

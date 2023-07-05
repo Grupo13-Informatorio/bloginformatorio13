@@ -15,11 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-from .views import index
+from django.urls import path, include
+##from .views import index
+from .views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', index, name='index'),
+    ##Esta linea de abajo tendría que reemplazarse por la de HOME ya que es la que aparece al inicio
+    path('', IndexView.as_view(), name='index'),
+    ##En esta linea de abajo estoy usando el articulo.html de la carpeta templates que lo llamo desde la views.py de articulo, pero antes se va a buscarlo a la urls.py de articulo
     path('', include('apps.articulo.urls')),
 ]

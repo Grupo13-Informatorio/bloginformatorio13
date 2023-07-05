@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 ##from .views import index
 from .views import IndexView
+##para imagenes
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +30,6 @@ urlpatterns = [
     ##En esta linea de abajo estoy usando el articulo.html de la carpeta templates que lo llamo desde la views.py de articulo, pero antes se va a buscarlo a la urls.py de articulo
     path('', include('apps.articulo.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

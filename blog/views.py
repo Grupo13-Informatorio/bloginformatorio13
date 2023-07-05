@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import render
-##Si quiero activar esta vista basada en funciones importar from django.shortcuts import render
+##Si quiero activar esta vista basada en funciones importar from django.shortcuts import render y tambien se usa en clase porque o sino se rompe 
 # def index(request):
 #     return render(request, 'index.html')
 

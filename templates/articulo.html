@@ -18,7 +18,20 @@
     <!-- place navbar here -->
   </header>
   <main>
-  <h1> Página de Articulo</h1>
+
+    <h1> Página de Articulo</h1>
+      <ul>
+          {% for articulo in articulos %}
+           <li> {{ articulo.titulo}}</li>
+           <li> {{ articulo.resumen}}</li>
+           <li> {{ articulo.contenido}}</li>
+           <img src= "{{ articulo.imagen.url }}" alt="">
+           <br>
+          {% empty %}
+           <li>No hay articulos</li>
+          {% endfor %}
+          
+      </ul>
   </main>
   <footer>
     <!-- place footer here -->

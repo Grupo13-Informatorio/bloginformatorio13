@@ -25,7 +25,7 @@ class Articulo(models.Model):
     resumen = models.TextField(null=False)
     contenido = models.TextField(null=False)
     fecha_hora = models.DateTimeField(auto_now_add=True)
-    imagen = models.ImageField(null=True, blank=True, upload_to='media/articulo/', default='articulo/default_articulo.jpg')
+    imagen = models.ImageField(null=True, blank=True, upload_to='media/articulo/', default='media/articulo/default_articulo.jpg')
     estado = models.BooleanField(default=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, default='Sin categoría')
     publicado = models.DateTimeField(default=timezone.now)

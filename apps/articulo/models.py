@@ -51,8 +51,10 @@ class Articulo(models.Model):
         help_text="Ingrese la categoria"
         )
     imagen = models.ImageField(
-        upload_to="media/images/", 
-        default = None
+        upload_to="media/articulo", 
+        default = None,
+        null=True,
+        blank=True
         )
     
     def save(self, *args, **kwargs):

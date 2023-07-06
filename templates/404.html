@@ -1,0 +1,6 @@
+{% extends 'index.html' %}
+{% block title %} Página no encontrada {% endblock%}
+{% block articulo %}
+    <h3>Esta página no existe, sepa disculpar las molestias</h3>
+    <a href="{% url 'home' %}">Inicio</a>
+{% endblock %}

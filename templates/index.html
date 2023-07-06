@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es-ar">
 <head>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Pagina de Inicio{% endblock %}</title>
@@ -9,7 +11,9 @@
     <h1>G13 - NUESTRO BLOG</h1>
     {% block articulo %} 
     <h3>Página principal</h3>
-    <a href="{% url 'articulos' %}">ver articulos</a> 
+    <a href="{% url 'articulos' %}">ver articulos</a>
+    <br>
+    <a href="{% url 'categorias' %}">ver categorias</a> 
     {% endblock %}
 </body>
 </html>

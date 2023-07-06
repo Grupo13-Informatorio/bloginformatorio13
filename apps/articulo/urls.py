@@ -1,6 +1,9 @@
 from django.urls import include, path
-from .views import ArticuloView
+from .views import ArticuloPorCategoria, ArticulosView, ArticuloView, CategoriasView
 
 urlpatterns = [
-    path('articulos/',ArticuloView.as_view(), name = 'articulos')
+    path('articulos/',ArticulosView.as_view(), name = 'articulos'),
+    path('articulo/<int:id>',ArticuloView.as_view(), name = 'mostrarArticulo'),
+    path('categoria/<int:id_categoria>',ArticuloPorCategoria.as_view(), name = 'articulosPorCategoria'),
+    path('categorias/',CategoriasView.as_view(), name = 'categorias'),
 ]

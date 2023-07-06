@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block title %} Articulos {% endblock %}
+{% block articulo %}
+    <ul>
+        {% for articulo in articulos %}
+        {% include 'tarjetaarticulo.html'%}
+        {% empty %}
+        <h3>Lo sentimos, no hay articulos para mostrar</h3>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Inicio</a>
+{% endblock %}

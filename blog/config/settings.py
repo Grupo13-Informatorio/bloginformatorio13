@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+from django.conf import settings
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -133,5 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Media files (Images)
-MEDIA_URL = 'media/'
+MEDIA_URL = ''
 MEDIA_DIR = [os.path.join(os.path.dirname(BASE_DIR), 'media')]
+
+

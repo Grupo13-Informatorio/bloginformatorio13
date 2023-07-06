@@ -57,6 +57,9 @@ class Articulo(models.Model):
         blank=True
         )
     
+    class Meta:
+        ordering = ('-fecha',)
+    
     def save(self, *args, **kwargs):
         if self.id:
             self.modificado = datetime.now()

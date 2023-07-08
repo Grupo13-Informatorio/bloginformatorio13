@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ar">
   <head>
     {% load static %}
     <meta charset="utf-8">
@@ -29,7 +29,9 @@
     </script>
   </head>
   <body>
+    {% include "header.html" %}
     {% block contenido %}
     {% endblock %}
+    {% include "footer.html" %}
   </body>
 </html>

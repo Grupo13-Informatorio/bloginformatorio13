@@ -48,6 +48,7 @@
     -webkit-touch-callout: none; }
   .owl-carousel .owl-item img {
     display: block;
+    object-fit: cover;
     width: 100%; }
   .owl-carousel .owl-nav.disabled,
   .owl-carousel .owl-dots.disabled {
@@ -139,7 +140,9 @@
   .owl-carousel .owl-item .owl-lazy[src^=""], .owl-carousel .owl-item .owl-lazy:not([src]) {
     max-height: 0; }
   .owl-carousel .owl-item img.owl-lazy {
-    transform-style: preserve-3d; }
+    transform-style: preserve-3d; 
+    object-fit: cover
+  }
 
 /*
  * 	Owl Carousel - Video Plugin

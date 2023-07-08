@@ -393,12 +393,14 @@ header .navbar {
 	margin-top: 12px;
 }
 
-
-
 /* Blog Posts */
 
-.blog-posts {
+.blog-posts-with-banner.blog-posts{
 	margin-top: 100px;
+}
+
+.blog-posts {
+	margin-top: 0;
 }
 
 .blog-posts .blog-post {
@@ -953,7 +955,7 @@ footer p a:hover {
 /* About Us */
 
 .about-us {
-	margin-top: 100px;
+	margin-top: 0;
 	text-align: center;
 }
 
@@ -1090,4 +1092,11 @@ footer p a:hover {
 		margin-left: 0px;
 		margin-top: 60px;
 	}
+}
+
+.img-lista-articulo {
+	max-height: 35vh;
+	resize: both;
+	object-fit: cover;
+	
 }

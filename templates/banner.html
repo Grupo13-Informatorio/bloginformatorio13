@@ -4,7 +4,8 @@
         <div class="owl-banner owl-carousel">
             {% for articulo in articulos_banner %}
             <div class="item">
-                <img src="{{articulo.imagen_carrusel.url}}" alt="Imagen {{articulo.titulo}}">
+                <img src="{{articulo.imagen.url}}" alt="Imagen {{articulo.titulo}}">
+                <div class="orla">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -19,6 +20,7 @@
                       <li><a href="">{{comentarios}} Comentarios</a></li>
                     </ul>
                   </div>
+                </div>
                 </div>
             </div>
             {% empty %}

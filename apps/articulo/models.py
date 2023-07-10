@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django_resized import ResizedImageField
 
 # Create your models here.
-
+# CATEGORIA
 class Categoria(models.Model):
     nombre = models.CharField(
         max_length=35, 
@@ -17,10 +17,14 @@ class Categoria(models.Model):
         on_delete = models.CASCADE,
         null = True,
         blank=True)
-    
+    activo = models.BooleanField(
+        default=True,
+        verbose_name="activo"
+    )
     def __str__(self) -> str:
         return str(self.nombre)
 
+# ARTICULO
 class Articulo(models.Model):
     fecha = models.DateField(
         editable = False, 
@@ -52,24 +56,16 @@ class Articulo(models.Model):
         verbose_name="Categoria", 
         help_text="Ingrese la categoria"
         )
-    imagen = ResizedImageField(
-        size=[1024, 768],
+    imagen = models.ImageField(
         upload_to="media/articulo", 
         default = "static/default-articulo.jpg",
-        crop = ['middle', 'center'],
         null=True,
         blank=True
         )
-    
-    imagen_carrusel = ResizedImageField(
-        
-        size=[640, 480],
-        upload_to="media/articulo/carrusel", 
-        default = "static/default-articulo.jpg",
-        crop = ['middle', 'center'],
-        null=True,
-        blank=True
-        )
+    activo = models.BooleanField(
+        default=True,
+        verbose_name="activo"
+    )    
     
     class Meta:
         ordering = ('-fecha',)
@@ -79,7 +75,6 @@ class Articulo(models.Model):
             self.modificado = datetime.now()
         else:
             self.fecha = datetime.now()
-        # ACA DEJO PARA SEGUIR EL LUNES self.imagen_carrusel = 
         super(Articulo, self).save(*args, **kwargs)
     
     def get_articulos_recientes():

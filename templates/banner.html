@@ -11,13 +11,13 @@
                     <div class="meta-category">
                       <span>{{articulo.categoria}}</span>
                     </div>
-                    <a href="{% url 'mostrarArticulo' id=articulo.id %}">
+                    <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
                       <h4>{{articulo.titulo}}</h4>
                     </a>
                     <ul class="post-info">
                       <li><a href="">{{id_usuario}}</a></li>
                       <li><a href="">{{articulo.fecha}}</a></li>
-                      <li><a href="">{{comentarios}} Comentarios</a></li>
+                      <li><a href="">{{articulo.comentario_set.all.count}} Comentarios</a></li>
                     </ul>
                   </div>
                 </div>

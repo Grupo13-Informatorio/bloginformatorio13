@@ -5,11 +5,11 @@
       </div>
       <div class="down-content">
         <span>Lifestyle</span>
-        <a href="{% url 'mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+        <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
         <ul class="post-info">
           <li><a href="#">{{articulo.usuario}}</a></li>
           <li><a href="#">{{articulo.fecha}}</a></li>
-          <li><a href="#">{{articulo.comentarios}} Comments</a></li>
+          <li><a href="#">{{articulo.comentario_set.all.count}} Comentarios</a></li>
         </ul>
         <p>{{articulo.resumen}}</p>
         <div class="post-options">

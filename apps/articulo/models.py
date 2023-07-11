@@ -2,7 +2,7 @@ from datetime import datetime
 from time import strftime
 from django.db import models
 from django.urls import reverse_lazy
-from django_resized import ResizedImageField
+
 
 # Create your models here.
 # CATEGORIA
@@ -82,7 +82,7 @@ class Articulo(models.Model):
         ultimos_cinco_ascendente = reversed(ultimos_cinco)
         return ultimos_cinco_ascendente
     
-    def get_url(self, **kwargs):
+    def get_url(self):
         return reverse_lazy("articulo_resumido", args=[self.pk])
     
     

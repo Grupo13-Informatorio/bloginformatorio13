@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block inicio_nav %} 
+{% block articulos_nav %}
 <li class="nav-item active">
-{% endblock inicio_nav %}
+{% endblock %}
 {% block contenido %}
     <div id="preloader">
         <div class="jumper">
@@ -11,8 +11,7 @@
         </div>
     </div>  
 {% block articulo %}
-{% include "banner.html" %}
-<section class="blog-posts-with-banner blog-posts">
+<section class="blog-posts">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">

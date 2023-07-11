@@ -16,9 +16,9 @@
                       <span>{{articulo.categoria}}</span>
                       <a href="post-details.html"><h4>{{articulo.titulo}}</h4></a>
                       <ul class="post-info">
-                        <li><a href="#">{{articulo.id_usuario}}</a></li>
+                        <li><a href="#">{{articulo.user}}</a></li>
                         <li><a href="#">{{articulo.fecha}}</a></li>
-                        <li><a href="#">{{articulo.comentarios}} Comments</a></li>
+                        <li><a href="#">{{articulo.comentario_set.all.count}} Comentarios</a></li>
                       </ul>
                       <p>{{articulo.contenido}}</p>
                       <div class="post-options">

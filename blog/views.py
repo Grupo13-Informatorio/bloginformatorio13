@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.contrib.auth.forms import UserCreationForm
 from apps.articulo.models import Articulo
 
 
@@ -23,3 +24,7 @@ def contacto(request):
 
 def sobre_nosotros(request):
     return render(request, 'sobre_nosotros.html')
+
+def registrarse(request):
+    return render(request, 'registrarse.html',
+                  {'form':UserCreationForm})

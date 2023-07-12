@@ -24,6 +24,13 @@ class Comentario(models.Model):
         editable = False, 
         verbose_name = "Fecha de publicacion"
         )
+    comentario_padre = models.ForeignKey(
+        "self",
+        on_delete = models.CASCADE, 
+        verbose_name = 'Comentario',
+        null = True,
+        blank = True
+        )
 
     
     def __str__(self) -> str:

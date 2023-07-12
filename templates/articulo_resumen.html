@@ -9,7 +9,14 @@
         <ul class="post-info">
           <li><a href="#">{{articulo.usuario}}</a></li>
           <li><a href="#">{{articulo.fecha}}</a></li>
-          <li><a href="#">{{articulo.comentario_set.all.count}} Comentarios</a></li>
+          <li><a href="">
+            {% if articulo.comentario_set.all.count == 0 %}
+            sin comentarios
+            {% else %}
+            {{articulo.comentario_set.all.count}} {%if articulo.comentario_set.all.count == 1%}comentario{%else%}comentarios{%endif%}
+            {% endif %}
+            </a>
+          </li>
         </ul>
         <p>{{articulo.resumen}}</p>
         <div class="post-options">

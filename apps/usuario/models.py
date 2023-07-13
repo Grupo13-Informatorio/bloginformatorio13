@@ -4,11 +4,4 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Usuario(AbstractUser):
-    is_colaborador = models.BooleanField(
-        verbose_name="Colaborador",
-        default=False,
-    )
-    is_publico = models.BooleanField(
-        verbose_name="Publico",
-        default=True
-    )
+    ROL = ['visitante','miembro', 'usuario']

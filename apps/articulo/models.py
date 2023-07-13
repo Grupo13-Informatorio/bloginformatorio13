@@ -3,6 +3,8 @@ from time import strftime
 from django.db import models
 from django.urls import reverse_lazy
 
+from apps.usuario.models import Usuario
+
 
 # Create your models here.
 # CATEGORIA
@@ -65,7 +67,14 @@ class Articulo(models.Model):
     activo = models.BooleanField(
         default=True,
         verbose_name="activo"
-    )    
+    )
+    # creado_por = models.ForeignKey(
+    #     Usuario,
+    #     on_delete = models.CASCADE,
+    #     editable=False,
+    #     null=False,
+    #     blank=False
+    # )    
     
     class Meta:
         ordering = ('-fecha',)
@@ -78,8 +87,7 @@ class Articulo(models.Model):
         super(Articulo, self).save(*args, **kwargs)
     
     def get_articulos_recientes():
-        ultimos_cinco = Articulo.objects.order_by('-fecha')[:5]
-        ultimos_cinco_ascendente = reversed(ultimos_cinco)
+        ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
         return ultimos_cinco_ascendente
     
     def get_url(self):

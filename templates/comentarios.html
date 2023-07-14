@@ -12,20 +12,20 @@
           {% for comentario in articulo.comentario_set.all %}
           <li>
             <div class="author-thumb">
-              <img src="assets/images/comment-author-01.jpg" alt="">
+              <img src="{{comentario.creado_por.foto_perfil.url}}" alt="">
             </div>
             <div class="right-content">
-              <h4>Usuario que comenta<span>{{ comentario.creado }}</span></h4>
+              <h4>{{comentario.creado_por.username}}<span>{{ comentario.creado }}</span></h4>
               <p>{{ comentario.contenido }}</p>
             </div>
           </li>
           {% for respuesta in comentario.comentario_set.all %}
           <li class="replied">
             <div class="author-thumb">
-              <img src="assets/images/comment-author-02.jpg" alt="">
+              <img src="{{respuesta.creado_por.foto_perfil.url}}" alt="">
             </div>
             <div class="right-content">
-              <h4>Usuario que comenta comentarios<span>{{ respuesta.creado }}</span></h4>
+              <h4>{{respuesta.creado_por.username}}<span>{{ respuesta.creado }}</span></h4>
               <p>{{respuesta.contenido}}</p>
             </div>
           </li>

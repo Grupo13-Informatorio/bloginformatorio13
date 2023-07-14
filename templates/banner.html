@@ -15,7 +15,7 @@
                       <h4>{{articulo.titulo}}</h4>
                     </a>
                     <ul class="post-info">
-                      <li><a href="">{{id_usuario}}</a></li>
+                      <li><a href="">{{articulo.creado_por.username}}</a></li>
                       <li><a href="">{{articulo.fecha}}</a></li>
                       <li><a href="">
                       {% if articulo.comentario_set.all.count == 0 %}

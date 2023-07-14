@@ -7,7 +7,7 @@
         <span>Lifestyle</span>
         <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
         <ul class="post-info">
-          <li><a href="#">{{articulo.usuario}}</a></li>
+          <li><a href="#">{{articulo.creado_por.username}}</a></li>
           <li><a href="#">{{articulo.fecha}}</a></li>
           <li><a href="">
             {% if articulo.comentario_set.all.count == 0 %}

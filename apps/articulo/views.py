@@ -2,6 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from apps.comentario.models import Comentario
 
@@ -10,7 +11,7 @@ from .models import Articulo, Categoria
 # Create your views here.
 
 
-class ArticuloView(View):
+class ArticuloView(LoginRequiredMixin, View):
     def get(self, request, id):
         articulo = Articulo.objects.get(id=id)
         comentarios = Comentario.objects.filter(articulo=articulo)

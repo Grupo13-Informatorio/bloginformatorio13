@@ -68,13 +68,13 @@ class Articulo(models.Model):
         default=True,
         verbose_name="activo"
     )
-    # creado_por = models.ForeignKey(
-    #     Usuario,
-    #     on_delete = models.CASCADE,
-    #     editable=False,
-    #     null=False,
-    #     blank=False
-    # )    
+    creado_por = models.ForeignKey(
+        Usuario,
+        on_delete = models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name="creador", 
+    )    
     
     class Meta:
         ordering = ('-fecha',)

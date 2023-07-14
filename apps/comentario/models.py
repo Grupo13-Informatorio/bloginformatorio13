@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
 from apps.articulo.models import Articulo
+from apps.usuario.models import Usuario
 
 # Create your models here.
 
@@ -31,6 +32,14 @@ class Comentario(models.Model):
         null = True,
         blank = True
         )
+    creado_por = models.ForeignKey(
+        Usuario,
+        on_delete = models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name="creador", 
+    )    
+
 
     
     def __str__(self) -> str:

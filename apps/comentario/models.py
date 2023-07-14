@@ -38,9 +38,10 @@ class Comentario(models.Model):
         null=True,
         blank=True,
         verbose_name="creador", 
+    )
+    is_active = models.BooleanField(
+        default=True,
     )    
-
-
     
     def __str__(self) -> str:
         return self.contenido

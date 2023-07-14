@@ -1,2 +1,3 @@
 __pycache__/
 blog/config/local.py
+blog/config/prod.py

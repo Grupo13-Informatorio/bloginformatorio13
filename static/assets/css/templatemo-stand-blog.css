@@ -5,7 +5,7 @@ TemplateMo 551 Stand Blog
 https://templatemo.com/tm-551-stand-blog
 
 */
-
+ 
 body {
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
@@ -196,6 +196,9 @@ header .navbar {
 .background-header .navbar-nav .show>.nav-link {
 	color: #f48840!important;
 }
+
+
+
 .navbar .navbar-brand {
 	float: 	left;
 	margin-top: -12px;
@@ -216,6 +219,12 @@ header .navbar {
 	font-style: normal;
 	color: #f48840;
 }
+
+.nav-item img, .navbar-brand a{
+	max-height: 50px;
+	margin: auto;
+}
+
 #navbarResponsive {
 	z-index: 999;
 }
@@ -224,11 +233,22 @@ header .navbar {
 }
 .navbar .navbar-nav .nav-item {
 	margin: 0px 15px;
+	justify-content: center;
 }
+
+.circular--portrait{
+	position: relative; width: 50px; height: 50px; overflow: hidden; border-radius: 50%; 
+}
+
+.circular--portrait img { 
+	width: 100%; height: auto; 
+}
+
 .navbar .navbar-nav a.nav-link {
 	text-transform: capitalize;
 	font-size: 15px;
 	font-weight: 800;
+	margin: auto;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	color: #1e1e1e;
@@ -261,9 +281,6 @@ header .navbar {
 	line-height: 30px;
 	font-family: 'FontAwesome';
 }
-
-
-
 /* Banner Style */
 .main-banner .container-fluid {
 	padding: 0px 10px;
@@ -1121,3 +1138,4 @@ footer p a:hover {
 	object-fit: cover;
 	
 }
+

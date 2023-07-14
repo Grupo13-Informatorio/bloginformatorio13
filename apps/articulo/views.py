@@ -10,11 +10,10 @@ from .models import Articulo, Categoria
 
 # Create your views here.
 
-
-class ArticuloView(LoginRequiredMixin, View):
+class ArticuloView(View):
     def get(self, request, id):
-        articulo = Articulo.objects.get(id=id)
-        comentarios = Comentario.objects.filter(articulo=articulo)
+        articulo = Articulo.objects.filter(is_active = True).get(id=id)
+        comentarios = Comentario.objects.filter(is_active = True, articulo = articulo)
         categorias = Categoria.objects.all()
         cant_comentarios = comentarios.count()
         id_usuario = "Admin"

@@ -1,5 +1,4 @@
 {% extends "index.html"%}
-
 {% block articulo %}
     <section class="blog-posts grid-system">
       <div class="container">
@@ -18,7 +17,7 @@
                       <ul class="post-info">
                         <li><a href="#">{{articulo.creado_por.username}}</a></li>
                         <li><a href="#">{{articulo.fecha}}</a></li>
-                        <li><a href="#">{{articulo.comentario_set.all.count}} Comentarios</a></li>
+                        <li><a href="#">{{articulo.comentario_set.all.count }} Comentarios</a></li>
                       </ul>
                       <p>{{articulo.contenido}}</p>
                       <div class="post-options">

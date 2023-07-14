@@ -3,8 +3,8 @@ from time import strftime
 from django.db import models
 from django.urls import reverse_lazy
 
-from apps.usuario.models import Usuario
 
+from apps.usuario.models import Usuario
 
 # Create your models here.
 # CATEGORIA
@@ -64,13 +64,13 @@ class Articulo(models.Model):
         null=True,
         blank=True
         )
-    activo = models.BooleanField(
+    is_active = models.BooleanField(
         default=True,
-        verbose_name="activo"
     )
+    
     creado_por = models.ForeignKey(
         Usuario,
-        on_delete = models.CASCADE,
+        on_delete = models.SET_NULL,
         null=True,
         blank=True,
         verbose_name="creador", 
@@ -92,7 +92,6 @@ class Articulo(models.Model):
     
     def get_url(self):
         return reverse_lazy("articulo_resumido", args=[self.pk])
-    
     
     def __str__(self) -> str:
         return str(self.titulo + " " + self.fecha.strftime("%d-%m-%Y"))

@@ -4,7 +4,6 @@
 ### MENTOR DESIGNADO: .....
 
 
-GRUPO 13 - G13 
 INTEGRANTES: 
    - ZENIQUEL, Camila
    - ROLON, Dario

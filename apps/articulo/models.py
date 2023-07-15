@@ -19,7 +19,7 @@ class Categoria(models.Model):
         on_delete = models.CASCADE,
         null = True,
         blank=True)
-    activo = models.BooleanField(
+    is_active = models.BooleanField(
         default=True,
         verbose_name="activo"
     )

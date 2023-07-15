@@ -4,8 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Usuario(AbstractUser):
-    is_visitante = models.BooleanField(default=True)
-    is_miembro = models.BooleanField(default=False)
+    is_miembro = models.BooleanField(default=True)
     is_usuario = models.BooleanField(default=False)
     foto_perfil = models.ImageField(
         default="static/default-user.png", 
@@ -13,3 +12,15 @@ class Usuario(AbstractUser):
         blank=True,
         null=True
         )
+    fecha_nacimiento = models.DateField(
+        null=True,
+        blank=True
+    )
+    
+    @property
+    def edad(self):
+        import datetime
+        return int((datetime.date.today() - self.birthday).days / 365.25  )
+    
+    def __str__(self):
+        return self.username

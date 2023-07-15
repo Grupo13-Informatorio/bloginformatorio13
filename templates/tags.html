@@ -1,3 +1,4 @@
+{% load articulo_tags %}
 <div class="col-lg-4">
     <div class="sidebar">
       <div class="row">
@@ -8,7 +9,7 @@
           </div>
           <div class="content">
             <ul>
-              {% for categoria in categorias %}
+              {% for categoria in categorias|is_active %}
               <li><a href="#">{{categoria.nombre}}</a></li>
               {% endfor %}
             </ul>

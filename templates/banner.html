@@ -18,7 +18,7 @@
                     <ul class="post-info">
                       <li><a href="">{{articulo.creado_por.username}}</a></li>
                       <li><a href="">{{articulo.fecha}}</a></li>
-                      <li><a href="">
+                      <li><a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
                       {% if articulo.comentario_set.all|is_active|length == 0 %}
                       sin comentarios
                       {% else %}

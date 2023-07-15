@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Iterable, Optional
 from django.db import models
 from apps.articulo.models import Articulo
 from apps.usuario.models import Usuario
@@ -8,7 +9,7 @@ from apps.usuario.models import Usuario
 class Comentario(models.Model):
     
     contenido = models.CharField(
-        max_length=100, 
+        max_length=200, 
         verbose_name='Texto', 
         help_text='Ingrese aqui su comentario',
         default = ''
@@ -20,8 +21,7 @@ class Comentario(models.Model):
         null = True,
         blank = True
         )
-    creado = models.DateField(
-        default= datetime.now(),
+    creado = models.DateTimeField(
         editable = False, 
         verbose_name = "Fecha de publicacion"
         )
@@ -45,4 +45,8 @@ class Comentario(models.Model):
     
     def __str__(self) -> str:
         return self.contenido
+    
+    def save(self, *args, **kwargs):
+        self.creado = datetime.now()
+        return super().save(*args, **kwargs)
 

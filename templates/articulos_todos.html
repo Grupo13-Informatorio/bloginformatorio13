@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load articulo_tags %}
 {% block contenido %}
 <section class="blog-posts">
       <div class="container">
@@ -6,7 +7,7 @@
           <div class="col-lg-8">
             <div class="all-blog-posts">
               <div class="row">
-                {% for articulo in articulos %}
+                {% for articulo in articulos|is_active %}
                 {% include "articulo_resumen.html" %}
                 {% empty %}
                 <h3>No se han publicado articulos</h3>

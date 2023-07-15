@@ -28,7 +28,7 @@
             >
                   {% if user.is_authenticated %}
                       <!-- Bienvenido {{user.username | upper}} -->
-                      <a  class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                      <a  class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                         <div class="circular--portrait" style="max-height:60px;">
                           <img src="{{user.foto_perfil.url}}" alt="foto {{user.username}}">
                         </div>

@@ -1,9 +1,8 @@
 {% load articulo_tags %}
-
 <div class="col-lg-12">
     <div class="sidebar-item comments">
       <div class="sidebar-heading">
-      {% with cant_comentarios=articulo.comentario_set.all|count_is_active  %}
+      {% with cant_comentarios=articulo.comentario_set.all|is_active|length  %}
       {% if cant_comentarios == 0 %}
         <h2>sin comentarios</h2>
       {% else %}
@@ -20,17 +19,17 @@
         <ul>
           {% for comentario in articulo.comentario_set.all|is_active %}
           <li>
-            <div class="author-thumb">
-              <img src="{{comentario.creado_por.foto_perfil.url}}" alt="">
+            <div class="author-thumb circular--comment">
+              <img src="{{comentario.creado_por.foto_perfil.url}}" class="">
             </div>
             <div class="right-content">
               <h4>{{comentario.creado_por.username}}<span>{{ comentario.creado }}</span></h4>
               <p>{{ comentario.contenido }}</p>
             </div>
           </li>
-          {% for respuesta in comentario.comentario_set.all %}
+          {% for respuesta in comentario.comentario_set.all|is_active %}
           <li class="replied">
-            <div class="author-thumb">
+            <div class="author-thumb circular--comment">
               <img src="{{respuesta.creado_por.foto_perfil.url}}" alt="">
             </div>
             <div class="right-content">

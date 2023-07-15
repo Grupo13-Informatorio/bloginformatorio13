@@ -13,6 +13,7 @@ INTEGRANTES:
    - MIRANDA, Federico
    - CABALLERO, Enzo
    - VERA, Franco
+   - GOMEZ, Jonatan 
    - HIEBL, Darian     
 
 **Comandos utiles:**

@@ -85,7 +85,8 @@ class Articulo(models.Model):
         else:
             self.fecha = datetime.now()
         super(Articulo, self).save(*args, **kwargs)
-    
+        
+  
     def get_articulos_recientes():
         ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
         return ultimos_cinco_ascendente

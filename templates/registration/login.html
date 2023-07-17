@@ -1,20 +1,38 @@
 {% extends "index.html"%}
 {% block contenido %}
-
-<form method="post" action="{% url 'login' %}" style="margin: 100px; ;">
-  {% csrf_token %}
-  <table>
-    <tr>
-      <td>{{ form.username.label_tag }}</td>
-      <td>{{ form.username }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.password.label_tag }}</td>
-      <td>{{ form.password }}</td>
-    </tr>
-  </table>
-  <input type="submit" value="login">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
-
+<section class="blog-posts">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="all-blog-posts">
+          <div class="row">
+            <div class="formulario">
+              <h3>Para continuar debe iniciar sesión</h3>
+              <hr>
+              <br>
+              <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table>
+                  <tr>
+                    <p>{{ form.username.label_tag }}</p>
+                    <p>{{ form.username }}</p>
+                  </tr>
+                  <tr>
+                    <p>{{ form.password.label_tag }}</p>
+                    <p>{{ form.password }}</p>
+                  </tr>
+                </table>
+                <br>
+                <input type="submit" value="login">
+                <input type="hidden" name="next" value="{{ next }}">
+              </form>
+              <hr>
+              <a href="{% url 'usuario:registro' %}">Registrese</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</section>
 {% endblock %}

@@ -1,7 +1,6 @@
 from django.urls import  path
 from .views import  ArticuloResumidoView, ArticuloView, ArticulosView
 
-
 app_name = 'articulo'
 
 urlpatterns = [

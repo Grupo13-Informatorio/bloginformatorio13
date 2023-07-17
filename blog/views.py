@@ -30,3 +30,6 @@ def sobre_nosotros(request):
 def registrarse(request):
     return render(request, 'registrarse.html',
                   {'form':UserCreationForm})
+    
+def registration_success(request):
+    return render(request,'registration_success.html' )

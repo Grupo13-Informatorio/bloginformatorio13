@@ -3,15 +3,17 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 
-from .views import IndexView, contacto, sobre_nosotros,registrarse
+from .views import IndexView, contacto, registration_success, sobre_nosotros,registrarse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',IndexView.as_view(), name = "inicio"),
     path('contacto/', contacto, name="contacto"),
-    path('registrar/', registrarse, name="registrarse"),
     path('nosotros/', sobre_nosotros, name="nosotros"),
     path('', include('apps.articulo.urls')),
+    path('', include('apps.usuario.urls')),
+    path('', include('apps.comentario.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("acounts/registration/success/",registration_success, name='registration_success'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) 
 

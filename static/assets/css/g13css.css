@@ -238,6 +238,19 @@ header .navbar {
 	position: relative; width: 50px; height: 50px; overflow: hidden; border-radius: 50%; 
 } */
 
+.formulario{
+	width: 100%;
+	text-align: center;
+}
+
+.formulario form{
+	display: inline-block;
+}
+
+.formulario form td{
+	text-align: end;
+}
+
 .circular--portrait img { 
 		border-radius: 50%;
 		height: 50px;
@@ -302,6 +315,10 @@ header .navbar {
 
 .owl-banner .item {
 	position: relative;
+}
+
+.errorlist{
+	color:red;
 }
 
 

@@ -91,8 +91,7 @@ class Articulo(models.Model):
         ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
         return ultimos_cinco_ascendente
     
-    def get_articulo_comentario(self):
-        print("estoy aca")
+    def get_comentario_url(self):
         return reverse_lazy("articulo:comentar", args=[self.pk])
 
     def get_url(self):

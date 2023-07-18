@@ -32,4 +32,4 @@ def registrarse(request):
                   {'form':UserCreationForm})
     
 def registration_success(request):
-    return render(request,'registration_success.html' )
+    return render(request,'registration/registration_success.html' )

@@ -7,9 +7,9 @@ class ComentarioCreationForm(ModelForm):
     contenido = CharField(
         label='Ingrese aqui su comentario', 
         max_length=250,
-        min_length=30,
+        min_length=10,
         widget=TextInput(
-            attrs={'placeholder': 'Igrese su comentario. Maximo 250 caracteres.'}
+            attrs={'placeholder': 'Igrese su comentario. Minimo 10 caracteres, maximo 250 caracteres.'}
             )
         )
     

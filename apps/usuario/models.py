@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Usuario(AbstractUser):
-    is_miembro = models.BooleanField(default=True)
-    is_usuario = models.BooleanField(default=False)
+    is_miembro = models.BooleanField(default=False)
+    is_usuario = models.BooleanField(default=True)
     foto_perfil = models.ImageField(
         default="static/default-user.png", 
         upload_to="media/usuarios",

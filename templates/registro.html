@@ -6,25 +6,37 @@
       <div class="col-lg-12">
         <div class="all-blog-posts">
           <div class="row">
-            <div class="formulario">
-              <h3>¡Bienvenido!</h3> 
-              <h4>A continuacion ingrese sus datos</h4>
-              <hr>
-              <br>
-              <form method="post" class="card card-body" action="{% url 'usuario:registro' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <br>
-                <input type="submit" value="REGISTRARSE">
-                <input type="hidden" name="next" value="{{ next }}">
-              </form>
-              <hr>
-              <a href="{% url 'inicio' %}">volver</a>
+            <div class="col-lg-12">
+              <div class="sidebar-item submit-comment">
+                <div class="sidebar-heading">
+                  <h2>Your comment</h2>
+                </div>
+                <div class="content">
+                  <form id="register_user" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <!-- <fieldset>
+                          <textarea name="{{form.comentario}}" rows="6" id="message" placeholder="{{form.comentario.placeholder}}" required="" ></textarea>
+                        </fieldset> -->
+                        {{form.as_p}}
+                      </div>
+                      <div class="col-lg-12">
+                        <fieldset>
+                          <button type="submit" id="form-submit" class="main-button">Submit</button>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                  <hr>
+                  <a href="{% url 'inicio' %}">volver</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </section>
 {% endblock %}

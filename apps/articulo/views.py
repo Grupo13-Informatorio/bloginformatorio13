@@ -33,11 +33,9 @@ class ArticulosView(View):
         articulos_banner = Articulo.get_articulos_recientes()
         articulos = Articulo.objects.all()
         categorias = Categoria.objects.all()
-        id_usuario = "Admin"
         context = { 
                 'articulos_banner' : articulos_banner,
                 'articulos' : articulos,
-                'id_usuario' : id_usuario,
                 'categorias' : categorias
                    }
         return render(request, 'articulos_todos.html', context)

@@ -747,6 +747,10 @@ ul.page-numbers li a:hover {
 	margin-top: 50px;
 }
 
+.sidebar-item.comments .content li {
+	width: 100%;
+}
+
 .sidebar .search {
 	margin-top: 0px;
 }

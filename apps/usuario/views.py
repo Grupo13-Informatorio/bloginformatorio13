@@ -24,4 +24,4 @@ class registrarUsuario(CreateView):
         else:
             form.is_invalid(form)
 
-    
+  

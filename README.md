@@ -11,7 +11,6 @@ INTEGRANTES:
    - VAERNET, Bianca
    - LOPEZ, Andres
    - MIRANDA, Federico
-   - CABALLERO, Enzo
    - VERA, Franco
    - GOMEZ, Jonatan 
    - HIEBL, Darian     

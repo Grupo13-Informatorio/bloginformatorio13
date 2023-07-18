@@ -19,7 +19,7 @@
               <a class="nav-link" href="{% url 'articulo:articulos'%}">Articulos</a>
             </li>
             <li class="nav-item {% if url_name == 'contacto' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'contacto'%}">Contactenos</a>
+              <a class="nav-link" href="{% url 'contacto' %}">Contactenos</a>
             </li>
             <li class="nav-item dropdown 
             {% if url_name == 'login' and not user.is_authenticated %} 

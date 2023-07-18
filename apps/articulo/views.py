@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from apps.comentario.forms import ComentarioCreationForm
 
 from apps.comentario.models import Comentario
 
@@ -16,13 +17,13 @@ class ArticuloView(View):
         comentarios = Comentario.objects.filter(is_active = True, articulo = articulo)
         categorias = Categoria.objects.all()
         cant_comentarios = comentarios.count()
-        id_usuario = "Admin"
+        form = ComentarioCreationForm()
         context = { 
                 'articulo' : articulo,
-                'id_usuario' : id_usuario,
                 'cant_comentarios' : cant_comentarios,
                 'comentarios' : comentarios,
-                'categorias' : categorias
+                'categorias' : categorias,
+                'form' : form,
                    }
         return render(request, 'articulo_mostrar.html', context)
         

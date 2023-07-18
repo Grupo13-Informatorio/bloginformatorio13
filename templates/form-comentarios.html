@@ -4,13 +4,14 @@
         <h2>Your comment</h2>
       </div>
       <div class="content">
-        <form id="comment" action="{{ articulo.get_link_comentar }}" method="post">
+        <form id="comment" action="{{articulo.get_comentario_url}}" method="post">
           {% csrf_token %}
           <div class="row">
             <div class="col-lg-12">
-              <fieldset>
-                <textarea name="message" rows="6" id="message" placeholder="Type your comment" required="" value="{{form.contenido}}"></textarea>
-              </fieldset>
+              <!-- <fieldset>
+                <textarea name='{{form.comentario}}' rows="6" id="message" placeholder="Type your comment" required="" ></textarea>
+              </fieldset> -->
+              {{form.as_p}}
             </div>
             <div class="col-lg-12">
               <fieldset>

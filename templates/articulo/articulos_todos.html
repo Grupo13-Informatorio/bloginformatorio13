@@ -8,14 +8,14 @@
             <div class="all-blog-posts">
               <div class="row">
                 {% for articulo in articulos|is_active %}
-                {% include "articulo_resumen.html" %}
+                {% include "articulo/articulo_resumen.html" %}
                 {% empty %}
                 <h3>No se han publicado articulos</h3>
                 {% endfor %}
               </div>
             </div>
           </div>
-        {% include "tags.html" %}
+        {% include "articulo/categorias.html" %}
         </div>
       </div>
     </section>

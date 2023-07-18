@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password
 
 
 class registrarUsuario(CreateView):
-    template_name = 'registro.html'
+    template_name = 'registration/registro.html'
     form_class = UserCreationForm
     success_url = reverse_lazy('registration_success')
     

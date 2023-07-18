@@ -1,8 +1,5 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.comentario.forms import ComentarioCreationForm
 
 from apps.comentario.models import Comentario
@@ -25,7 +22,7 @@ class ArticuloView(View):
                 'categorias' : categorias,
                 'form' : form,
                    }
-        return render(request, 'articulo_mostrar.html', context)
+        return render(request, 'articulo/articulo_mostrar.html', context)
         
 
 class ArticulosView(View):
@@ -38,7 +35,7 @@ class ArticulosView(View):
                 'articulos' : articulos,
                 'categorias' : categorias
                    }
-        return render(request, 'articulos_todos.html', context)
+        return render(request, 'articulo/articulos_todos.html', context)
 
 
 class ArticuloResumidoView(View):
@@ -51,4 +48,4 @@ class ArticuloResumidoView(View):
                 'comentarios' : 35,
                 'categorias' : categorias
                    }
-        return render(request, 'articulo_resumen.html', context)
+        return render(request, 'articulo/articulo_resumen.html', context)

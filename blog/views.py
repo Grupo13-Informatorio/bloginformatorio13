@@ -22,7 +22,7 @@ class IndexView(View):
         return render(request, 'index.html', context)
 
 def contacto(request):
-    return render(request,'contacto.html')
+    return render(request,'contacto/contacto.html')
 
 def sobre_nosotros(request):
     return render(request, 'nosotros.html')

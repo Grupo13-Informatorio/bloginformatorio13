@@ -1,9 +1,14 @@
+from typing import Any
+from django.forms.models import BaseModelForm
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView
+from django.views.generic import CreateView
+
 from apps.articulo.forms import ArticuloCreationForm
 from apps.comentario.forms import ComentarioCreationForm
-
 from apps.comentario.models import Comentario
 
 from .models import Articulo, Categoria
@@ -26,7 +31,6 @@ class ArticuloView(View):
                    }
         return render(request, 'articulo/articulo_mostrar.html', context)
         
-
 class ArticulosView(View):
     def get(self, request):
         articulos_banner = Articulo.get_articulos_recientes()
@@ -38,7 +42,6 @@ class ArticulosView(View):
                 'categorias' : categorias
                    }
         return render(request, 'articulo/articulos_todos.html', context)
-
 
 class ArticuloResumidoView(View):
     def get(self, request, id):
@@ -62,18 +65,14 @@ class EditarArticulo(UpdateView):
     
 
 
-def crearArticulo(request):
-
-    form_articulo = ArticuloCreationForm()
+class CrearArticulo(CreateView):
     
-    if request.method == "POST":
-        form = ArticuloCreationForm(data=request.POST, files=request.FILES)
-        form.instance.creado_por = request.user
-        if form.is_valid():
-            form.save()
-            return redirect('articulo:articulos')
-        else:
-            return redirect('articulo:articulos')
-    else:
-        return render(request,'articulo/articulo_crear.html',{'form': form_articulo} )
+    form_class = ArticuloCreationForm
+    template_name = 'articulo/articulo_crear.html'
+    success_url = ''
+    
+    def form_valid(self, form):
+        if form.is_valid:
+            form.instance.creado_por = self.request.user
+            return super().form_valid(form)
     

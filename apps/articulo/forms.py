@@ -6,4 +6,4 @@ class ArticuloCreationForm(ModelForm):
 
     class Meta:
         model = Articulo
-        fields = ('titulo', 'resumen', 'contenido', 'categoria', 'imagen', 'is_active')
+        exclude = ['creado_por', 'fecha', 'modificado']

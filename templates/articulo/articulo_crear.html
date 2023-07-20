@@ -12,7 +12,7 @@
                   <h2>Ingrese los datos del articulo:</h2>
                 </div>
                 <div class="content">
-                  <form action="{% url 'articulo:crear' %}" method="post">
+                  <form action="{% url 'articulo:crear' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                       <div class="col-lg-12">

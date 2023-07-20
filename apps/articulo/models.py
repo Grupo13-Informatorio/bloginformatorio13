@@ -28,53 +28,21 @@ class Categoria(models.Model):
 
 # ARTICULO
 class Articulo(models.Model):
-    fecha = models.DateField(
-        editable = False, 
-        verbose_name = "Fecha de publicacion"
-        )
-    modificado = models.DateField(
-        editable = False,
-        verbose_name = 'Modificado',
-        null = True,
-        blank = True   
-    )
-    titulo = models.CharField(
-        max_length=100, 
-        verbose_name="Titulo", 
-        help_text="Ingrese el titulo del articulo"
-        )
-    resumen = models.TextField(
-        verbose_name= 'Resumen', 
-        help_text='Ingrese aqui su resumen'
-        )
-    contenido = models.TextField(
-        verbose_name= "Contenido", 
-        help_text="Ingrese aqui el contenido del articulo"
-        )
-    categoria = models.ForeignKey(
-        Categoria, 
-        on_delete = models.CASCADE, 
-        null=True, 
-        verbose_name="Categoria", 
-        help_text="Ingrese la categoria"
-        )
-    imagen = models.ImageField(
-        upload_to="media/articulo", 
-        default = "static/default-articulo.jpg",
-        null=True,
-        blank=True
-        )
-    is_active = models.BooleanField(
-        default=True,
-    )
-    
-    creado_por = models.ForeignKey(
-        Usuario,
-        on_delete = models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="creador", 
-    )    
+    fecha = models.DateField(editable = False,verbose_name = "Fecha de publicacion")
+    modificado = models.DateField(editable = False,verbose_name = 'Modificado', null = True,
+                                  blank = True)
+    titulo = models.CharField(max_length=100,verbose_name="Titulo",
+                              help_text="Ingrese el titulo del articulo")
+    resumen = models.TextField(verbose_name= 'Resumen',help_text='Ingrese aqui su resumen')
+    contenido = models.TextField(verbose_name= "Contenido",
+                                 help_text="Ingrese aqui el contenido del articulo")
+    categoria = models.ForeignKey(Categoria,on_delete = models.CASCADE,null=True,
+                                  verbose_name="Categoria",help_text="Ingrese la categoria")
+    imagen = models.ImageField(upload_to="articulo/",default = "../static/default-articulo.jpg",
+                               null=True,blank=True)
+    is_active = models.BooleanField(default=True)
+    creado_por = models.ForeignKey(Usuario,on_delete = models.SET_NULL,null=True,blank=True,
+                                   verbose_name="creador")    
     
     class Meta:
         ordering = ('-fecha',)

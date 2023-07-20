@@ -25,10 +25,8 @@ class UserCreationForm(ModelForm):
         cleaned_form = super().clean() 
         password = cleaned_form.get('password')
         password2 = cleaned_form.get('password2')
-        
         if password != password2:
             self.add_error("password2", "Las contraseñas no coinciden")
-            
         return cleaned_form
     
     class Meta:

@@ -86,7 +86,10 @@ class Articulo(models.Model):
             self.fecha = datetime.now()
         super(Articulo, self).save(*args, **kwargs)
         
-  
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("articulo:mostrarArticulo", kwargs={"id": self.pk})
+        
     def get_articulos_recientes():
         ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
         return ultimos_cinco_ascendente

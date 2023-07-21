@@ -1,0 +1,15 @@
+{% extends 'homel.html' %}
+{% block title %} Crear Articulo {% endblock %}
+
+{% load static %}
+
+{% block crearArticulo %}
+
+    <h1>Agregar/Editar artículo</h1>
+    <form method="post" enctype="multipar/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+
+{% endblock %}

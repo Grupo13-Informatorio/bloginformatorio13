@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 ##from .views import index
-from .views import IndexView
+from .views import IndexView, AboutView, ContactenosView
 ##para imagenes
 from django.conf.urls.static import static
 from django.conf import settings
@@ -29,6 +29,11 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     ##En esta linea de abajo estoy usando el articulo.html de la carpeta templates que lo llamo desde la views.py de articulo, pero antes se va a buscarlo a la urls.py de articulo
     path('', include('apps.articulo.urls')),
+    path('', include('apps.comentario.urls')),
+    path('sobrenosotros/', AboutView.as_view(), name='sobrenosotros'),
+    path('contactenos/',ContactenosView.as_view(), name='contactenos'),
+    path('', include('apps.contacto.urls')),
+    path('', include('apps.usuario.urls')),
 ]
 
 if settings.DEBUG:

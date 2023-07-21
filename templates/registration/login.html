@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+
+{% block title %} Ingresar {% endblock title %}
+
+{% block contenido %}
+{% include 'header.html' %}
+<main>
+  
+    <h1> Ingresar </h1>
+      <ul>
+      </ul>
+
+</main>
+<!-- Acá el usuario si no está registrado es redireccionado al registro "registrar.html" de otra manera tiene que ir a "index.html"-->
+<section class="blog-posts grid-system">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="all-blog-posts">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="blog-post">
+                  <div class="blog-thumb">
+                        <form class="form-group" method="POST">
+                              {% csrf_token %}
+
+                                {{ form.as_p }}
+
+                              
+                              <div class="col text-behind mt-2">
+                                <a class="btn btn-seccondary" href="{% url 'apps.usuario:registrar' %}">¿Todavía no está registrado? Regístrese</a>
+                              </div>
+                          
+                              <button type="submit" class="btn btn-success">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+{% endblock contenido %}

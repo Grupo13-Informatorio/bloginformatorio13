@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+
+{% block contenido %}
+
+{% for comentario in comentarios %}
+
+<div class="content">
+  <ul>
+    <li>
+      <div class="author-thumb">
+        <img src="{{ comentario.usuario.imagen.url }}g" alt="">
+      </div>
+      <div class="right-content">
+        <h4>{{ comentario.usuario }}<span>{{ comentario.fecha }}</span></h4>
+        <p>{{ comentario.texto }}</p>
+      </div>
+      {% if user.is_superuser %}
+        <a class="btn btn-succes btn-lg" 
+          href="{% url 'apps.comentario:eliminarComentario' comentario.pk %}"> Eliminar comentario</a>
+      {% endif %}
+    </li>
+  </ul>
+</div>
+{% empty %}
+<li>Aún no hay comentarios</li>
+{% endfor %}
+
+{% endblock %}

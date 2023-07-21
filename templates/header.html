@@ -1,11 +1,10 @@
 {% load static %}
 
-
 <!-- Header -->
   <header class="">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}"><h2> GRUPO 13 <em>.</em></h2></a>
+        <a class="navbar-brand" href="{% url 'index' %}"><h2> GRUPO 13<em>¬</em></h2></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,17 +16,23 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" href="{% static 'about.html' %}">Sobre Nosotros</a>
+              <a class="nav-link" href="{% url 'sobrenosotros' %}">Sobre Nosotros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'articulos' %}">Artículos</a>
+              <a class="nav-link" href="{% url 'apps.articulo:articulos' %}">Artículos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% static 'post-details.html' %}">Detalles Post</a>
+              <a class="nav-link" href="{% url 'contacto:contacto' %}">Contáctenos</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% static 'contact.html' %}">Contáctenos</a>
+              <a class="nav-link" href="{% url 'apps.usuario:logout' %}">Cerrar sesión</a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'apps.usuario:login' %}">Ingresar/Registrarse</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>

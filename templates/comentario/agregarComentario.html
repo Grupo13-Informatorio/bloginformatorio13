@@ -1,0 +1,10 @@
+{% extends 'home.html' %}
+{% block title %} Crear Comentario {% endblock %}
+{% block contenido %}
+<h1>Crear comentario</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+{% endblock %}

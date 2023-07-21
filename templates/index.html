@@ -2,6 +2,9 @@
 {% load static %} <!--esto se hace para cargar los archivos estaticos de la carpeta static-->
 
 {% block contenido %}
+
+{% include "header.html" %}
+
 <body>
 
   <!-- ***** Preloader Start ***** -->
@@ -16,21 +19,20 @@
 
 <!--DE ACA SAQUE EL HEADER HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH-->
 
-{% include "header.html" %}
-
   <!-- Page Content -->
 <!--DE ACA SAQUE EL BANNER HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH-->
-{% include "banner.html" %}
+
+ {% include "banner.html" %}
 
 <!--DE ACA SAQUE EL BUSCADOR Y ETIQUETAS HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH-->
 
-{% include "centroizquierda.html" %} <!--Reemplazar por centrodepagina.html para que aparezca el buscador-->
+ {% include "centroizquierda.html" %} <!--Reemplazar por centrodepagina.html para que aparezca el buscador-->
 
 
 
 <!--DE ACA SAQUE EL FOOTER HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH-->
 
-{% include "footer.html" %}<!--Está adentro de "block contenido", si está afuera no te deja :D-->
+ {% include "footer.html" %}<!--Está adentro de "block contenido", si está afuera no te deja :D-->
 
 
 

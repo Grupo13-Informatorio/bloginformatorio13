@@ -5,22 +5,11 @@ from django.utils import timezone
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=30, null=False)
+    def __str__(self) -> str:
+        return self.nombre
 
 
 class Articulo(models.Model):
-    '''
-    Clase: Articulo
-    Hereda de: objeto
-    Atributos de clase: id, articulos (lista)
-    Atributos en constructor: id_usuario, titulo, resumen, contenido
-    Atributos por defecto: id = autogenerado, fecha_hora = fecha y hora actual, estado = True
-    Propiedades: fecha
-    Metodos de clase: __generar_id
-    Metodos de instancia: set_estado
-    Metodo __str__ devuelve "ID - Titulo - Resumen - Usuario - Activo"
-    '''
-    
-    #self.id_usuario = id_usuario
     titulo = models.CharField(max_length=30, null=False)
     resumen = models.TextField(null=False)
     contenido = models.TextField(null=False)
@@ -40,20 +29,4 @@ class Articulo(models.Model):
         self.imagen.delete(self.imagen.name)
         super().delete()
 
-
-    # def __generar_id():
-    #     '''Devuelve ID distinto en cada instancia'''
-    #     actual = Articulo.id
-    #     Articulo.id += 1
-    #     return actual
     
-    # def get_fecha_hora(self):
-    #     return self.fecha_hora
-    
-    # fecha = property(get_fecha_hora)
-    
-    # def set_estado(self, estado):
-    #     self.estado = bool(estado)
-    
-    # def __repr__(self) -> str:
-    #     return f"ID {self.id} - {self.fecha_hora} - Titulo:{self.titulo} - Resumen:{self.resumen} - Usuario:{self.id_usuario} - Activo:{self.estado}"

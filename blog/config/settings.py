@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-6t9=is5x&6)@3-kq0ru_-&0bn3khooh=k#w4ah+klsgj@r+68g
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'usuario.Usuario'
 
 
 # Application definition
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.articulo',
+    'apps.comentario',
+    'apps.contacto',
+    'apps.usuario',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blog.wsgi.application'
+
 
 
 # Database
@@ -129,7 +134,7 @@ STATICFILES_DIRS = [os.path.join(os.path.dirname(BASE_DIR), 'static/')]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+LOGOUT_REDIRECT_URL = '/' ##esto es response en logout
 
 # Media files (Images)
 MEDIA_URL = 'media/'

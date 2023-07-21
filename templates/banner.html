@@ -1,0 +1,29 @@
+{% load static %}
+
+
+<div class="main-banner header-text">
+    <div class="container-fluid">
+      <div class="owl-banner owl-carousel">
+        {% for articulo in articulos %}
+          <div class="item">
+              <img src="{{ articulo.imagen.url }}" width="250" height="450"  alt="">
+              <div class="item-content">
+                <div class="transparent-container"> <!--"main-content"-->
+                    <div class="meta-category">
+                        <span>{{ articulo.categoria }}</span>
+                      </div>
+                      <a href="{% url 'apps.articulo:leer_articulo' articulo.id %}"><h4> {{ articulo.titulo }} </h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ articulo.fecha_hora }}</a></li>
+                        <li><a href="#">12 Comments</a></li>  
+                      </ul>
+                </div>
+              </div>
+          </div>
+        {%empty%}
+        <li>HOLAAAAAAAAAAAAAAA</li>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

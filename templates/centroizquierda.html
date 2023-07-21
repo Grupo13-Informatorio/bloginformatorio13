@@ -1,0 +1,47 @@
+{% load static %}
+
+<section class="blog-posts">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="all-blog-posts">
+            <div class="row">
+              {% for articulo in home %}
+              <div class="col-lg-12">
+                <div class="blog-post">
+                  <div class="blog-thumb">
+                    <img src="{{ articulo.imagen.url}}" width="300" height="600" alt="">
+                  </div>
+                  <div class="down-content">
+                    <span>{{articulo.categoria}}</span>
+                    <a href="{% url 'apps.articulo:leer_articulo' articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+                    <ul class="post-info">
+                      <li><a href="#">{{articulo.fecha_hora}}</a></li>
+                      <li><a href="#">12 Comments</a></li>
+                    </ul>
+                    <p>{{articulo.resumen}}</p>
+                    <div class="post-options">
+                      <div class="row">
+                        <div class="col-6">
+                          <ul class="post-share">
+                            <li><i class="fa fa-share-alt"></i></li>
+                            <li><a href="#">Facebook</a>,</li>
+                            <li><a href="#"> Twitter</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <div class="col-lg-12">
+                <div class="main-button">
+                  <a href="{% url 'apps.articulo:articulos' %}">Ver todos los artículos</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>

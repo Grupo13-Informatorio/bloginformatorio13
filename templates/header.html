@@ -49,15 +49,10 @@
                       
                                      
               {% else %}
-              <a class="nav-link" href="{% url 'login'%}">Iniciar Sesion</a>
+              <a class="nav-link" href="{% url 'usuario:login'%}">Iniciar Sesion</a>
               {% endif %}
             </li>
           </ul>
-          {% if messages %}
-            {% for m in messages %}
-              {{ m }}
-            {% endfor %}
-          {% endif %}
         </div>
 
         

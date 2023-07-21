@@ -1,8 +1,10 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib import messages
 from django.views import View
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from apps.articulo.models import Articulo, Categoria
-
 
 
 class IndexView(View):
@@ -27,9 +29,7 @@ def contacto(request):
 def sobre_nosotros(request):
     return render(request, 'nosotros.html')
 
-def registrarse(request):
-    return render(request, 'registrarse.html',
-                  {'form':UserCreationForm})
-    
+   
 def registration_success(request):
     return render(request,'registration/registration_success.html' )
+

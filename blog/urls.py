@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 
-from .views import IndexView, contacto, registration_success, sobre_nosotros,registrarse
+from .views import IndexView, contacto, registration_success, sobre_nosotros
 
 urlpatterns = [
     path('admin/', admin.site.urls),

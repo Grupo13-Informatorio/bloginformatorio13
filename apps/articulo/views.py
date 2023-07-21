@@ -50,8 +50,6 @@ class ArticuloResumidoView(View):
         categorias = Categoria.objects.all()
         context = { 
                 'articulo' : articulo,
-                'id_usuario' : "Admin",
-                'comentarios' : 35,
                 'categorias' : categorias
                    }
         return render(request, 'articulo/articulo_resumen.html', context)
@@ -73,17 +71,12 @@ class CrearArticulo(CreateView):
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_crear.html'
     
-    def get_success_url(self):
-        return redirect(self.request.GET.get('next'))
-
     def form_valid(self, form):
         if form.is_valid:
             form.instance.creado_por = self.request.user
+            messages.success(self.request, "Articulo creado exitosamente")
             return super().form_valid(form)
         else:
+            messages.error(self.request, "Error en la validacion")
             return render(self.request, 'articulo/articulo_crear.html', {'form': form})
-    
-    def post(self, request, *args: str, **kwargs: Any):
-        messages.success(request, "Articulo creado correctamente")
-        return super().post(request, *args, **kwargs)
-    
+   

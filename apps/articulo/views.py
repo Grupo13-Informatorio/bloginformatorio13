@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView
 from django.views.generic import CreateView
+from django.contrib import messages
 
 from apps.articulo.forms import ArticuloCreationForm
 from apps.comentario.forms import ComentarioCreationForm
@@ -62,17 +63,27 @@ class EditarArticulo(UpdateView):
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_editar.html'
     success_url = ''
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any):
+        messages.success(request, "Articulo actualizado correctamente")
+        return super().post(request, *args, **kwargs)
     
-
-
 class CrearArticulo(CreateView):
     
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_crear.html'
-    success_url = ''
     
+    def get_success_url(self):
+        return redirect(self.request.GET.get('next'))
+
     def form_valid(self, form):
         if form.is_valid:
             form.instance.creado_por = self.request.user
             return super().form_valid(form)
+        else:
+            return render(self.request, 'articulo/articulo_crear.html', {'form': form})
+    
+    def post(self, request, *args: str, **kwargs: Any):
+        messages.success(request, "Articulo creado correctamente")
+        return super().post(request, *args, **kwargs)
     

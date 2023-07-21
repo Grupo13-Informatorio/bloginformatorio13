@@ -53,6 +53,11 @@
               {% endif %}
             </li>
           </ul>
+          {% if messages %}
+            {% for m in messages %}
+              {{ m }}
+            {% endfor %}
+          {% endif %}
         </div>
 
         

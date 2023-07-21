@@ -21,7 +21,7 @@
           </li>
         </ul>
         {% if user.is_superuser or user == articulo.creado_por %}
-        <button type="button"><a href="{% url 'articulo:editar' pk=articulo.id %}">Editar</a></button>
+        <button type="button" class="btn btn-primary btn-sm"><a href="{% url 'articulo:editar' pk=articulo.id %}">Editar</a></button>
         {% endif %}
         <p>{{articulo.resumen}}</p>
         <div class="post-options">

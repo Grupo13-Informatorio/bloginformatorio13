@@ -7,7 +7,7 @@ class Usuario(AbstractUser):
     is_miembro = models.BooleanField(default=False)
     is_usuario = models.BooleanField(default=True)
     foto_perfil = models.ImageField(
-        default="static/default-user.png", 
+        default="../static/default-user.png", 
         upload_to="usuarios/",
         blank=True,
         null=True

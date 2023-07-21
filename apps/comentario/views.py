@@ -4,7 +4,7 @@ from .models import Comentario
 from .forms import ComentarioForm
 from django.views.generic import DeleteView
 from apps.usuario.models import Usuario
-from django.urls import reverse_lazy
+from django.urls import reverse
 from apps.articulo.models import Articulo
 
 @login_required
@@ -33,8 +33,8 @@ def listado_comentario(request):
     return render(request, 'comentario/listadoComentario.html', context)
 
 def agregarComentario(request):
-    usuario = Usuario(usuario = request.user) #acá no estoy seguro de la clase
-    form = Comentario(request.POST or None) #acá tampoco
+    usuario = Usuario(usuario = request.user)
+    form = Comentario(request.POST or None)
     if form.is_valid():
         form.save()
         form = ComentarioForm()
@@ -49,7 +49,8 @@ def agregarComentario(request):
 class DeleteComentario(DeleteView):
     model = Comentario
     template_name = "comentario/eliminarComentario.html"
-    succes_url = reverse_lazy('apps.articulo:articulos')
+    def get_success_url(self):
+        return reverse('apps.articulo:articulos')
 
 def detalle_articulo(request, articulo_id):
     articulo = Articulo.objects.get(id=articulo_id)

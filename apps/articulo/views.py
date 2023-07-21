@@ -5,14 +5,15 @@ from django.views import View
 from .forms import ArticuloForm
 from apps.comentario.forms import ComentarioForm
 from django.views.generic import DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse
 
 
 # ##Vista basada en clases
 class DeleteArticulo(DeleteView):
     model = Articulo
     template_name = "articulo/eliminarArticulo.html"
-    succes_url = reverse_lazy('apps.articulo:articulos')
+    def get_success_url(self):
+        return reverse('apps.articulo:articulos')
 
 class ArticuloView(View):
     template_name = 'articulo.html'

@@ -1,40 +1,62 @@
-{% load static %}
-
-<!-- Header -->
-  <header class="">
+{% with namespace=request.resolver_match.namespace url_name=request.resolver_match.url_name %}
+<header class="">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}"><h2> GRUPO 13<em>¬</em></h2></a>
+        <a class="navbar-brand" href="{% url 'inicio'%}"><h2>G13-Info<em>.</em></h2>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}">INICIO <!-- url 'nombredelaplantilla' referido a urls de blog/config-->
-                <span class="sr-only">(current)</span>
-              </a>
+            <li class="nav-item {% if url_name == 'inicio' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'inicio'%}">Inicio</a>
             </li> 
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'sobrenosotros' %}">Sobre Nosotros</a>
+            <li class="nav-item {% if url_name == 'nosotros' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'nosotros'%}">Nosotros</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'apps.articulo:articulos' %}">Artículos</a>
+            <li class="nav-item {% if namespace == 'articulo' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'articulo:articulos'%}">Articulos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contacto:contacto' %}">Contáctenos</a>
+            <li class="nav-item {% if url_name == 'contacto' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'contacto' %}">Contactenos</a>
             </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'apps.usuario:logout' %}">Cerrar sesión</a>
+            <li class="nav-item dropdown 
+            {% if url_name == 'login' and not user.is_authenticated %} 
+              active 
+            {% endif %}"
+            >
+                  {% if user.is_authenticated %}
+                      <!-- Bienvenido {{user.username | upper}} -->
+                      <a  class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                        <div class="circular--portrait" style="max-height:60px;">
+                          <img src="{{user.foto_perfil.url}}" alt="foto {{user.username}}">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a class="nav-link active">¡hola {{user.username}}!</a></li>
+                        <li class="dropdown-item">
+                          <a  class="nav-link" href="{% url 'logout' %}">
+                          Cerrar Sesion
+                          </a>
+                        </li>
+                        
+                        <li class="dropdown-item"><a class="nav-link" href="#">perfil</a></li>
+                        {% if user.is_miembro or user.is_superuser %}
+                        <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crear' %}">publicar articulo</a></li>
+                        {% endif %}
+                      </ul>
+                      
+                                     
+              {% else %}
+              <a class="nav-link" href="{% url 'usuario:login'%}">Iniciar Sesion</a>
+              {% endif %}
             </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'apps.usuario:login' %}">Ingresar/Registrarse</a>
-            </li>
-            {% endif %}
           </ul>
         </div>
+
+        
       </div>
     </nav>
   </header>
+{%endwith%}

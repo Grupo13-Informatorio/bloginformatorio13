@@ -1,8 +1,6 @@
-{% extends 'home.html' %}
-
-{% load static %}
-  
-    <title>{% block title %} Crear articulo {% endblock title %}</title>
+{% extends "index.html"%}
+ 
+{% block title %}Crear articulo{% endblock title %}
   
 {% block contenido %}
 
@@ -16,9 +14,6 @@
       </ul>
 
 </main>
-
-    
-    <center>
         <div class="row">
                 <h1>Articulo</h1>
                 <div class="col-lg-12">
@@ -34,6 +29,5 @@
                     </div>
                 </div>
             </div>
-    </center>
 {% include "footer.html" %}
 {% endblock %}

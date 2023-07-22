@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+from django.conf import settings
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,12 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6t9=is5x&6)@3-kq0ru_-&0bn3khooh=k#w4ah+klsgj@r+68g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
 DEBUG = True
 
 ALLOWED_HOSTS = []
-AUTH_USER_MODEL = 'usuario.Usuario'
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 # Application definition
 
@@ -40,10 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.articulo',
+    
     'apps.comentario',
-    'apps.contacto',
+    'apps.articulo',
     'apps.usuario',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 ROOT_URLCONF = 'blog.urls'
 
@@ -77,24 +82,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog.wsgi.application'
 
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'blogfinal',
-        'USER' : 'root',
-        'PASSWORD' : 'Root1234',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
-    }
-}
 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'usuario.Usuario'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -111,6 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -128,14 +126,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(os.path.dirname(BASE_DIR), 'static/')]
+STATICFILES_DIRS = [os.path.join(os.path.dirname(BASE_DIR), 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGOUT_REDIRECT_URL = '/' ##esto es response en logout
+
 
 # Media files (Images)
-MEDIA_URL = 'media/'
-MEDIA_DIR = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+

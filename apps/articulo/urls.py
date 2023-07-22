@@ -2,12 +2,12 @@ from django.urls import path
 from .views import ArticuloView 
 from . import views
 
-app_name = 'apps.articulo'
+app_name = 'articulo'
 
 urlpatterns = [
-    path('articulos/', ArticuloView.as_view(), name='articulos'),
-    path('leer_articulo/<int:id>', views.leer_articulo, name="leer_articulo"),
-    path('articulo_actualizar/<int:pk>/', views.articulo_actualizar, name="articulo_actualizar"),
-    path('articulo_crear/', views.articulo_crear, name="articulo_crear"),
-    path('eliminarArticulo/<int:pk>/', views.DeleteArticulo.as_view(), name='eliminarArticulo'),
+    path('articulos/', ArticuloView.as_view(), name="articulos"),
+    path('articulo/<int:id>/ver/', views.ArticuloIndividualView.as_view(), name="articulo"),
+    path('articulo/<int:pk>/editar/', views.ActualizarArticulo.as_view, name="editar"),
+    path('articulo/crear/', views.articulo_crear, name="crear"),
+    path('articulo/<int:pk>/eliminar/', views.DeleteArticulo.as_view(), name="eliminar"),
 ]

@@ -1,0 +1,52 @@
+{% load articulo_tags %}
+<div class="col-lg-12">
+    <div class="blog-post">
+      <div class="blog-thumb">
+        <img src="{{ articulo.imagen.url }}" alt="" class="img-lista-articulo">
+      </div>
+      <div class="down-content">
+        <span>{{articulo.categoria}}</span>
+        <a href="{% url 'articulo:articulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+        <ul class="post-info">
+          <li><a href="#">{{articulo.usuario}}</a></li>
+          <li><a href="#">{{articulo.fecha}}</a></li>
+          <li>
+            <a href="">
+            {% if articulo.comentario_set.all|is_active|length == 0 %}
+            sin comentarios
+            {% else %}
+            {{articulo.comentario_set.all|is_active|length}} {%if articulo.comentario_set.all|is_active|length == 1%}comentario{%else%}comentarios{%endif%}
+            {% endif %}
+            </a>
+          </li>
+        </ul>
+        {% if user.is_superuser or user == articulo.usuario %}
+        <a href="{% url 'articulo:editar' pk=articulo.id %}">
+          <button type="button" class="btn btn-primary">Editar</button>
+        </a>
+        {% endif %}
+        <p>{{articulo.resumen}}</p>
+        <div class="post-options">
+          <div class="row">
+            <div class="col-6">
+              <ul class="post-tags">
+                <li><i class="fa fa-tags"></i></li>
+                <li><a href="#">{{articulo.categoria}}</a>,</li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="post-share">
+                <li><i class="fa fa-share-alt"></i></li>
+                <li><a href="#">Facebook</a>,</li>
+                <li><a href="#"> Twitter</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+

@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Iterable, Optional
 from django.db import models
 from apps.articulo.models import Articulo
 from apps.usuario.models import Usuario

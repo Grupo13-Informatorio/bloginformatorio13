@@ -1,5 +1,8 @@
 from django.db import models
+from django.urls import reverse_lazy
 from django.utils import timezone
+
+from apps.usuario.models import Usuario
 
 # Create your models here.
 
@@ -29,4 +32,17 @@ class Articulo(models.Model):
         self.imagen.delete(self.imagen.name)
         super().delete()
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("articulo:mostrar", kwargs={"id": self.pk})
+        
+    def get_articulos_recientes():
+        ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
+        return ultimos_cinco_ascendente
+    
+    def get_comentario_url(self):
+        return reverse_lazy("articulo:comentar", args=[self.pk])
+
+    def get_url(self):
+        return reverse_lazy("articulo:resumen", args=[self.pk])
     

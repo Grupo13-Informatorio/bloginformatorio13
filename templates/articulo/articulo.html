@@ -22,7 +22,7 @@
                       </div>
                       <div class="down-content"> <!---->
                         <span><a href="{{ articulo.contenido }}">{{ articulo.categoria }}</a></span>
-                           <a href="{% url 'apps.articulo:leer_articulo' articulo.id %}"><h4> {{ articulo.titulo }}</h4></a>
+                           <a href="{% url 'articulo:articulo' pk=articulo.id %}"><h4> {{ articulo.titulo }}</h4></a>
                         <ul class="post-info">
                           <li><a href="#">{{ articulo.fecha_hora }}</a></li>
                           <li><a href="#">Aca van la cantidad de comentarios</a></li>
@@ -38,9 +38,9 @@
                                 <div class="row">
                                     {% if user.is_superuser %}
                                     <a class="btn btn-succes btn-lg" 
-                                      href="{% url 'apps.articulo:eliminarArticulo' articulo.pk %}"> Eliminar articulo</a>
+                                      href="{% url 'articulo:eliminar' articulo.pk %}"> Eliminar articulo</a>
                                       <a class="btn btn-succes btn-lg" 
-                                      href="{% url 'apps.articulo:articulo_crear' %}"> Crear articulo</a>
+                                      href="{% url 'articulo:crear' %}"> Crear articulo</a>
                                     {% endif %}
                                 </div>
                               </ul>

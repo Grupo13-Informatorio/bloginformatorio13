@@ -2,7 +2,7 @@ from typing import Any
 from django.shortcuts import redirect
 from apps.articulo.models import Articulo
 
-from apps.comentario.forms import ComentarioCreationForm
+from .forms import ComentarioCreationForm
 
 def registrarComentario(request, id):
     if request.method == "POST":

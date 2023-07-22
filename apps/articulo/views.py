@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import DeleteView
 from django.urls import reverse
 from django.views import View
@@ -8,8 +8,7 @@ from django.contrib import messages
 from .models import Articulo, Categoria
 from apps.comentario.models import Comentario
 from .forms import ArticuloForm
-from apps.comentario.forms import ComentarioCreationForm, ComentarioForm
-
+from apps.comentario.forms import ComentarioCreationForm
 
 # ##Vista basada en clases
 class DeleteArticulo(DeleteView):
@@ -45,7 +44,6 @@ def articulo_crear(request):
 
     
 class ActualizarArticulo(UpdateView):
-    
     model = Articulo
     form_class = ArticuloForm
     template_name = 'articulo/articulo_editar.html'

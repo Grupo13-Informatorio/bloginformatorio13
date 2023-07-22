@@ -1,0 +1,42 @@
+{% extends "index.html"%}
+{% block contenido %}
+<section class="blog-posts">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="all-blog-posts">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="sidebar-item submit-comment">
+                <div class="sidebar-heading">
+                  <h2>Registrese para continuar...</h2>
+                </div>
+                <div class="content">
+                  <form id="register_user" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <!-- <fieldset>
+                          <textarea name="{{form.comentario}}" rows="6" id="message" placeholder="{{form.comentario.placeholder}}" required="" ></textarea>
+                        </fieldset> -->
+                        {{form.as_p}}
+                      </div>
+                      <div class="col-lg-12">
+                        <fieldset>
+                          <button type="submit" id="form-submit" class="main-button">Submit</button>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                  <hr>
+                  <a href="{% url 'inicio' %}">volver</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

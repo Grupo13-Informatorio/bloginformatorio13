@@ -1,0 +1,45 @@
+{% load articulo_tags %}
+<div class="col-lg-12">
+    <div class="sidebar-item comments">
+      <div class="sidebar-heading">
+      {% with cant_comentarios=articulo.comentario_set.all|is_active|length  %}
+      {% if cant_comentarios == 0 %}
+        <h2>sin comentarios</h2>
+      {% else %}
+        <h2>{{cant_comentarios}} 
+          {%if cant_comentarios == 1%}
+            comentario
+          {%else%}
+            comentarios
+          {%endif%}</h2>
+      {% endif %}
+      {% endwith %}
+      </div>
+      <div class="content">
+        <ul>
+          {% for comentario in articulo.comentario_set.all|is_active %}
+          <li>
+            <div class="author-thumb circular--comment">
+              <img src="{{comentario.creado_por.foto_perfil.url}}" class="">
+            </div>
+            <div class="right-content">
+              <h4>{{comentario.creado_por.username}}<span>{{ comentario.creado }}</span></h4>
+              <p>{{ comentario.contenido }}</p>
+            </div>
+          </li>
+          {% for respuesta in comentario.comentario_set.all|is_active %}
+          <li class="replied">
+            <div class="author-thumb circular--comment">
+              <img src="{{respuesta.creado_por.foto_perfil.url}}" alt="">
+            </div>
+            <div class="right-content">
+              <h4>{{respuesta.creado_por.username}}<span>{{ respuesta.creado }}</span></h4>
+              <p>{{respuesta.contenido}}</p>
+            </div>
+          </li>
+          {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>

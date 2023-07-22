@@ -1,5 +1,6 @@
 from django.contrib import admin
-from.models import Comentario
+
+from apps.comentario.models import Comentario
 
 # Register your models here.
 

@@ -8,7 +8,7 @@ from django.contrib import messages
 from .models import Articulo, Categoria
 from apps.comentario.models import Comentario
 from .forms import ArticuloForm
-from apps.comentario.forms import ComentarioForm
+from apps.comentario.forms import ComentarioCreationForm, ComentarioForm
 
 
 # ##Vista basada en clases

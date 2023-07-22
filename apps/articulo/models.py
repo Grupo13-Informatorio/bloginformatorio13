@@ -14,7 +14,7 @@ class Articulo(models.Model):
     resumen = models.TextField(null=False)
     contenido = models.TextField(null=False)
     imagen = models.ImageField(null=True, blank=True, upload_to='articulo', default='articulo/default_articulo.jpg')
-    estado = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, default='Sin categoría')
     publicado = models.DateTimeField(default=timezone.now, editable=False)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)

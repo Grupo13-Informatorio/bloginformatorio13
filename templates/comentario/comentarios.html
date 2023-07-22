@@ -20,7 +20,7 @@
           {% for comentario in articulo.comentario_set.all|is_active %}
           <li>
             <div class="author-thumb circular--comment">
-              <img src="{{comentario.creado_por.foto_perfil.url}}" class="">
+              <img src="{{comentario.usuario.foto_perfil.url}}" class="">
             </div>
             <div class="right-content">
               <h4>{{comentario.creado_por.username}}<span>{{ comentario.creado }}</span></h4>
@@ -30,7 +30,7 @@
           {% for respuesta in comentario.comentario_set.all|is_active %}
           <li class="replied">
             <div class="author-thumb circular--comment">
-              <img src="{{respuesta.creado_por.foto_perfil.url}}" alt="">
+              <img src="{{respuesta.usuario.foto_perfil.url}}" alt="">
             </div>
             <div class="right-content">
               <h4>{{respuesta.creado_por.username}}<span>{{ respuesta.creado }}</span></h4>

@@ -32,9 +32,11 @@ def articulo_crear(request):
     if request.method == "POST":
         form = ArticuloForm(request.POST, request.FILES)
         if form.is_valid():
-            print(f'form is valid: {form.is_valid()}')
-            form.save()
-            redirect(reverse_lazy('articulo:articulos'))
+            form.save(commit=False)
+            form.instance.usuario = request.user
+            form.save(commit=True)
+            messages.success(request, "Articulo creado correctamente")
+            return redirect(reverse_lazy('articulo:articulos'))
     else:
         form = ArticuloForm()
     return render(request, 'articulo/articulo_form.html', {'form':form})

@@ -1,10 +1,14 @@
 body {
   font-family: 'Roboto', sans-serif;
+  /* background-image: url('informatorio.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 p {
 	margin-bottom: 0px;
 	font-size: 15px;

@@ -1,29 +1,3 @@
-/* 
-
-TemplateMo 551 Stand Blog
-
-https://templatemo.com/tm-551-stand-blog
-
-
-
-*/
-
-#myButton {
-	background-color: orange;
-	color: white;
-	transition: background-color 0.3s ease;
-  }
-  
-#myButton:hover {
-	background-color: darkorange;
-	cursor: pointer;
-  }
-
-.transparent-container {
-	background-color: rgba(90, 90, 90, 0.5);
-	opacity:0.8;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
@@ -191,6 +165,7 @@ header {
 }
 header .navbar {
 	padding: 25px 0px;
+	align-content: center;
 }
 .background-header .navbar {
 	padding: 17px 0px;
@@ -214,6 +189,9 @@ header .navbar {
 .background-header .navbar-nav .show>.nav-link {
 	color: #f48840!important;
 }
+
+
+
 .navbar .navbar-brand {
 	float: 	left;
 	margin-top: -12px;
@@ -234,19 +212,66 @@ header .navbar {
 	font-style: normal;
 	color: #f48840;
 }
+
+.nav-item img, .navbar-brand a{
+	max-height: 50px;
+	margin: auto;
+}
+
 #navbarResponsive {
 	z-index: 999;
+	justify-content: center;
 }
+
 .navbar-collapse {
+	align-content: center;
 	text-align: center;
 }
 .navbar .navbar-nav .nav-item {
+	display: flex;
 	margin: 0px 15px;
+	align-content: center;
+	justify-content: center;
 }
+
+/* .circular--portrait{
+	position: relative; width: 50px; height: 50px; overflow: hidden; border-radius: 50%; 
+} */
+
+.formulario{
+	width: 100%;
+	text-align: center;
+}
+
+.formulario form{
+	display: inline-block;
+}
+
+.formulario form td{
+	text-align: end;
+}
+
+.circular--portrait img { 
+		border-radius: 50%;
+		height: 50px;
+		object-fit: cover;
+		object-position: center;
+		width: 50px;
+	}
+
+.circular--comment img { 
+	border-radius: 50%;
+	height: 75px;
+	object-fit: cover;
+	object-position: center;
+	width: 75px;
+}
+
 .navbar .navbar-nav a.nav-link {
 	text-transform: capitalize;
 	font-size: 15px;
 	font-weight: 800;
+	margin: auto;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	color: #1e1e1e;
@@ -279,27 +304,24 @@ header .navbar {
 	line-height: 30px;
 	font-family: 'FontAwesome';
 }
-
-
-
 /* Banner Style */
 .main-banner .container-fluid {
 	padding: 0px 10px;
 	margin-bottom: -24px;
 }
 .owl-banner {
-	padding-top: 110px;
+	padding-top: 0px;
 }
 
 .owl-banner .item {
 	position: relative;
 }
 
-.owl-banner .item .item-content {
-	position: absolute;
-	bottom: 40px;
-	left: 40px;
+.errorlist{
+	color:red;
 }
+
+
 
 .owl-banner .item .item-content .meta-category span {
 	color: #f48840;
@@ -411,12 +433,14 @@ header .navbar {
 	margin-top: 12px;
 }
 
-
-
 /* Blog Posts */
 
-.blog-posts {
+.blog-posts-with-banner.blog-posts{
 	margin-top: 100px;
+}
+
+.blog-posts {
+	margin-top: 110px;
 }
 
 .blog-posts .blog-post {
@@ -455,6 +479,31 @@ header .navbar {
 .blog-posts .down-content ul.post-info li {
 	display: inline-block;
 	margin-right: 8px;
+}
+
+.owl-banner.owl-carousel img{
+	display: block;
+	width: 500 px;
+	height: 400px;
+	margin: auto;
+}
+
+.owl-banner .item .item-content {
+	position: absolute;
+	bottom: 10px;
+	left: 15%;
+}
+
+.orla{
+	box-sizing: border-box;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 33%;
+	width: 100%;
+	background-color: black;
+	opacity: 0.7;
+	z-index: 10;
 }
 
 .blog-posts .down-content ul.post-info li:after {
@@ -641,7 +690,6 @@ ul.page-numbers li a:hover {
 	height: 46px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -654,7 +702,6 @@ ul.page-numbers li a:hover {
 	height: 46px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -698,6 +745,10 @@ ul.page-numbers li a:hover {
 	margin-top: 50px;
 }
 
+.sidebar-item.comments .content li {
+	width: 100%;
+}
+
 .sidebar .search {
 	margin-top: 0px;
 }
@@ -718,7 +769,6 @@ ul.page-numbers li a:hover {
 	height: 50px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -890,7 +940,6 @@ footer p a:hover {
 	height: 46px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -903,7 +952,6 @@ footer p a:hover {
 	height: 46px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -971,7 +1019,7 @@ footer p a:hover {
 /* About Us */
 
 .about-us {
-	margin-top: 100px;
+	margin-top: 0;
 	text-align: center;
 }
 
@@ -1109,3 +1157,11 @@ footer p a:hover {
 		margin-top: 60px;
 	}
 }
+
+.img-lista-articulo {
+	max-height: 35vh;
+	resize: both;
+	object-fit: cover;
+	
+}
+

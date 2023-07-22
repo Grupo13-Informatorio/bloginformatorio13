@@ -90,3 +90,12 @@ jQuery( document ).ready(function( $ ) {
         }
  
 });
+
+
+const suceso = (titulo, mensaje) => {
+    Swal.fire({
+        icon: 'success',
+        title: titulo,
+        text: mensaje
+    });
+};

@@ -8,6 +8,7 @@ from apps.usuario.models import Usuario
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=30, null=False)
+    is_active = models.BooleanField(default=True)
     def __str__(self) -> str:
         return self.nombre
 
@@ -34,15 +35,15 @@ class Articulo(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("articulo:mostrar", kwargs={"id": self.pk})
+        return reverse("articulo:articulo", kwargs={"pk": self.pk})
         
     def get_articulos_recientes():
-        ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
+        ultimos_cinco_ascendente = Articulo.objects.order_by('-publicado','-id')[:5]
         return ultimos_cinco_ascendente
     
     def get_comentario_url(self):
         return reverse_lazy("articulo:comentar", args=[self.pk])
-
+    
     def get_url(self):
         return reverse_lazy("articulo:resumen", args=[self.pk])
     

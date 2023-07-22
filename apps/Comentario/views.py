@@ -13,5 +13,5 @@ def registrarComentario(request, id):
         if form.is_valid():
             form.save()
         else:
-            return redirect('articulo:mostrarArticulo', id)
-    return redirect('articulo:mostrarArticulo', id)
+            return redirect('articulo:articulo', id)
+    return redirect('articulo:articulo', id)

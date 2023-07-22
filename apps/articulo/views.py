@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DeleteView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView
 from django.contrib import messages
@@ -25,9 +25,7 @@ class ArticuloView(View):
             articulos = Articulo.objects.filter(categoria__nombre=categoria)
         else:
             articulos = Articulo.objects.all()
-
         categorias = Categoria.objects.all()
-
         return render(request, 'articulo/articulo.html',{'articulos' : articulos,'categorias': categorias}) ##
 
 def articulo_crear(request):
@@ -36,8 +34,7 @@ def articulo_crear(request):
         if form.is_valid():
             print(f'form is valid: {form.is_valid()}')
             form.save()
-            return redirect('apps.articulo:articulos')
-
+            redirect(reverse_lazy('articulo:articulos'))
     else:
         form = ArticuloForm()
     return render(request, 'articulo/articulo_form.html', {'form':form})
@@ -46,7 +43,7 @@ def articulo_crear(request):
 class ActualizarArticulo(UpdateView):
     model = Articulo
     form_class = ArticuloForm
-    template_name = 'articulo/articulo_editar.html'
+    template_name = 'articulo/articulo_form.html'
     success_url = ''
 
     def post(self, request, *args, **kwargs):
@@ -54,8 +51,8 @@ class ActualizarArticulo(UpdateView):
         return super().post(request, *args, **kwargs)
 
 class ArticuloIndividualView(View):
-    def get(self, request, id):
-        articulo = Articulo.objects.filter(is_active = True).get(id=id)
+    def get(self, request, pk):
+        articulo = Articulo.objects.filter(is_active = True).get(id=pk)
         comentarios = Comentario.objects.filter(is_active = True, articulo = articulo)
         categorias = Categoria.objects.all()
         cant_comentarios = comentarios.count()

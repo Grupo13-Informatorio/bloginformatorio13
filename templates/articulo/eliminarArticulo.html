@@ -1,7 +1,4 @@
-{% extends 'home.html' %}
-
 {% block contenido %}
-
 <form method="post">
     {% csrf_token %}
     <div class="main-container" style="text-align: center; margin-top:12%; margin-bottom:12%;">
@@ -10,5 +7,4 @@
         <a class="btn btn-success" href="{% url 'articulo:articulos' %}">Cancelar</a>
     </div>
 </form>
-
 {% endblock %}

@@ -20,7 +20,7 @@
             <div class="all-blog-posts">
               <div class="row">
                 {% for articulo in articulos|is_active %}
-                {% include url 'articulo:articulos' %}
+                {{ articulo.get_absolute_url }}
                 {% empty %}
                 <h3>No se han publicado articulos</h3>
                 {% endfor %}

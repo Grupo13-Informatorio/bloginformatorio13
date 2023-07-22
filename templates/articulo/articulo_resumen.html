@@ -6,10 +6,10 @@
       </div>
       <div class="down-content">
         <span>{{articulo.categoria}}</span>
-        <a href="{% url 'articulo:articulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+        <a href="{% url 'articulo:articulo' pk=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
         <ul class="post-info">
           <li><a href="#">{{articulo.usuario}}</a></li>
-          <li><a href="#">{{articulo.fecha}}</a></li>
+          <li><a href="#">{{articulo.publicado}}</a></li>
           <li>
             <a href="">
             {% if articulo.comentario_set.all|is_active|length == 0 %}

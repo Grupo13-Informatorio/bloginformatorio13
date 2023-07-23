@@ -1,22 +1,138 @@
-{% extends "base.html" %}
-{% load articulo_tags %}
-{% block contenido %}
-<section class="blog-posts">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="all-blog-posts">
-              <div class="row">
-                {% for articulo in articulos|is_active %}
-                {% include "articulo/articulo_resumen.html" %}
-                {% empty %}
-                <h3>No se han publicado articulos</h3>
-                {% endfor %}
-              </div>
+{% extends "index.html"%}  
+{% block articulo %}
+
+<section class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>Noticas</span>
+              <h4>Aqui todas las noticias</h4>
+            </div>
+            <div class="col-lg-4">
             </div>
           </div>
-        {% include "articulo/categorias.html" %}
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+<section class="blog-posts grid-system">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="all-blog-posts">
+          <div class="row">
+<!-- Aca en esta seccion empiezan los articulos -->
+            {% for articulo in page_obj %}
+            <div class="col-lg-6">
+              <div class="blog-post">
+                <div class="blog-thumb">
+                  <img src="{{ articulo.imagen.url }}" alt="">
+                </div>
+                <div class="down-content">
+                  <span>{{ articulo.categoria }}</span>
+                  <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+                  <ul class="post-info">
+                    <li><a href="#">{{ articulo.usuario }}</a></li>
+                    <li><a href="#">{{ articulo.fecha }}</a></li>
+                    <li><a href="#">{{articulo.comentario_set.all.count }} Comentarios</a></li>
+                  </ul>
+                  <p>{{ articulo.resumen }}</p>
+                  <div class="post-options">
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+<!-- Aca va la parte de paginacion y demas hierbas -->
+            <div class="col-lg-12">
+              <ul class="page-numbers">
+                {% if page_obj.has_previous %}
+                <li>
+                  <a href="?page=1"><i class="fa fa-angle-double-left"></i></a>
+                  <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                </li>
+                {% endif %}
+                <li class="active">
+                  <a href="">{{ page_obj.number }}</a>
+                </li>
+                {% if page_obj.has_next %}
+                <li>
+                  <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-angle-double-right"></i></a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="sidebar">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="sidebar-item search">
+                <form id="search_form" name="gs" method="GET" action="#">
+                  <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="sidebar-item recent-posts">
+                <div class="sidebar-heading">
+                  <h2>Posteos recientes</h2>
+                </div>
+                <div class="content">
+                  <ul>
+                    <!-- Aca los ultimos posteos -->
+                    <li><a href="post-details.html">
+                      <h5>Vestibulum id turpis porttitor sapien facilisis scelerisque</h5>
+                      <span>May 31, 2020</span>
+                    </a></li>
+                    <li><a href="post-details.html">
+                      <h5>Suspendisse et metus nec libero ultrices varius eget in risus</h5>
+                      <span>May 28, 2020</span>
+                    </a></li>
+                    <li><a href="post-details.html">
+                      <h5>Swag hella echo park leggings, shaman cornhole ethical coloring</h5>
+                      <span>May 14, 2020</span>
+                    </a></li>
+                    <!-- aca finalizan los ultimos posteos -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Aca empiezan las categorias -->
+            <div class="col-lg-12">
+              <div class="sidebar-item tags">
+                <div class="sidebar-heading">
+                  <h2>Tag Clouds</h2>
+                </div>
+                <div class="content">
+                  <ul>
+                    <li><a href="#">Lifestyle</a></li>
+                    <li><a href="#">Creative</a></li>
+                    <li><a href="#">HTML5</a></li>
+                    <li><a href="#">Inspiration</a></li>
+                    <li><a href="#">Motivation</a></li>
+                    <li><a href="#">PSD</a></li>
+                    <li><a href="#">Responsive</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Aca terminan las categorias -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
+    

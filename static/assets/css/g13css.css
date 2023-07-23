@@ -1158,6 +1158,10 @@ footer p a:hover {
 	}
 }
 
+a {
+	word-break: break-all
+}
+
 .img-lista-articulo {
 	max-height: 35vh;
 	resize: both;

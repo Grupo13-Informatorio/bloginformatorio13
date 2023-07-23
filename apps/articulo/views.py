@@ -1,11 +1,11 @@
-from typing import Any
+from typing import Any, Dict
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.contrib import messages
 
 from apps.articulo.forms import ArticuloCreationForm
@@ -32,17 +32,17 @@ class ArticuloView(View):
                    }
         return render(request, 'articulo/articulo_mostrar.html', context)
         
-class ArticulosView(View):
-    def get(self, request):
-        articulos_banner = Articulo.get_articulos_recientes()
-        articulos = Articulo.objects.all()
-        categorias = Categoria.objects.all()
-        context = { 
-                'articulos_banner' : articulos_banner,
-                'articulos' : articulos,
-                'categorias' : categorias
-                   }
-        return render(request, 'articulo/articulos_todos.html', context)
+# class ArticulosView(View):
+#     def get(self, request):
+#         articulos_banner = Articulo.get_articulos_recientes()
+#         articulos = Articulo.objects.all()
+#         categorias = Categoria.objects.all()
+#         context = { 
+#                 'articulos_banner' : articulos_banner,
+#                 'articulos' : articulos,
+#                 'categorias' : categorias
+#                    }
+#         return render(request, 'articulo/articulos_todos.html', context)
 
 class ArticuloResumidoView(View):
     def get(self, request, id):
@@ -79,4 +79,16 @@ class CrearArticulo(CreateView):
         else:
             messages.error(self.request, "Error en la validacion")
             return render(self.request, 'articulo/articulo_crear.html', {'form': form})
+        
+class ArticuloListVieww(ListView):
+    model = Articulo
+    paginate_by = 4
+    template_name = 'articulo/articulos_todos.html'
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['articulos_banner'] = Articulo.get_articulos_recientes()
+        context['categorias'] = Categoria.objects.all()
+        return context
+
    

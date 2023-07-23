@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load articulo_tags %}
+{% block contenido %}
+<section class="blog-posts">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                {% for articulo in articulos|is_active %}
+                {% include "articulo/articulo_resumen.html" %}
+                {% empty %}
+                <h3>No se han publicado articulos</h3>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% include "articulo/categorias.html" %}
+        </div>
+      </div>
+    </section>
+{% endblock %}

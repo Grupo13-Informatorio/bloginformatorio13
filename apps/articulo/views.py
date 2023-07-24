@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -90,5 +91,10 @@ class ArticuloListVieww(ListView):
         context['articulos_banner'] = Articulo.get_articulos_recientes()
         context['categorias'] = Categoria.objects.all()
         return context
+    
+    def get_queryset(self):
+        articulos = Articulo.objects.filter(is_active=True).order_by('-fecha')
+        return articulos
+        
 
    

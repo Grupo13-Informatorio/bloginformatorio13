@@ -1,11 +1,13 @@
-from typing import Any
+from typing import Any, Dict
+from django import http
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from apps.usuario.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 
 # Create your views here.
@@ -20,8 +22,6 @@ class registrarUsuario(CreateView):
         if form.is_valid():
             response_form = super().form_valid(form)
             usuario = form.save(commit=False)
-            print(usuario.password)
-            print(form.clean())
             usuario.password = make_password(form.cleaned_data["password"])
             usuario.save()
             messages.success(self.request, "¡Usuario creado correctamente!")
@@ -35,9 +35,14 @@ class LoginUsuario(LoginView):
             return super().form_valid(form)
         else:
             form.is_invalid(form)
-            messages.error(self.request, "¡Usuario logueado correctamente!")
+            messages.error(self.request, "Error de validacion")
     
-
     def get_success_url(self) -> str:
         messages.success(self.request, "¡Usuario logueado correctamente!")
         return super().get_success_url()
+  
+    
+class LogoutUsuario(LogoutView):
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        messages.success(self.request, "¡Sesion cerrada correctamente!")
+        return super().get(request, *args, **kwargs)    

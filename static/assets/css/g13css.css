@@ -1159,7 +1159,7 @@ footer p a:hover {
 }
 
 a {
-	word-break: break-all
+	word-wrap: break-word
 }
 
 .img-lista-articulo {

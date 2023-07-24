@@ -1,7 +1,7 @@
 from django.urls import  path
 
 from apps.comentario.views import  registrarComentario
-from .views import  ArticuloListVieww, ArticuloResumidoView, ArticuloView,  CrearArticulo, EditarArticulo
+from .views import  ArticuloListVieww, ArticuloPorCategoriaListVieww, ArticuloResumidoView, ArticuloView,  CrearArticulo, EditarArticulo
 
 app_name = 'articulo'
 
@@ -11,5 +11,6 @@ urlpatterns = [
     path('articulo/crear/',CrearArticulo.as_view(), name = 'crear'),
     path('articulo_resumido/<int:id>/',ArticuloResumidoView.as_view(), name = 'articulo_resumido'),
     path('articulo/<int:id>/comentar/', registrarComentario, name='comentar'),
-    path('articulo/<int:pk>/editar/', EditarArticulo.as_view(), name='editar')
+    path('articulo/<int:pk>/editar/', EditarArticulo.as_view(), name='editar'),
+    path('categoria/articulo/', ArticuloPorCategoriaListVieww.as_view(), name='categoria'),
 ]

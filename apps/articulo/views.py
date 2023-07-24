@@ -20,11 +20,13 @@ from .models import Articulo, Categoria
 class ArticuloView(View):
     def get(self, request, id):
         articulo = Articulo.objects.filter(is_active = True).get(id=id)
+        articulos = Articulo.objects.filter(is_active = True).order_by('-fecha','-id')[:5]
         comentarios = Comentario.objects.filter(is_active = True, articulo = articulo)
         categorias = Categoria.objects.all()
         cant_comentarios = comentarios.count()
         form = ComentarioCreationForm()
         context = { 
+                'articulos_banner' : articulos,
                 'articulo' : articulo,
                 'cant_comentarios' : cant_comentarios,
                 'comentarios' : comentarios,
@@ -62,7 +64,6 @@ class EditarArticulo(UpdateView):
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_editar.html'
     success_url = ''
-
     def post(self, request: HttpRequest, *args: str, **kwargs: Any):
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
@@ -88,7 +89,7 @@ class ArticuloListVieww(ListView):
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['articulos_banner'] = Articulo.get_articulos_recientes()
+        context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
         return context
     
@@ -97,4 +98,21 @@ class ArticuloListVieww(ListView):
         return articulos
         
 
+class ArticuloPorCategoriaListVieww(ListView):
+    model = Articulo
+    paginate_by = 4
+    template_name = 'articulo/articulos_todos.html'
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
+        context['categorias'] = Categoria.objects.all()
+        return context
+    
+    def get_queryset(self):
+        articulos = Articulo.objects \
+                .filter(is_active=True, categoria=Categoria.objects.get(pk=self.request.GET.get('categoria'))) \
+                .order_by('-fecha')
+        return articulos
+        
    

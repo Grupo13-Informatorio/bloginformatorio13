@@ -1,14 +1,14 @@
 from typing import Any, Dict
-from django import http
-from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from apps.usuario.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
+
+from apps.usuario.models import Usuario
 
 # Create your views here.
 
@@ -45,4 +45,22 @@ class LoginUsuario(LoginView):
 class LogoutUsuario(LogoutView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         messages.success(self.request, "¡Sesion cerrada correctamente!")
-        return super().get(request, *args, **kwargs)    
+        return super().get(request, *args, **kwargs)
+    
+class UpdateUsuarioView(UpdateView):
+    template_name = "usuario/perfil.html"
+    model = Usuario
+    form_class = UserCreationForm
+    success_url = reverse_lazy('inicio')
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            response_form = super().form_valid(form)
+            usuario = form.save(commit=False)
+            usuario.password = make_password(form.cleaned_data["password"])
+            usuario.save()
+            messages.success(self.request, "Usuario actualizado correctamente")
+            return response_form
+        else:
+            form.is_invalid(form)
+       

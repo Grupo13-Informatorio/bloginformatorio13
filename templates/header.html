@@ -16,10 +16,20 @@
               <a class="nav-link" href="{% url 'nosotros'%}">Nosotros</a>
             </li>
             <li class="nav-item {% if namespace == 'articulo' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'articulo:articulos'%}">Articulos</a>
+              <a class="nav-link" href="{% url 'articulo:articulos'%}">Publicaciones</a>
             </li>
             <li class="nav-item {% if url_name == 'contacto' %} active {% endif %}">
-              <a class="nav-link" href="{% url 'contacto' %}">Contactenos</a>
+              <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+            </li>
+            <li class="nav-item">
+            <form class="form-inline">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="ingrese su busqueda">
+              </div>
+            </form>
             </li>
             <li class="nav-item dropdown 
             {% if url_name == 'login' and not user.is_authenticated %} 
@@ -41,7 +51,7 @@
                           </a>
                         </li>
                         
-                        <li class="dropdown-item"><a class="nav-link" href="#">perfil</a></li>
+                        <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:actualizar' pk=user.id %}?next={{request.path}}">perfil</a></li>
                         {% if user.is_miembro or user.is_superuser %}
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crear' %}">publicar articulo</a></li>
                         {% endif %}

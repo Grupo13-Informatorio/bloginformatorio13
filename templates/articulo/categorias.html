@@ -1,21 +1,15 @@
 {% load articulo_tags %}
-<div class="col-lg-4">
-    <div class="sidebar">
-      <div class="row">
-      <div class="col-lg-12">
-        <div class="sidebar-item tags">
-          <div class="sidebar-heading">
-            <h2>Categorias</h2>
-          </div>
-          <div class="content">
-            <ul>
-              {% for categoria in categorias|is_active %}
-              <li><a href="#">{{categoria.nombre}}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
+<div class="col-lg-12">
+  <div class="sidebar-item tags">
+    <div class="sidebar-heading">
+      <h2>Categorias</h2>
+    </div>
+    <div class="content">
+      <ul>
+        {% for categoria in categorias|is_active %}
+        <li><a href="{% url 'articulo:categoria' %}?categoria={{categoria.pk}}">{{categoria.nombre}}</a></li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>

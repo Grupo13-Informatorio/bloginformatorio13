@@ -1,6 +1,6 @@
 from typing import Any, Dict
 from django.forms import CharField, DateField, ModelForm, PasswordInput
-
+from django.contrib.auth.decorators import login_required
 from apps.usuario.models import Usuario
 
 
@@ -31,5 +31,5 @@ class UserCreationForm(ModelForm):
     
     class Meta:
         model = Usuario
-        fields = ('first_name','last_name','email','fecha_nacimiento', 'username', 'password', 'foto_perfil')
+        fields = ('username', 'first_name','last_name','foto_perfil','email','fecha_nacimiento', 'password')
 

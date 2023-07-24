@@ -15,11 +15,11 @@
 {% include "banner.html" %}
 <section class="blog-posts-with-banner blog-posts">
       <div class="container">
-        <div class="row">
+        <div class="row mt-5">
           <div class="col-lg-8">
             <div class="all-blog-posts">
               <div class="row">
-                {% for articulo in articulos|is_active %}
+                {% for articulo in articulos %}
                 {% include "articulo/articulo_resumen.html" %}
                 {% empty %}
                 <h3>No se han publicado articulos</h3>
@@ -27,9 +27,41 @@
               </div>
             </div>
           </div>
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="sidebar-item search">
+                    <form id="search_form" name="gs" method="GET" action="#">
+                      <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
+                    </form>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                      <h2>Publicaciones recientes</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        <!-- Aca los ultimos posteos -->
+                        {% for articulo in articulos %}
+                        <li><a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
+                          <h5>{{articulo.titulo}}</h5>
+                          <span>{{articulo.fecha}}</span>
+                        </a></li>
+                        {% endfor %}
+                        <!-- aca finalizan los ultimos posteos -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
         {% include "articulo/categorias.html" %}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 {% endblock  %}
 {% endblock %}

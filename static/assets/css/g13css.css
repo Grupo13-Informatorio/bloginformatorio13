@@ -436,11 +436,25 @@ header .navbar {
 /* Blog Posts */
 
 .blog-posts-with-banner.blog-posts{
-	margin-top: 100px;
+	margin-top: 0px;
+}
+
+.all-blog-posts{
+	margin-top: 00px;
+}
+
+#id_is_active {
+	align-content: start;
+	height: 2rem;
+}
+
+.fa{
+	background-color: #f48840;
+	color:#f48840;
 }
 
 .blog-posts {
-	margin-top: 110px;
+	margin-top: 0;
 }
 
 .blog-posts .blog-post {

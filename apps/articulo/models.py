@@ -1,7 +1,10 @@
-from datetime import datetime
-from time import strftime
 from django.db import models
 from django.urls import reverse_lazy
+from django.db.models import Count
+
+from datetime import datetime
+from time import strftime
+
 
 
 from apps.usuario.models import Usuario
@@ -28,21 +31,36 @@ class Categoria(models.Model):
 
 # ARTICULO
 class Articulo(models.Model):
-    fecha = models.DateField(editable = False,verbose_name = "Fecha de publicacion")
-    modificado = models.DateField(editable = False,verbose_name = 'Modificado', null = True,
-                                  blank = True)
-    titulo = models.CharField(max_length=100,verbose_name="Titulo",
-                              help_text="Ingrese el titulo del articulo")
-    resumen = models.TextField(verbose_name= 'Resumen',help_text='Ingrese aqui su resumen')
+    fecha = models.DateField(editable = False,
+                             verbose_name = "Fecha de publicacion"
+                             )
+    modificado = models.DateField(editable = False,
+                                  verbose_name = 'Modificado', 
+                                  null = True,
+                                  blank = True
+                                  )
+    titulo = models.CharField(max_length=100,
+                              verbose_name="Titulo",
+                              )
+    resumen = models.TextField(verbose_name= 'Resumen',
+                               )
     contenido = models.TextField(verbose_name= "Contenido",
-                                 help_text="Ingrese aqui el contenido del articulo")
-    categoria = models.ForeignKey(Categoria,on_delete = models.CASCADE,null=True,
-                                  verbose_name="Categoria",help_text="Ingrese la categoria")
-    imagen = models.ImageField(upload_to="articulo/",default = "../static/default-articulo.jpg",
-                               null=True,blank=True)
+                                 )
+    categoria = models.ForeignKey(Categoria,on_delete = models.CASCADE,
+                                  null=True, 
+                                  verbose_name="Categoria",
+                                  )
+    imagen = models.ImageField(upload_to="articulo/",
+                               default = "../static/default-articulo.jpg",
+                               null=True,
+                               blank=True
+                               )
     is_active = models.BooleanField(default=True)
-    creado_por = models.ForeignKey(Usuario,on_delete = models.SET_NULL,null=True,blank=True,
-                                   verbose_name="creador")    
+    creado_por = models.ForeignKey(Usuario,
+                                   on_delete = models.SET_NULL,
+                                   null=True,blank=True,
+                                   verbose_name="creador"
+                                   )    
     
     class Meta:
         ordering = ('-fecha',)
@@ -62,6 +80,12 @@ class Articulo(models.Model):
         ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
         return ultimos_cinco_ascendente
     
+    def get_articulos_mas_comentados():
+        mas_comentados = Articulo.objects.all() \
+                .annotate(num_comentarios=Count('comentario')) \
+                .order_by('-num_comentarios')[:5]
+        return mas_comentados
+        
     def get_comentario_url(self):
         return reverse_lazy("articulo:comentar", args=[self.pk])
 

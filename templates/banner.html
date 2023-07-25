@@ -15,7 +15,7 @@
                       <a href="{% url 'apps.articulo:leer_articulo' articulo.id %}"><h4> {{ articulo.titulo }} </h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ articulo.fecha_hora }}</a></li>
-                        <li><a href="#">12 Comments</a></li>  
+                        <li><a href="#">Comentarios: {{ articulo.comentarios.count }}</a></li>  
                       </ul>
                 </div>
               </div>

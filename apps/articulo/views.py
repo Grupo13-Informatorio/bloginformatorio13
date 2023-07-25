@@ -6,6 +6,7 @@ from .forms import ArticuloForm
 from apps.comentario.forms import ComentarioForm
 from django.views.generic import DeleteView
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 
 # ##Vista basada en clases
@@ -17,6 +18,7 @@ class DeleteArticulo(DeleteView):
 
 class ArticuloView(View):
     template_name = 'articulo.html'
+    art_mostrar = 6
 
     def get(self, request, categoria=None):
         if categoria:
@@ -26,7 +28,11 @@ class ArticuloView(View):
 
         categorias = Categoria.objects.all()
 
-        return render(request, 'articulo/articulo.html',{'articulos' : articulos,'categorias': categorias}) ##
+        paginator = Paginator(articulos, self.art_mostrar)
+        numero_pagina = request.GET.get('pagina',)
+        obj_pagina = paginator.get_page(numero_pagina)
+
+        return render(request, 'articulo/articulo.html',{'articulos' : obj_pagina,'categorias': categorias}) ##
 
 def articulo_crear(request):
     if request.method == "POST":
@@ -34,10 +40,11 @@ def articulo_crear(request):
         if form.is_valid():
             print(f'form is valid: {form.is_valid()}')
             form.save()
-            return redirect('articulos')
+            return redirect('apps.articulo:articulos')
+
     else:
         form = ArticuloForm()
-    return render(request, 'articulos/articulo_form.html', {'form':form})
+    return render(request, 'articulo/articulo_form.html', {'form':form})
 
 def articulo_actualizar(request, pk):
     articulo = get_object_or_404(Articulo, pk=pk)
@@ -45,10 +52,11 @@ def articulo_actualizar(request, pk):
         form = ArticuloForm(request.POST, request.FILES, instance=articulo)
         if form.is_valid():
             form.save()
-            return redirect('articulos')
+            return redirect('apps.articulo:articulos')
+        
     else:
         form = ArticuloForm(instance=articulo)
-    return render(request, 'articulos/articulo_form.html', {'form':form})
+    return render(request, 'articulo/articulo_form.html', {'form':form, 'articulo': articulo})
     
 def existe_articulo(id):
     for i in Articulo:
@@ -73,7 +81,7 @@ def leer_articulo(request, id):
             aux.articulo = articulos
             aux.usuario = request.user
             aux.save()
-            form        = ComentarioForm################ ACÄ PUEDE QUE LE HAYA ERRADO, si no es este es ComentarioForm
+            form        = ComentarioForm()
         
         else:
 

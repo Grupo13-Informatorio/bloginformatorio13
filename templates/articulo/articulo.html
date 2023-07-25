@@ -16,64 +16,119 @@
       </ul>
 
   </main>
-  <section class="blog-posts">
-   
-      <div class="container">
-        
+
+  <section class="blog-posts grid-system">
+      <div class="container"> 
         <div class="row">
           <div class="col-lg-8">
             <div class="all-blog-posts">
-              
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="blog-post">
-                      {% for articulo in articulos %}
-                      <div class="blog-thumb">
-                        <img src="{{ articulo.imagen.url }}" width="400" height="550" alt=""><!---->
-                      </div>
-                      <div class="down-content"> <!---->
-                        <span><a href="{{ articulo.contenido }}">{{ articulo.categoria }}</a></span>
-                           <a href="{% url 'apps.articulo:leer_articulo' articulo.id %}"><h4> {{ articulo.titulo }}</h4></a>
-                        <ul class="post-info">
-                          <li><a href="#">{{ articulo.fecha_hora }}</a></li>
-                          <li><a href="#">Aca van la cantidad de comentarios</a></li>
-                        </ul>
-                        <p>{{ articulo.resumen }}.
-                        <div class="post-options">
-                          <div class="row">
-                            <div class="col-6">
-                              <ul class="post-share">
-                                <li><i class="fa fa-share-alt"></i></li>
-                                <li><a href="#">Facebook</a>,</li>
-                                <li><a href="#"> Twitter</a></li>
-                                <div class="row">
-                                    {% if user.is_superuser %}
-                                    <a class="btn btn-succes btn-lg" 
-                                      href="{% url 'apps.articulo:eliminarArticulo' articulo.pk %}"> Eliminar articulo</a>
-                                    <a class="btn btn-succes btn-lg" 
-                                      href="{% url 'apps.articulo:articulo_actualizar' %}"> Actualizar articulo</a>
-                                    {% endif %}
-                                </div>
-                              </ul>
-                            </div>
+              <div class="row">
+                {% for articulo in articulos %}
+                <div class="col-lg-6">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{ articulo.imagen.url }}" alt=""> <!---->
+                    </div>
+                    <div class="down-content">
+                      <span>{{ articulo.categoria }}</span>
+                      <a href="{% url 'apps.articulo:leer_articulo' articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ articulo.fecha_hora }}</a></li>
+                        <li><a href="#">Comentarios: {{ articulo.comentarios.count }}</a></li>
+                      </ul>
+                      <p>{{articulo.resumen}}</p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              <li><a href="#">{{articulo.categoria}}</a></li>
+                              {% if user.is_superuser %}
+                              <div class="row">
+                                <li>
+                                <a class="btn btn-succes btn-lg"
+                                  href="{% url 'apps.articulo:eliminarArticulo' articulo.pk %}">Eliminar articulo</a>
+                                </li>
+                                <li class="orange-box">
+                                  <a class="btn btn-succes btn-lg" 
+                                  href="{% url 'apps.articulo:articulo_crear' %}">Crear articulo</a>
+                                </li>
+                              </div>
+                              {% endif %}
+                            </ul>
                           </div>
                         </div>
                       </div>
-                      {% empty %}
-
-                      <li>No hay articulos</li>
-                        
-                      {% endfor %}
                     </div>
                   </div>
+                </div>
+                {% endfor %}
                 <div class="col-lg-12">
-                  <div class="main-button">
-                    <a href="{% url 'apps.articulo:articulos' %}">Ver todos los artículos</a>
-                  </div>
+                  <ul class="page-numbers">
+                    {% if articulos.has_previous %}
+                        <li><a href="?pagina=1">&laquo;</a></li>
+                    {% endif %}
+            
+                    {% for num in articulos.paginator.page_range %}
+                        {% if articulos.number == num %}
+                            <li class="active"><span>{{ num }}</span></li>
+                        {% else %}
+                            <li><a href="?pagina={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+            
+                    {% if articulos.has_next %}
+                        <li><a href="?pagina={{ articulos.paginator.num_pages }}">&raquo;</a></li>
+                    {% endif %}
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="sidebar-item search">
+                    <form id="search_form" name="gs" method="GET" action="#">
+                      <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
+                    </form>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                      <h2>Blogs más recientes</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        {% for articulo in articulos|slice:":3" %}
+                          <li><a href="post-details.html">
+                            <h5>{{ articulo.titulo }}</h5>
+                            <span>{{ articulo.fecha_hora }}</span>
+                          </a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item categories">
+                    <div class="sidebar-heading">
+                      <h2>Categories</h2>
+                    </div>
+                    <div class="content">
+                      {% for articulo in articulos|slice:":7" %}
+                      <ul>
+                        <li><a href="#">{{ articulo.categoria }}</a></li>
+                      </ul>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!---->
       </div>
   </section>
 

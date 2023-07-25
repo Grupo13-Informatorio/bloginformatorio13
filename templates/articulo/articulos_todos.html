@@ -83,11 +83,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="sidebar-item search">
-                  <form action="{% url 'articulo:buscar' %}" method="get">
-                    <div class="input-group">
-                      <input type="text" name="q" class="form-control" placeholder="ingrese su busqueda">
-                    </div>
-                  </form>
+                {% include 'articulo/busqueda_form.html' %}
               </div>
             </div>
             <!-- Comienzan los ultimos posteos -->

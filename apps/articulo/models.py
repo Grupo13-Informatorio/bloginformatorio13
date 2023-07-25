@@ -88,6 +88,9 @@ class Articulo(models.Model):
         
     def get_comentario_url(self):
         return reverse_lazy("articulo:comentar", args=[self.pk])
+    
+    def get_responder_url(self):
+        return reverse_lazy("articulo:responder", args=[self.pk])
 
     def get_url(self):
         return reverse_lazy("articulo_resumido", args=[self.pk])

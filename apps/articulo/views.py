@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import CreateView, ListView
 from django.contrib import messages
 from django.db.models import Q
@@ -134,3 +134,7 @@ class ArticuloBusquedaView(ListView):
         return articulos
 
 
+# class ArticuloDeleteView(DeleteView):
+#     model = Articulo
+#     success_url = reverse_lazy("articulo:articulos")
+    

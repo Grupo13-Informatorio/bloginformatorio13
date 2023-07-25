@@ -23,8 +23,18 @@
               <img src="{{comentario.creado_por.foto_perfil.url}}" class="">
             </div>
             <div class="right-content">
-              <h4>{{comentario.creado_por.username}}<span>{{ comentario.creado }}</span></h4>
+              <h4>{{comentario.creado_por}}<span>{{ comentario.creado }}</span></h4>
+              <a onclick='showform("form-comentario{{comentario.id}}")'>
+                <small>responder</small>
+              </a>
               <p>{{ comentario.contenido }}</p>
+              <form id="form-comentario{{comentario.id}}" method="post" action="{{articulo.get_responder_url}}" style="display:none;">
+                {% csrf_token %}
+                <div class="input-group">
+                  <input type="hidden" name="comentario" value="{{comentario.id}}">
+                  <input class="form-control" name="contenido" type="text" placeholder="ingrese aqui su respuesta...">
+                </div>
+              </form>
             </div>
           </li>
           {% for respuesta in comentario.comentario_set.all|is_active %}
@@ -33,7 +43,7 @@
               <img src="{{respuesta.creado_por.foto_perfil.url}}" alt="">
             </div>
             <div class="right-content">
-              <h4>{{respuesta.creado_por.username}}<span>{{ respuesta.creado }}</span></h4>
+              <h4>{{respuesta.creado_por}}<span>{{ respuesta.creado }}</span></h4>
               <p>{{respuesta.contenido}}</p>
             </div>
           </li>

@@ -99,3 +99,15 @@ const suceso = (titulo, mensaje) => {
         text: mensaje
     });
 };
+
+const showform = (elem) => {
+    let x = document.getElementById(elem);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      x.addClass = "fa-reply";
+      x.removeClass = "fa-x";
+    } else {
+      x.style.display = "none";
+      x.removeClass = "fa-reply";
+      x.addClass = "fa-x";    };
+  };

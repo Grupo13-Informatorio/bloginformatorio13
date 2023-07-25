@@ -8,7 +8,7 @@ class Usuario(AbstractUser):
     is_usuario = models.BooleanField(default=True)
     foto_perfil = models.ImageField(
         default="../static/default-user.png", 
-        upload_to="usuarios/",
+        upload_to="usuarios",
         )
     fecha_nacimiento = models.DateField(
         null=True,

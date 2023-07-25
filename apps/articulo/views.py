@@ -1,13 +1,11 @@
 from typing import Any, Dict
-from django.db.models.query import QuerySet
-from django.forms.models import BaseModelForm
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView
 from django.views.generic import CreateView, ListView
 from django.contrib import messages
+from django.db.models import Q
 
 from apps.articulo.forms import ArticuloCreationForm
 from apps.comentario.forms import ComentarioCreationForm
@@ -64,7 +62,7 @@ class EditarArticulo(UpdateView):
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_editar.html'
     success_url = ''
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any):
+    def post(self, request, *args: str, **kwargs):
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
     
@@ -107,6 +105,8 @@ class ArticuloPorCategoriaListVieww(ListView):
         context = super().get_context_data(**kwargs)
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
+        categoria = Categoria.objects.get(pk=self.request.GET.get('categoria'))
+        context['categoria'] = categoria
         return context
     
     def get_queryset(self):
@@ -115,4 +115,22 @@ class ArticuloPorCategoriaListVieww(ListView):
                 .order_by('-fecha')
         return articulos
         
-   
+class ArticuloBusquedaView(ListView):
+    
+    model = Articulo
+    paginate_by = 4
+    template_name = 'articulo/articulos_todos.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
+        context['categorias'] = Categoria.objects.all()
+        return context
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        articulos = Articulo.objects.filter( \
+            Q(titulo__icontains=query) | Q(resumen__icontains=query) | Q(contenido__icontains=query))
+        return articulos
+
+

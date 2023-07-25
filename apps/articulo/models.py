@@ -50,7 +50,7 @@ class Articulo(models.Model):
                                   null=True, 
                                   verbose_name="Categoria",
                                   )
-    imagen = models.ImageField(upload_to="articulo/",
+    imagen = models.ImageField(upload_to="articulo",
                                default = "../static/default-articulo.jpg",
                                null=True,
                                blank=True

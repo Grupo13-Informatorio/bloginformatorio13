@@ -10,9 +10,6 @@ from django.contrib import messages
 
 from apps.usuario.models import Usuario
 
-# Create your views here.
-
-
 class registrarUsuario(CreateView):
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
@@ -41,12 +38,11 @@ class LoginUsuario(LoginView):
         messages.success(self.request, "¡Usuario logueado correctamente!")
         return super().get_success_url()
   
-    
 class LogoutUsuario(LogoutView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         messages.success(self.request, "¡Sesion cerrada correctamente!")
         return super().get(request, *args, **kwargs)
-    
+
 class UpdateUsuarioView(UpdateView):
     template_name = "usuario/perfil.html"
     model = Usuario

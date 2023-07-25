@@ -6,10 +6,12 @@ from django.views.generic.edit import UpdateView
 from django.views.generic import CreateView, ListView
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from apps.articulo.forms import ArticuloCreationForm
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
+from blog.mixins import MiembroRequiredMixin
 
 from .models import Articulo, Categoria
 
@@ -32,19 +34,9 @@ class ArticuloView(View):
                 'form' : form,
                    }
         return render(request, 'articulo/articulo_mostrar.html', context)
+   
+   
         
-# class ArticulosView(View):
-#     def get(self, request):
-#         articulos_banner = Articulo.get_articulos_recientes()
-#         articulos = Articulo.objects.all()
-#         categorias = Categoria.objects.all()
-#         context = { 
-#                 'articulos_banner' : articulos_banner,
-#                 'articulos' : articulos,
-#                 'categorias' : categorias
-#                    }
-#         return render(request, 'articulo/articulos_todos.html', context)
-
 class ArticuloResumidoView(View):
     def get(self, request, id):
         articulo = Articulo.objects.get(id=id)
@@ -56,7 +48,8 @@ class ArticuloResumidoView(View):
         return render(request, 'articulo/articulo_resumen.html', context)
 
 
-class EditarArticulo(UpdateView):
+
+class EditarArticulo(LoginRequiredMixin, MiembroRequiredMixin, UpdateView):
     
     model = Articulo
     form_class = ArticuloCreationForm
@@ -65,8 +58,10 @@ class EditarArticulo(UpdateView):
     def post(self, request, *args: str, **kwargs):
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
-    
-class CrearArticulo(CreateView):
+
+
+
+class CrearArticulo(LoginRequiredMixin, MiembroRequiredMixin, CreateView):
     
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_crear.html'
@@ -79,8 +74,11 @@ class CrearArticulo(CreateView):
         else:
             messages.error(self.request, "Error en la validacion")
             return render(self.request, 'articulo/articulo_crear.html', {'form': form})
-        
-class ArticuloListVieww(ListView):
+
+
+
+class ArticuloListView(ListView):
+    
     model = Articulo
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
@@ -94,27 +92,29 @@ class ArticuloListVieww(ListView):
     def get_queryset(self):
         articulos = Articulo.objects.filter(is_active=True).order_by('-fecha')
         return articulos
-        
 
-class ArticuloPorCategoriaListVieww(ListView):
+
+
+class CategoriaListView(ListView):
+    
     model = Articulo
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
     
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
-        categoria = Categoria.objects.get(pk=self.request.GET.get('categoria'))
-        context['categoria'] = categoria
+        context['categoria'] = Categoria.objects.get(id=self.kwargs['pk'])
         return context
-    
+
     def get_queryset(self):
         articulos = Articulo.objects \
-                .filter(is_active=True, categoria=Categoria.objects.get(pk=self.request.GET.get('categoria'))) \
+                .filter(is_active=True, categoria=Categoria.objects.get(id=self.kwargs['pk'])) \
                 .order_by('-fecha')
         return articulos
         
+
 class ArticuloBusquedaView(ListView):
     
     model = Articulo

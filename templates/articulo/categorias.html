@@ -7,7 +7,7 @@
     <div class="content">
       <ul>
         {% for categoria in categorias|is_active %}
-        <li><a href="{% url 'articulo:categoria' %}?categoria={{categoria.pk}}">{{categoria.nombre}}</a></li>
+        <li><a href="{% url 'articulo:categoria' pk=categoria.pk %}">{{categoria.nombre}}</a></li>
         {% endfor %}
       </ul>
     </div>

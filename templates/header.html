@@ -21,23 +21,13 @@
             <li class="nav-item {% if url_name == 'contacto' %} active {% endif %}">
               <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
             </li>
-            <li class="nav-item">
-            <form class="form-inline" action="{% url 'articulo:buscar' %}" method="get">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                </div>
-                <input type="text" name="q" class="form-control" placeholder="ingrese su busqueda">
-              </div>
-            </form>
-            </li>
+
             <li class="nav-item dropdown 
             {% if url_name == 'login' and not user.is_authenticated %} 
               active 
             {% endif %}"
             >
               {% if user.is_authenticated %}
-                      <!-- Bienvenido {{user.username | upper}} -->
                       <a  class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                         <div class="circular--portrait" style="max-height:60px;">
                           <img src="{{user.foto_perfil.url}}" alt="foto {{user.username}}">

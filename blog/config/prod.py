@@ -1,5 +1,0 @@
-DATABASES = {
-    'default': {
-        
-    }
-}

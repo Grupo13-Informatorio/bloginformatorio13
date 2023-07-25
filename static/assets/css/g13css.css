@@ -31,7 +31,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .main-button a {
 	display: inline-block;
-	background-color: #f48840;
+	background-color: #326932;
 	color: #fff;
 	font-size: 13px;
 	font-weight: 500;
@@ -41,7 +41,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .main-button a:hover {
-	background-color: #fb9857;
+	background-color: #326932;
 }
 
 .heading-page {
@@ -59,7 +59,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .page-heading .text-content h4 {
-	color: #f48840;
+	color: #15460b;
 	font-size: 18px;
 	text-transform: uppercase;
 	font-weight: 900;
@@ -77,7 +77,7 @@ h1,h2,h3,h4,h5,h6 {
 
 #preloader {
   overflow: hidden;
-  background: #f48840;
+  background: #15460b;
   left: 0;
   right: 0;
   top: 0;
@@ -191,7 +191,7 @@ header .navbar {
 .background-header .navbar-nav .nav-link.active,
 .background-header .navbar-nav .nav-link.show,
 .background-header .navbar-nav .show>.nav-link {
-	color: #f48840!important;
+	color: #15460b!important;
 }
 
 
@@ -214,7 +214,7 @@ header .navbar {
 .navbar .navbar-brand h2 em {
 	font-size: 44px;
 	font-style: normal;
-	color: #f48840;
+	color: #15460b;
 }
 
 .nav-item img, .navbar-brand a{
@@ -286,14 +286,14 @@ header .navbar {
 .navbar .navbar-nav .nav-link.active,
 .navbar .navbar-nav .nav-link.show,
 .navbar .navbar-nav .show>.nav-link {
-	color: #f48840;
+	color: #15460b;
 }
 .navbar .navbar-toggler-icon {
 	background-image: none;
 }
 .navbar .navbar-toggler {
 	border-color: #fff;
-	background-color: #f48840;	
+	background-color: #15460b;	
 	height: 46px;
 	outline: none;
 	border-radius: 0px;
@@ -328,7 +328,7 @@ header .navbar {
 
 
 .owl-banner .item .item-content .meta-category span {
-	color: #f48840;
+	color: #15460b;
 	font-size: 18px;
 	text-transform: uppercase;
 	font-weight: 900;
@@ -367,7 +367,7 @@ header .navbar {
 }
 
 .owl-banner .item .item-content ul li a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 .owl-banner .owl-nav {
@@ -417,7 +417,7 @@ header .navbar {
 }
 
 .call-to-action .main-content span {
-	color: #f48840;
+	color: #15460b;
 	font-size: 18px;
 	font-weight: 900;
 	letter-spacing: 0.5px;
@@ -468,7 +468,7 @@ header .navbar {
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	font-weight: 900;
-	color: #f48840;
+	color: #15460b;
 }
 
 .blog-posts .down-content h4 {
@@ -541,7 +541,7 @@ header .navbar {
 }
 
 .blog-posts .down-content ul.post-info li a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 .blog-posts .down-content p {
@@ -562,7 +562,7 @@ header .navbar {
 
 .blog-posts .down-content ul.post-tags li:first-child i,
 .blog-posts .down-content ul.post-share li:first-child i {
-	color: #f48840;
+	color: #15460b;
 	margin-right: 5px;
 }
 
@@ -581,7 +581,7 @@ header .navbar {
 
 .blog-posts .down-content ul.post-tags li a:hover,
 .blog-posts .down-content ul.post-share li a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 .blog-posts .main-button a {
@@ -615,13 +615,13 @@ ul.page-numbers li a {
 }
 
 ul.page-numbers li.active a {
-	background-color: #f48840;
-	border-color: #f48840;
+	background-color: #15460b;
+	border-color: #15460b;
 	color: #fff;
 }
 
 ul.page-numbers li a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 .blog-posts .sidebar-heading h2 {
@@ -724,7 +724,7 @@ ul.page-numbers li a:hover {
 
 .blog-posts .submit-comment button {
 	display: inline-block;
-	background-color: #f48840;
+	background-color: #15460b;
 	color: #fff;
 	font-size: 13px;
 	font-weight: 500;
@@ -736,7 +736,7 @@ ul.page-numbers li a:hover {
 }
 
 .blog-posts .submit-comment button:hover {
-	background-color: #fb9857;
+	background-color: #326932;
 }
 
 /* Sidebar */
@@ -804,7 +804,7 @@ ul.page-numbers li a:hover {
 }
 
 .sidebar .recent-posts ul li h5:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 .sidebar .recent-posts ul li span {
@@ -830,7 +830,7 @@ ul.page-numbers li a:hover {
 }
 
 .sidebar .categories ul li a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 .sidebar .tags ul li {
@@ -853,8 +853,8 @@ ul.page-numbers li a:hover {
 }
 
 .sidebar .tags ul li a:hover {
-	background-color: #f48840;
-	border-color: #f48840;
+	background-color: #15460b;
+	border-color: #15460b;
 	color: #fff;
 }
 
@@ -903,7 +903,7 @@ footer ul.social-icons li a {
 }
 
 footer ul.social-icons li a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 footer p {
@@ -913,11 +913,11 @@ footer p {
 }
 
 footer p a {
-	color: #f48840;
+	color: #15460b;
 }
 
 footer p a:hover {
-	color: #f48840;
+	color: #15460b;
 }
 
 
@@ -974,7 +974,7 @@ footer p a:hover {
 
 .contact-us .contact-form button {
 	display: inline-block;
-	background-color: #f48840;
+	background-color: #15460b;
 	color: #fff;
 	font-size: 13px;
 	font-weight: 500;
@@ -986,7 +986,7 @@ footer p a:hover {
 }
 
 .contact-us .contact-form button:hover {
-	background-color: #fb9857;
+	background-color: #326932;
 }
 
 .contact-us .contact-information {
@@ -1056,7 +1056,7 @@ footer p a:hover {
 }
 
 .about-us ul li a:hover {
-	background-color: #f48840;
+	background-color: #15460b;
 }
 
 
@@ -1125,7 +1125,7 @@ footer p a:hover {
 	.navbar .navbar-nav .nav-link.active,
 	.navbar .navbar-nav .nav-link.show,
 	.navbar .navbar-nav .show>.nav-link {
-		color: #f48840!important;
+		color: #15460b!important;
 		border-bottom: none!important;
 		padding-bottom: 15px;
 	}

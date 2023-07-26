@@ -29,7 +29,7 @@
                 </table>
                 <br>
                 <button type="submit">Iniciar Sesion</button>
-                <!-- <input type="hidden" name="next" value="{{ next }}"> -->
+                <input type="hidden" name="next" value="{{ next }}">
               </form>
               <div class="m-b-1 text-xs-center"> 
                 <a href="{% url 'password_reset' %}">
@@ -38,10 +38,7 @@
               </div>
               <div class="text-xs-center">
                 <small>¿No tenes una cuenta? 
-                  <a href="{% url 'usuario:registro' %}
-                    {% if next %}
-                    ?next={{ next }}
-                    {% endif %}">
+                  <a href="{% url 'usuario:registro' %}{% if next %}?next={{ next }}{% endif %}">
                     Registrate
                   </a>
                 </small>

@@ -1,7 +1,7 @@
 from django.urls import  path
 
 from apps.comentario.views import  registrarComentario, registrarRespuestaAComentario
-from .views import  ArticuloBusquedaView, ArticuloListView, ArticuloResumidoView, CategoriaListView, ArticuloView,  CrearArticulo, EditarArticulo
+from .views import  ArticuloBusquedaView, ArticuloListView, ArticuloResumidoView, BorrarArticuloView, CategoriaListView, ArticuloView,  CrearArticulo, CrearCategoria, EditarArticulo
 
 app_name = 'articulo'
 
@@ -15,4 +15,6 @@ urlpatterns = [
     path('categoria/<int:pk>/', CategoriaListView.as_view(), name='categoria'),
     path('articulo/buscar/',ArticuloBusquedaView.as_view(), name='buscar'),
     path('articulo/<int:id>/responder/', registrarRespuestaAComentario, name='responder'),
+    path('categoria/crear/', CrearCategoria.as_view(), name='crearCategoria'),
+    path('articulo/<int:pk>/borrar/', BorrarArticuloView.as_view(), name='borrar'),
 ]

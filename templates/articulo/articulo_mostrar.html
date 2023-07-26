@@ -12,10 +12,10 @@
                   <img src="{{articulo.imagen.url}}" alt="">
                 </div>
                 {% if user.is_superuser or user == articulo.creado_por %}
-                <a class="fas fa-edit fa-lg" href="{% url 'articulo:editar' pk=articulo.id %}">
+                <a class="fas fa-pencil fa-xl" href="{% url 'articulo:editar' pk=articulo.id %}">
                  <i ></i>
                 </a>
-                <a class="fa-solid fa-trash fa-lg" href="{% url 'articulo:editar' pk=articulo.id %}">
+                <a class="fa-solid fa-trash fa-xl" href="{% url 'articulo:borrar' pk=articulo.id %}">
                   <i ></i>
                 </a>
                 {% endif %}
@@ -31,15 +31,15 @@
                   <div class="post-options">
                     <div class="row">
                       <div class="col-6">
-                        <ul class="post-tags">
-                          <!-- <li><i class="fa fa-tags"></i></li>
-                          <li><a href="#">Best Templates</a>,</li>
-                          <li><a href="#">TemplateMo</a></li> -->
+                        <ul class="post-tags fa-xl">
+                          <li>
+                            <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">{{articulo.categoria}}</a>
+                          </li>
                         </ul>
                       </div>
                       <div class="col-6">
                         <ul class="post-share">
-                          <li><i class="fa fa-share-alt"></i></li>
+                          <li><i class="fa fa-share-alt fa-xl"></i></li>
                           <li><a href="#">Facebook</a>,</li>
                           <li><a href="#"> Twitter</a></li>
                         </ul>

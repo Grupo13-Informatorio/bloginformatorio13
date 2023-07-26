@@ -1,5 +1,6 @@
 from typing import Any, Dict
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView, DeleteView
@@ -8,7 +9,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from apps.articulo.forms import ArticuloCreationForm
+from apps.articulo.forms import ArticuloCreationForm, CategoriaForm
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
 from blog.mixins import MiembroRequiredMixin
@@ -134,7 +135,34 @@ class ArticuloBusquedaView(ListView):
         return articulos
 
 
-# class ArticuloDeleteView(DeleteView):
-#     model = Articulo
-#     success_url = reverse_lazy("articulo:articulos")
+class CrearCategoria(LoginRequiredMixin, MiembroRequiredMixin, CreateView):
     
+    form_class = CategoriaForm
+    template_name = 'articulo/categoria_crear.html'
+     
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next')
+        return context    
+    
+    def form_valid(self, form):
+        if form.is_valid:
+            messages.success(self.request, "Categoria agregada exitosamente")
+            self.success_url = self.request.POST.get('next') 
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, "Error en la validacion")
+            return render(self.request, 'articulo/articulo_crear.html', {'form': form}) 
+        
+        
+        
+class BorrarArticuloView(DeleteView):
+    
+    model = Articulo
+    template_name = 'articulo/articulo_borrar.html'
+    success_url = reverse_lazy('articulo:articulos')
+    
+    def get_success_url(self) -> str:
+        messages.success(self.request, "Articulo borrado exitosamente")
+        return super().get_success_url()

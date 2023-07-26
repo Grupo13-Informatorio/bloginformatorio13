@@ -1,5 +1,23 @@
 {% extends "index.html"%}
 {% block contenido %}
+<section class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>Categoria</span>
+              <h4>Cree aqui una nueva categoria</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="blog-posts">
   <div class="container">
     <div class="row">
@@ -9,10 +27,10 @@
             <div class="col-lg-12">
               <div class="sidebar-item submit-comment">
                 <div class="sidebar-heading">
-                  <h2>Registrese para continuar...</h2>
+                  <h2>Ingrese el nombre de la categoria:</h2>
                 </div>
                 <div class="content">
-                  <form id="register_user" method="post">
+                  <form action="{% url 'articulo:crearCategoria' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                       <div class="col-lg-12">
@@ -21,13 +39,14 @@
                       <input type="hidden" name="next" value="{{next}}">
                       <div class="col-lg-12">
                         <fieldset>
-                          <button type="submit" id="form-submit" class="main-button">Submit</button>
+                          <button type="submit" id="form-submit" class="main-button">Crear</button>
+                          <!-- <input type="hidden" name="next" value="{{next}}"> -->
                         </fieldset>
                       </div>
                     </div>
                   </form>
                   <hr>
-                  <a href="{% url 'inicio' %}">volver</a>
+                  <a href="{% url 'inicio' %}">inicio</a>
                 </div>
               </div>
             </div>

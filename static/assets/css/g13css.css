@@ -277,6 +277,7 @@ header .navbar {
 	color: #1e1e1e;
 	transition: all 0.3s;
 }
+
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .active>.nav-link,
 .navbar .navbar-nav .nav-link.active,
@@ -284,9 +285,11 @@ header .navbar {
 .navbar .navbar-nav .show>.nav-link {
 	color: #f48840;
 }
+
 .navbar .navbar-toggler-icon {
 	background-image: none;
 }
+
 .navbar .navbar-toggler {
 	border-color: #fff;
 	background-color: #f48840;	
@@ -297,6 +300,7 @@ header .navbar {
 	right: 30px;
 	top: 25px;
 }
+
 .navbar .navbar-toggler-icon:after {
 	content: '\f0c9';
 	color: #fff;
@@ -304,6 +308,7 @@ header .navbar {
 	line-height: 30px;
 	font-family: 'FontAwesome';
 }
+
 /* Banner Style */
 .main-banner .container-fluid {
 	padding: 0px 10px;
@@ -449,7 +454,6 @@ header .navbar {
 }
 
 .fa{
-	background-color: #f48840;
 	color:#f48840;
 }
 
@@ -847,29 +851,33 @@ ul.page-numbers li a:hover {
 	color: #f48840;
 }
 
-.sidebar .tags ul li {
-	margin-right: 6px;
-	display: inline-block;
-}
 
 .sidebar .tags ul li {
-	margin-bottom: 10px;
-}
-
-.sidebar .tags ul li a {
 	font-size: 15px;
 	font-weight: 500;
 	color: #aaa;
 	display: inline-block;
 	border: 1px solid #eee;
-	padding: 10px 18px;
+	padding: 8px 8px;
 	transition: all .3s;
+}
+
+.sidebar .tags ul li a{
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 500;
+	color: #aaa;
 }
 
 .sidebar .tags ul li a:hover {
 	background-color: #f48840;
 	border-color: #f48840;
 	color: #fff;
+}
+
+.sidebar .tags ul li a button{
+	text-align: center;
+	vertical-align: middle;
 }
 
 
@@ -1014,10 +1022,10 @@ footer p a:hover {
 }
 
 .fa-solid, .fas {
-	color:darkgray;
+	margin-top: 20px;
+	margin-left: 10px;
+	color:#fb9857;
 }
-
-
 
 
 .contact-us .contact-information ul li:last-child {

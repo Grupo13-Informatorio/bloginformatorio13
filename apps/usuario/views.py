@@ -11,9 +11,15 @@ from django.contrib import messages
 from apps.usuario.models import Usuario
 
 class registrarUsuario(CreateView):
+    
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
     success_url = reverse_lazy('registration_success')
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next')
+        return context
     
     def form_valid(self, form):
         if form.is_valid():
@@ -27,23 +33,32 @@ class registrarUsuario(CreateView):
             form.is_invalid(form)
 
 class LoginUsuario(LoginView):
+    
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
-        else:
-            form.is_invalid(form)
-            messages.error(self.request, "Error de validacion")
-    
+        
     def get_success_url(self) -> str:
         messages.success(self.request, "¡Usuario logueado correctamente!")
         return super().get_success_url()
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next')
+        return context
+  
+  
   
 class LogoutUsuario(LogoutView):
+    
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         messages.success(self.request, "¡Sesion cerrada correctamente!")
         return super().get(request, *args, **kwargs)
 
+
+
 class UpdateUsuarioView(UpdateView):
+    
     template_name = "usuario/perfil.html"
     model = Usuario
     form_class = UserCreationForm

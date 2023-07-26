@@ -100,6 +100,15 @@ const suceso = (titulo, mensaje) => {
     });
 };
 
+
+const alert = (titulo, mensaje) => {
+    Swal.fire({
+        icon: 'danger',
+        title: titulo,
+        text: mensaje
+    });
+};
+
 const showform = (elem) => {
     let x = document.getElementById(elem);
     if (x.style.display === "none") {

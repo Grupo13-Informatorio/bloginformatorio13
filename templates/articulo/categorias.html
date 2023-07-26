@@ -7,7 +7,14 @@
     <div class="content">
       <ul>
         {% for categoria in categorias|is_active %}
-        <li><a href="{% url 'articulo:categoria' pk=categoria.pk %}">{{categoria.nombre}}</a></li>
+        <li >
+          <div>
+            <a class="align-middle" href="{% url 'articulo:categoria' pk=categoria.pk %}">{{categoria.nombre}}</a>
+            {% if user.is_miembro or user.is_superuser %}
+            <a class="align-middle" href=""><button class="btn"><span><i class="fa-solid fa-trash align-middle"></i></span></button></a>
+            {% endif %}
+          </div>
+        </li>
         {% endfor %}
       </ul>
     </div>

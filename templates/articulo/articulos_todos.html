@@ -35,15 +35,17 @@
                   <img src="{{ articulo.imagen.url }}" alt="">
                 </div>
                 {% if user.is_superuser or user == articulo.creado_por %}
-                <a class="fa-solid fa-edit fa-lg" href="{% url 'articulo:editar' pk=articulo.id %}">
+                <a class="fa-solid fa-pencil fa-xl" href="{% url 'articulo:editar' pk=articulo.id %}">
                  <i ></i>
                 </a>
-                <a class="fa-solid fa-trash fa-lg" href="{% url 'articulo:editar' pk=articulo.id %}">
+                <a class="fa-solid fa-trash fa-xl" href="{% url 'articulo:borrar' pk=articulo.id %}">
                   <i ></i>
                 </a>
                 {% endif %}
                 <div class="down-content">
-                  <span>{{ articulo.categoria }}</span>
+                  
+                  <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">
+                  <span>{{ articulo.categoria }}</span></a>
                   <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
                   <ul class="post-info">
                     <li><a href="#">{{ articulo.usuario }}</a></li>
@@ -63,7 +65,7 @@
               <ul class="page-numbers">
                 {% if page_obj.has_previous %}
                 <li>
-                  <a href="?{% url_replace page=1 %}"><i class="fa-solid fa-angles-left"></i></a>
+                  <a href="?{% url_replace page=1 %}"><i class="fa-solid fa-xl fa-angles-left"></i></a>
                   <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
                 </li>
                 {% endif %}
@@ -73,7 +75,7 @@
                 {% if page_obj.has_next %}
                 <li>
                   <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
-                  <a href="?{% url_replace page=page_obj.paginator.num_pages %}" sytle="color:orange;"><i class="fa-solid fa-angles-right"></i></a>
+                  <a href="?{% url_replace page=page_obj.paginator.num_pages %}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
                 </li>
                 {% endif %}
               </ul>

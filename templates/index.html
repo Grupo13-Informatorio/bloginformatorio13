@@ -47,14 +47,12 @@
                     </div>
                     <div class="content">
                       <ul>
-                        <!-- Aca los ultimos posteos -->
                         {% for articulo in articulos %}
                         <li><a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
                           <h5>{{articulo.titulo}}</h5>
                           <span>{{articulo.fecha}}</span>
                         </a></li>
                         {% endfor %}
-                        <!-- aca finalizan los ultimos posteos -->
                       </ul>
                     </div>
                   </div>

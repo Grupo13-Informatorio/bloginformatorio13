@@ -23,3 +23,4 @@ class CategoriaForm(ModelForm):
             'categoria' : TextInput(attrs={'placeholder': 'Ingrese su categoria', 'max_length' : 50}),
        
         }
+        exclude= ['is_active']

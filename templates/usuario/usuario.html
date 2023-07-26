@@ -7,8 +7,8 @@
         <div class="main-content">
           <div class="row">
             <div class="col-lg-8">
-              <span>PERFIL</span>
-              <h4>Bienvenido nuevamente <em>{{user}}</em></h4>
+              <span>PEFIL</span>
+              <h4>Bienvenido nuevamente <em>{{usuario}}</em></h4>
             </div>
             <div class="col-lg-4">
             </div>
@@ -27,15 +27,23 @@
             <div class="col-lg-12">
               <div class="sidebar-item submit-comment">
                 <div class="content">
+
                     <p><h2>Usuario: </h2>{{usuario.username}}</p>
                     <p><h2>Nombre: </h2>{{usuario.first_name}}</p>
                     <p><h2>Apellido: </h2>{{usuario.last_name}}</p>
                     <p><h2>Fecha nacimiento: </h2>{{usuario.fecha_nacimiento}}</p>
+                    <p><h2>Edad: </h2>{{usuario.edad}}</p>
                     <p><h2>Email: </h2>{{usuario.email}}</p>
                     <p><h2>Registrado: </h2>{{usuario.date_joined}}</p>
 
                     <img src="{{usuario.foto_perfil}}" style="max-height:400px; max-width:400px;" alt="foto perfil {{usuario}}">
                     
+                    <table>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                    </table>
                     
 
                   <hr>

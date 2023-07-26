@@ -7,6 +7,7 @@ from apps.usuario.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
+from apps.usuario.mixins import IsMiembroRequiredMixin
 
 from apps.usuario.models import Usuario
 
@@ -57,7 +58,7 @@ class LogoutUsuario(LogoutView):
 
 
 
-class UpdateUsuarioView(UpdateView):
+class UpdateUsuarioView(IsMiembroRequiredMixin, UpdateView):
     
     template_name = "usuario/perfil.html"
     model = Usuario
@@ -74,10 +75,14 @@ class UpdateUsuarioView(UpdateView):
             return response_form
         else:
             form.is_invalid(form)
+<<<<<<< HEAD
 
 class VerPerfilUsuario(DetailView):
     model = Usuario
     template_name = 'usuario/ver_perfil.html'
     context_object_name = 'usuario'
 
+=======
+            
+>>>>>>> darian
        

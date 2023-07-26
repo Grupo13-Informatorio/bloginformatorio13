@@ -851,7 +851,6 @@ ul.page-numbers li a:hover {
 	color: #f48840;
 }
 
-
 .sidebar .tags ul li {
 	font-size: 15px;
 	font-weight: 500;
@@ -859,28 +858,48 @@ ul.page-numbers li a:hover {
 	display: inline-block;
 	border: 1px solid #eee;
 	padding: 8px 8px;
+	margin-bottom: 5px;
 	transition: all .3s;
 }
 
 .sidebar .tags ul li a{
-	display: inline-block;
+	display: inline-flex;
+	height: 100%;
 	font-size: 15px;
 	font-weight: 500;
 	color: #aaa;
 }
 
-.sidebar .tags ul li a:hover {
+.sidebar .tags ul li div {
+	display:inline;
+	align-content: center;
+}
+
+.sidebar .tags ul li div button, 
+.sidebar .tags ul li div a{
+	align-content: center;
+	background-color:transparent;
+	cursor: pointer;
+	border: none;
+}
+
+/* .sidebar .tags ul li div a:hover {
 	background-color: #f48840;
 	border-color: #f48840;
 	color: #fff;
+} */
+
+.sidebar .tags ul li a button span{
+	height: 100%;
+	width: 100%;
 }
 
-.sidebar .tags ul li a button{
+.sidebar .tags ul li a button,
+.sidebar .tags ul li a button::after
+{
 	text-align: center;
 	vertical-align: middle;
 }
-
-
 /* Footer */
 
 footer {

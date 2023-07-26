@@ -156,7 +156,6 @@ class CrearCategoria(LoginRequiredMixin, MiembroRequiredMixin, CreateView):
             return render(self.request, 'articulo/articulo_crear.html', {'form': form}) 
         
         
-        
 class BorrarArticuloView(DeleteView):
     
     model = Articulo
@@ -165,4 +164,23 @@ class BorrarArticuloView(DeleteView):
     
     def get_success_url(self) -> str:
         messages.success(self.request, "Articulo borrado exitosamente")
+        return super().get_success_url()
+    
+    
+class BorrarCategoriaView(DeleteView):
+    
+    model = Categoria
+    template_name = 'articulo/categoria_borrar.html'
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+        ctx['next'] = self.request.GET.get('next')
+        return ctx
+    
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any):
+        self.success_url = request.POST.get('next')
+        return super().post(request, *args, **kwargs)
+    
+    def get_success_url(self) -> str:
+        messages.success(self.request, "Categoria borrada exitosamente")
         return super().get_success_url()

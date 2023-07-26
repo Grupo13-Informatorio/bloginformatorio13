@@ -9,13 +9,21 @@
         {% for categoria in categorias|is_active %}
         <li >
           <div>
-            <a class="align-middle" href="{% url 'articulo:categoria' pk=categoria.pk %}">{{categoria.nombre}}</a>
+            <a href="{% url 'articulo:categoria' pk=categoria.pk %}">{{categoria.nombre}}</a>
             {% if user.is_miembro or user.is_superuser %}
-            <a class="align-middle" href=""><button class="btn"><span><i class="fa-solid fa-trash align-middle"></i></span></button></a>
+            <a href="{% url 'articulo:borrarCategoria' pk=categoria.pk %}?next={{request.path}}">
+              <button ><span><i class="fa-solid fa-trash"></i></span></button></a>
             {% endif %}
           </div>
         </li>
         {% endfor %}
+        <li>
+          <div>
+          {% if user.is_superuser or user.is_miembro %}
+          <a href="{% url 'articulo:crearCategoria' %}?next={{request.path}}"><i class="fa-solid fa-xl fa-add"></i></a>
+          {% endif %}
+        </div>
+        </li>
       </ul>
     </div>
   </div>

@@ -45,6 +45,7 @@
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:actualizar' pk=user.id %}?next={{request.path}}">perfil</a></li>
                         {% if user.is_miembro or user.is_superuser %}
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crear' %}">publicar articulo</a></li>
+                        <li class="dropdown-item"><a class="nav-link" href="{% url 'categoria:crear' %}">crear categoria</a></li>
                         {% endif %}
                       </ul>
                       

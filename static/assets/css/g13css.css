@@ -454,7 +454,7 @@ header .navbar {
 }
 
 .blog-posts {
-	margin-top: 0;
+	margin-top: 0px;
 }
 
 .blog-posts .blog-post {
@@ -699,7 +699,7 @@ ul.page-numbers li a:hover {
 	margin-top: 60px;
 }
 
-.blog-posts .submit-comment input {
+.blog-posts .submit-comment input, input.form-control{
 	width: 100%;
 	height: 46px;
 	border: 1px solid #eee;
@@ -709,6 +709,10 @@ ul.page-numbers li a:hover {
 	outline: none;
 	padding: 0px 15px;
 	margin-bottom: 30px;
+}
+
+.right-content a{
+	cursor: pointer;
 }
 
 .blog-posts .submit-comment textarea {
@@ -1008,6 +1012,13 @@ footer p a:hover {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #eee;
 }
+
+.fa-solid, .fas {
+	color:darkgray;
+}
+
+
+
 
 .contact-us .contact-information ul li:last-child {
 	margin-bottom: 0px;

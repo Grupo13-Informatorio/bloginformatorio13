@@ -38,6 +38,9 @@
                 <a class="fa-solid fa-edit fa-lg" href="{% url 'articulo:editar' pk=articulo.id %}">
                  <i ></i>
                 </a>
+                <a class="fa-solid fa-trash fa-lg" href="{% url 'articulo:editar' pk=articulo.id %}">
+                  <i ></i>
+                </a>
                 {% endif %}
                 <div class="down-content">
                   <span>{{ articulo.categoria }}</span>

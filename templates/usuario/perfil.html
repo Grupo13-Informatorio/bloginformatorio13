@@ -1,24 +1,23 @@
 {% extends "index.html"%}
 {% block contenido %}
 <section class="call-to-action">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="main-content">
-            <div class="row">
-              <div class="col-lg-8">
-                <span>PEFIL</span>
-                <h4>Bienvenido nuevamente <em>{{user}}</em></h4>
-              </div>
-              <div class="col-lg-4">
-              </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>PERFIL</span>
+              <h4>Bienvenido nuevamente <em>{{user}}</em></h4>
+            </div>
+            <div class="col-lg-4">
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
 <section class="blog-posts">
   <div class="container">
     <div class="row">
@@ -31,12 +30,11 @@
                   <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-lg-12">
-                        {{form.as_p}}
-                        </div>
                       <div class="col-lg-12">
-                    <p>{{form.non_field_errors}}</p>
-
+                      {{form.as_p}}
+                      </div>
+                      <div class="col-lg-12">
+                      <p>{{form.non_field_errors}}</p>
                         <fieldset>
                           <button type="submit" value="Update" id="form-submit" class="main-button">Actualizar</button>
                         </fieldset>

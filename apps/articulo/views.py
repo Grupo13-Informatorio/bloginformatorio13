@@ -1,6 +1,5 @@
-from typing import Any, Dict
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.http import HttpRequest 
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView, DeleteView
@@ -12,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.articulo.forms import ArticuloCreationForm, CategoriaForm
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
-from blog.mixins import MiembroRequiredMixin
+from apps.usuario.mixins import IsMiembroRequiredMixin
 
 from .models import Articulo, Categoria
 
@@ -50,19 +49,19 @@ class ArticuloResumidoView(View):
 
 
 
-class EditarArticulo(LoginRequiredMixin, MiembroRequiredMixin, UpdateView):
+class EditarArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
     
     model = Articulo
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_editar.html'
     success_url = ''
-    def post(self, request, *args: str, **kwargs):
+    def post(self, request, *args, **kwargs):
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
 
 
 
-class CrearArticulo(LoginRequiredMixin, MiembroRequiredMixin, CreateView):
+class CrearArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
     
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_crear.html'
@@ -84,7 +83,7 @@ class ArticuloListView(ListView):
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
     
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
@@ -135,13 +134,13 @@ class ArticuloBusquedaView(ListView):
         return articulos
 
 
-class CrearCategoria(LoginRequiredMixin, MiembroRequiredMixin, CreateView):
+class CrearCategoria(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
     
     form_class = CategoriaForm
     template_name = 'articulo/categoria_crear.html'
      
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['next'] = self.request.GET.get('next')
         return context    
@@ -156,7 +155,7 @@ class CrearCategoria(LoginRequiredMixin, MiembroRequiredMixin, CreateView):
             return render(self.request, 'articulo/articulo_crear.html', {'form': form}) 
         
         
-class BorrarArticuloView(DeleteView):
+class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
     
     model = Articulo
     template_name = 'articulo/articulo_borrar.html'
@@ -167,17 +166,17 @@ class BorrarArticuloView(DeleteView):
         return super().get_success_url()
     
     
-class BorrarCategoriaView(DeleteView):
+class BorrarCategoriaView(IsMiembroRequiredMixin, DeleteView):
     
     model = Categoria
     template_name = 'articulo/categoria_borrar.html'
     
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['next'] = self.request.GET.get('next')
         return ctx
     
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any):
+    def post(self, request: HttpRequest, *args, **kwargs):
         self.success_url = request.POST.get('next')
         return super().post(request, *args, **kwargs)
     

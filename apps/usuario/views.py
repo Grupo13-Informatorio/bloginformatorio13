@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
+from apps.articulo.models import Articulo
 from apps.usuario.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
@@ -75,14 +76,16 @@ class UpdateUsuarioView(IsMiembroRequiredMixin, UpdateView):
             return response_form
         else:
             form.is_invalid(form)
-<<<<<<< HEAD
 
 class VerPerfilUsuario(DetailView):
     model = Usuario
-    template_name = 'usuario/ver_perfil.html'
+    template_name = 'usuario/perfil.html'
     context_object_name = 'usuario'
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        articulos = Articulo.objects.filter(creado_por=kwargs['object'])
+        ctx['articulos'] = articulos
+        return ctx
 
-=======
-            
->>>>>>> darian
        

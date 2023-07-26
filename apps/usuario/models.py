@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+
+import datetime
 # Create your models here.
 
 
@@ -15,10 +17,10 @@ class Usuario(AbstractUser):
         null=True,
         blank=True
     )
-    @property
-    def edad(self):
-        import datetime
-        return int((datetime.date.today() - self.birthday).days / 365.25  )
+    
+    def get_edad(self):
+        return int((datetime.date.today() - self.fecha_nacimiento).days / 365.25)
+    
     def __str__(self):
         return self.username
     

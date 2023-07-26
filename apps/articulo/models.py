@@ -92,6 +92,9 @@ class Articulo(models.Model):
     def get_responder_url(self):
         return reverse_lazy("articulo:responder", args=[self.pk])
 
+    def get_url_completo(self):
+        return reverse_lazy("articulo:mostrarArticulo", args=[self.pk])
+    
     def get_url(self):
         return reverse_lazy("articulo_resumido", args=[self.pk])
     

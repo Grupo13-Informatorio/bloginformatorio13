@@ -48,7 +48,7 @@
                   <span>{{ articulo.categoria }}</span></a>
                   <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
                   <ul class="post-info">
-                    <li><a href="#">{{ articulo.usuario }}</a></li>
+                    <li><a href="{{ articulo.creado_por.get_link_verperfil }}">{{ articulo.creado_por }}</a></li>
                     <li><a href="#">{{ articulo.fecha }}</a></li>
                     <li><a href="#">{{articulo.comentario_set.all.count }} Comentarios</a></li>
                   </ul>

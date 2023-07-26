@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 from apps.usuario.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
@@ -74,4 +74,10 @@ class UpdateUsuarioView(UpdateView):
             return response_form
         else:
             form.is_invalid(form)
+
+class VerPerfilUsuario(DetailView):
+    model = Usuario
+    template_name = 'usuario/ver_perfil.html'
+    context_object_name = 'usuario'
+
        

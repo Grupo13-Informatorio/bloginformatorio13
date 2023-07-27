@@ -115,6 +115,7 @@ class CategoriaListView(ListView):
         return articulos
         
 
+
 class ArticuloBusquedaView(ListView):
     
     model = Articulo
@@ -134,12 +135,12 @@ class ArticuloBusquedaView(ListView):
         return articulos
 
 
+
 class CrearCategoria(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
     
     form_class = CategoriaForm
     template_name = 'articulo/categoria_crear.html'
      
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['next'] = self.request.GET.get('next')
@@ -153,6 +154,7 @@ class CrearCategoria(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
         else:
             messages.error(self.request, "Error en la validacion")
             return render(self.request, 'articulo/articulo_crear.html', {'form': form}) 
+    
         
         
 class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
@@ -165,6 +167,7 @@ class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
         messages.success(self.request, "Articulo borrado exitosamente")
         return super().get_success_url()
     
+   
     
 class BorrarCategoriaView(IsMiembroRequiredMixin, DeleteView):
     

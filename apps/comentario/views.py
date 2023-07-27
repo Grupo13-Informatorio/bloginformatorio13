@@ -37,7 +37,7 @@ def registrarRespuestaAComentario(request, id):
     return redirect('articulo:mostrarArticulo', id)
 
 
-class EditarArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
+class EditarComentario(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
     
     model = Comentario
     form_class = ComentarioCreationForm
@@ -49,9 +49,9 @@ class EditarArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
     
-class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
+class BorrarComentarioView(IsMiembroRequiredMixin, DeleteView):
     
-    model = Articulo
+    model = Comentario
     template_name = 'comentario/comentario_borrar.html'
     success_url = ''
     

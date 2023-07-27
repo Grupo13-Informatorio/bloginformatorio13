@@ -87,6 +87,22 @@ class VerPerfilUsuario(DetailView):
         ctx = super().get_context_data(**kwargs)
         articulos = Articulo.objects.filter(creado_por=kwargs['object'])
         comentarios = Comentario.objects.filter(creado_por=kwargs['object'])
+        cant_comentarios = comentarios.count()
+        cant_articulos = articulos.count()
+        if cant_comentarios == 0:
+            titulo_comentarios = 'Sin comentarios'
+        elif cant_comentarios == 1:
+            titulo_comentarios = 'Comentario'
+        else:
+            titulo_comentarios = str(cant_comentarios) + ' ' + 'Comentarios'
+        if cant_articulos == 0:
+            titulo_articulos = 'Sin articulos'
+        elif cant_articulos == 1:
+            titulo_articulos = 'Articulo'
+        else:
+            titulo_articulos = str(cant_comentarios) + ' ' + 'Articulos'
+        ctx['titulo_articulos'] = titulo_articulos
+        ctx['titulo_comentarios'] = titulo_comentarios
         ctx['comentarios'] = comentarios
         ctx['articulos'] = articulos
         return ctx

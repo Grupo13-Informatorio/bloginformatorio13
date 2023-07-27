@@ -3,8 +3,13 @@
 <header class="">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <div class="navbar-brand"><h2><a href="{% url 'inicio'%}"><img src="{% static 'favicon_80.png' %}" style="max-height:50px">G13-Info<em>.</em>
-        </a></h2>
+        <div class="navbar-brand">
+          <h2>
+            <a href="{% url 'inicio'%}">
+              <img src="{% static 'favicon_80.png' %}" style="max-height:50px">
+              Green<em>13</em>
+            </a>
+          </h2>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,7 +28,6 @@
             <li class="nav-item {% if url_name == 'contacto' %} active {% endif %}">
               <a class="nav-link" href="{% url 'contacto:contacto' %}">Contacto</a>
             </li>
-
             <li class="nav-item dropdown 
             {% if url_name == 'login' and not user.is_authenticated %} 
               active 
@@ -43,23 +47,19 @@
                           Cerrar Sesion
                           </a>
                         </li>
-                        
+                        <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:perfil' pk=user.id %}?next={{request.path}}">ver perfil</a></li>
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:actualizar' pk=user.id %}?next={{request.path}}">editar perfil</a></li>
                         {% if user.is_miembro or user.is_superuser %}
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crear' %}">publicar articulo</a></li>
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crearCategoria' %}?next={{request.path}}">crear categoria</a></li>
                         {% endif %}
                       </ul>
-                      
-                                     
               {% else %}
-                <a class="nav-link" href="{% url 'usuario:login'%}?next={{request.path}}">Iniciar Sesion</a>
+                <a class="nav-link" href="{% url 'usuario:login'%}{% if url_name != 'inicio' %}?next=?{{request.path}}{% endif %}">Iniciar Sesion</a>
               {% endif %}
             </li>
           </ul>
         </div>
-
-        
       </div>
     </nav>
   </header>

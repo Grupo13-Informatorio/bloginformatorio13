@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group, User, Permission
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse_lazy
@@ -27,6 +28,15 @@ class Usuario(AbstractUser):
     
     def __str__(self):
         return self.username
+    
+    def save(self, force_insert, force_update, using, update_fields):
+        if self.is_miembro:
+            pass            
+        else:
+            pass
+        return super().save(force_insert, force_update, using, update_fields)
+    
+    
     
 
     

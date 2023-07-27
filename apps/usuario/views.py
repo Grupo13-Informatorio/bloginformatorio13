@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 
+
 from apps.usuario.mixins import IsMiembroRequiredMixin
 from apps.articulo.models import Articulo
 from apps.comentario.models import Comentario
@@ -18,17 +19,17 @@ class registrarUsuario(CreateView):
     
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
-    success_url = reverse_lazy('registration_success')
+    success_url = reverse_lazy('login')
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['next'] = self.request.GET.get('next')
         return context
     
     def form_valid(self, form):
         if form.is_valid():
             response_form = super().form_valid(form)
             usuario = form.save(commit=False)
+            next = self.request.POST.get('next')
             usuario.password = make_password(form.cleaned_data["password"])
             usuario.save()
             messages.success(self.request, "¡Usuario creado correctamente!")
@@ -48,7 +49,8 @@ class LoginUsuario(LoginView):
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['next'] = self.request.GET.get('next')
+        next = self.request.GET.get('next')
+        context['next'] = next
         return context
   
   

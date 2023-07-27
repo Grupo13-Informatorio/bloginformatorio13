@@ -90,7 +90,7 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy('inicio')
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user == self.get_object()):
             return True
         else:
             return False    

@@ -33,3 +33,19 @@ class UserCreationForm(ModelForm):
         model = Usuario
         fields = ('username', 'first_name','last_name','foto_perfil','email','fecha_nacimiento', 'password')
 
+
+
+class UserEditionForm(ModelForm):
+
+    fecha_nacimiento = DateField(
+        label="Ingrese fecha de nacimiento"
+    )
+    
+    def clean(self):
+        return super().clean() 
+    
+    class Meta:
+        model = Usuario
+        fields = ('first_name','last_name','foto_perfil','email','fecha_nacimiento')
+
+

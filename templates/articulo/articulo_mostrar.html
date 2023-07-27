@@ -1,11 +1,36 @@
 {% extends "index.html"%}
 {% block title %} Blog G13 - Articulo {% endblock %}
 {% block articulo %}
-<section class="blog-posts grid-system">
+
+<section class="call-to-action">
   <div class="container">
     <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>ARTICULO</span>
+              <h4>Titulo:
+                <p>
+                  {{articulo.titulo}}
+                </p>
+              </h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blog-posts grid-system">
+  <div class="container">
+    <div class="row mt-5">
       <div class="col-lg-8">
         <div class="all-blog-posts">
+          <div class="row">
           <div class="row">
             <div class="col-lg-12">
               <div class="blog-post">
@@ -38,6 +63,8 @@
                           </li>
                         </ul>
                       </div>
+                    </div>
+                  </div>
                       <div class="col-6">
                         <ul class="post-share">
                           <li><i class="fa fa-share-alt fa-xl"></i></li>
@@ -54,8 +81,8 @@
             {% if user.is_authenticated  %}
             {% include "../comentario/form-comentarios.html" %}
             {% endif %}
+            <small>Para comentar ustede debe <a href="{% url 'usuario:login' %}?next={{request.path}}">iniciar sesion</a> o <a href="{% url 'usuario:registro' %}?next={{request.path}}">registrarse</a></small>
           </div>
-        </div>
       </div>
       <div class="col-lg-4">
         <div class="sidebar">
@@ -63,7 +90,7 @@
             <div class="col-lg-12">
               <div class="sidebar-item search">
                 {% include 'articulo/busqueda_form.html' %}
-            </div>
+              </div>
             </div>
             <div class="col-lg-12">
               <div class="sidebar-item recent-posts">
@@ -82,9 +109,13 @@
                     <!-- aca finalizan los ultimos posteos -->
                   </ul>
                 </div>
-              
 {% include "articulo/categorias.html" %}
-  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

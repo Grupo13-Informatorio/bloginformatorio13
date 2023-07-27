@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -13,7 +14,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 
 from apps.articulo.models import Articulo
 from apps.comentario.models import Comentario
-from apps.usuario.forms import UserCreationForm
+from apps.usuario.forms import UserCreationForm, UserEditionForm
 from apps.usuario.models import Usuario
 
 class registrarUsuario(CreateView):
@@ -31,6 +32,11 @@ class registrarUsuario(CreateView):
             usuario = form.save(commit=False)
             usuario.password = make_password(form.cleaned_data["password"])
             usuario.save()
+            messages.success(self.request, "Thanks for registering. You are now logged in.")
+            usuario = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'],
+                                    )
+            login(self.request, usuario)
             return super().form_valid(form) 
         else:
             self.form_invalid(form)
@@ -42,6 +48,8 @@ class registrarUsuario(CreateView):
         if redirect_to and url_is_safe:
             messages.success(self.request, "¡Usuario creado correctamente!")
             return redirect_to
+
+
 
 class LoginUsuario(LoginView):
     
@@ -78,7 +86,7 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     template_name = "usuario/editar_perfil.html"
     model = Usuario
-    form_class = UserCreationForm
+    form_class = UserEditionForm
     success_url = reverse_lazy('inicio')
     
     def test_func(self):
@@ -89,12 +97,8 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def form_valid(self, form):
         if form.is_valid():
-            response_form = super().form_valid(form)
-            usuario = form.save(commit=False)
-            usuario.password = make_password(form.cleaned_data["password"])
-            usuario.save()
             messages.success(self.request, "Usuario actualizado correctamente")
-            return response_form
+            return super().form_valid(form)
         else:
             self.form_invalid(form)
 

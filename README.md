@@ -8,12 +8,13 @@ INTEGRANTES:
    - ZENIQUEL, Camila
    - ROLON, Dario
    - RAMIREZ, Claudio
+   - MIRANDA, Federico
+   - HIEBL, Darian   
+
+   - VERA, Franco
+   - GOMEZ, Jonatan   
    - VAERNET, Bianca
    - LOPEZ, Andres
-   - MIRANDA, Federico
-   - VERA, Franco
-   - GOMEZ, Jonatan 
-   - HIEBL, Darian     
 
 **Comandos utiles:**
 

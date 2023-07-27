@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+
+{% load static %}
+  
+    <title>{% block title %} Crear articulo {% endblock title %}</title>
+  
+{% block contenido %}
+
+{% include "header.html" %}
+<main>
+  
+    <h1> Artículo </h1>
+      <ul>.
+      </ul>
+      <ul>.
+      </ul>
+
+</main>
+
+    
+<section class="contact-us">
+    <div class="container">
+      <div class="row">
+      
+        <div class="col-lg-12">
+          <div class="down-contact">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="sidebar-item contact-form">
+                  <div class="sidebar-heading">
+                    <h1>Articulo</h1>
+                    <div class="col-lg-12">
+                        <div class="blog-post">
+                            <div class="blog-thumb">
+                                    <form method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                        
+                                            {{ form.as_p }}
+                                        <button type="submit" class="btn btn-primary">Listo</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "footer.html" %}
+{% endblock %}

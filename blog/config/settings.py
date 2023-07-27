@@ -26,9 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6t9=is5x&6)@3-kq0ru_-&0bn3khooh=k#w4ah+klsgj@r+68g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'usuario.Usuario'
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -82,6 +84,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -126,13 +129,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(os.path.dirname(BASE_DIR), 'static')]
+STATICFILES_DIRS = [os.path.join(os.path.dirname(BASE_DIR), 'static/')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+LOGOUT_REDIRECT_URL = '/' ##esto es response en logout
 
 # Media files (Images)
 MEDIA_URL = '/media/'

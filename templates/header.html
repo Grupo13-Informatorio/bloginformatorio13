@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% with namespace=request.resolver_match.namespace url_name=request.resolver_match.url_name %}
 {% load static %}
 <header class="">
@@ -6,11 +7,21 @@
         <div class="navbar-brand"><h2><a href="{% url 'inicio'%}"><img src="{% static 'favicon_80.png' %}" style="max-height:50px">G13-Info<em>.</em>
         </a></h2>
         </div>
+=======
+{% load static %}
+
+<!-- Header -->
+  <header class="">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}"><h2> GRUPO 13<em>¬</em></h2></a>
+>>>>>>> origin/Dario
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
             <li class="nav-item {% if url_name == 'inicio' %} active {% endif %}">
               <a class="nav-link" href="{% url 'inicio'%}">Inicio</a>
             </li> 
@@ -64,3 +75,31 @@
     </nav>
   </header>
 {%endwith%}
+=======
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}">INICIO <!-- url 'nombredelaplantilla' referido a urls de blog/config-->
+                <span class="sr-only">(current)</span>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'sobrenosotros' %}">Sobre Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'apps.articulo:articulos' %}">Artículos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contacto:contacto' %}">Contáctenos</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'apps.usuario:logout' %}">Cerrar sesión</a>
+              {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'apps.usuario:login' %}">Iniciar sesión/Registrarse</a>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+>>>>>>> origin/Dario

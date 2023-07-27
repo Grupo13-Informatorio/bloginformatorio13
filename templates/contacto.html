@@ -1,0 +1,21 @@
+{% extends 'contactenos.html' %}
+
+
+{% block contacto %}
+
+    <div class="container">
+
+        <h1>{{ Mensaje }}</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                <input type="submit" id="myButton" value="Enviar" >
+
+        </form>
+
+
+    </div>
+
+{% endblock contacto %}

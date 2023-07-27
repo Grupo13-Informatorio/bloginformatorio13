@@ -1,0 +1,81 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %} Contáctenos {% endblock %}
+
+{% block contenido %}
+
+    {% include 'header.html' %}
+
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>CONTÁCTENOS</h4>
+                <h2>Manténgase en contacto con nosotros!</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <section class="contact-us">
+      <div class="container">
+        <div class="row">
+        
+          <div class="col-lg-12">
+            <div class="down-contact">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="sidebar-item contact-form">
+                    <div class="sidebar-heading">
+                      {% block contacto %}
+                      {% endblock %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="sidebar-item contact-information">
+                    <div class="sidebar-heading">
+                      <h2>Información de contacto</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        <li>
+                          <h5>123-456-789</h5>
+                          <span>NÚMERO DE TELÉFONO</span>
+                        </li>
+                        <li>
+                          <h5>info@compañia.com</h5>
+                          <span>EMAIL</span>
+                        </li>
+                        <li>
+                          <h5>Nación, localidad 
+                          	<br>Calle, número de calle</h5>
+                          <span>DIRECCIÓN</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-12">
+            <div id="map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113289.01764934915!2d-59.077745628938615!3d-27.46048492949619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94450c62a6f5f70b%3A0xf03ac86511c2cd6d!2sResistencia%2C%20Chaco!5e0!3m2!1ses-419!2sar!4v1689234008178!5m2!1ses-419!2sar" width="100%" height="450px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+{% include 'footer.html' %}
+
+{% endblock contenido %}

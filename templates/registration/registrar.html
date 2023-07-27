@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+
+{% block title %} Registro {% endblock title %}
+
+{% block contenido %}
+{% include 'header.html' %}
+<main>
+  
+    <h1> Registro</h1>
+      <ul>
+      </ul>
+
+</main>
+<!--Acá el usuario tiene que poder registrar el usuario y una vez hecho ser redireccionado al "login.html"-->
+<section class="blog-posts grid-system">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="all-blog-posts">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="blog-post">
+                  <div class="blog-thumb">
+                        <form action="{{ action_url }}" class="form-group" method="POST" enctype="multipart/form-data"> <!--que hace esta linea-->
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
+                            <button type="submit" class="btn btn-success btn-lg px-3">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+{% endblock contenido %}

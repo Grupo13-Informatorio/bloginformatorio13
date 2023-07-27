@@ -82,15 +82,18 @@ class ArticuloListView(ListView):
     model = Articulo
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
+    cantidad_registros = 0
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
+        context['registros'] = self.cantidad_registros
         return context
     
     def get_queryset(self):
         articulos = Articulo.objects.filter(is_active=True).order_by('-fecha')
+        self.cantidad_registros = articulos.count()
         return articulos
 
 
@@ -100,10 +103,12 @@ class CategoriaListView(ListView):
     model = Articulo
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
+    cantidad_registros = 0
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
+        context['registros'] = self.cantidad_registros
         context['categorias'] = Categoria.objects.all()
         context['categoria'] = Categoria.objects.get(id=self.kwargs['pk'])
         return context
@@ -112,6 +117,7 @@ class CategoriaListView(ListView):
         articulos = Articulo.objects \
                 .filter(is_active=True, categoria=Categoria.objects.get(id=self.kwargs['pk'])) \
                 .order_by('-fecha')
+        self.cantidad_registros = articulos.count()
         return articulos
         
 
@@ -121,9 +127,13 @@ class ArticuloBusquedaView(ListView):
     model = Articulo
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
+    cantidad_registros = 0
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        query = self.request.GET.get("q")
+        context['registros'] = self.cantidad_registros
+        context['query'] = query
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
         return context
@@ -132,6 +142,7 @@ class ArticuloBusquedaView(ListView):
         query = self.request.GET.get("q")
         articulos = Articulo.objects.filter( \
             Q(titulo__icontains=query) | Q(resumen__icontains=query) | Q(contenido__icontains=query))
+        self.cantidad_registros = articulos.count()
         return articulos
 
 
@@ -157,7 +168,7 @@ class CrearCategoria(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
     
         
         
-class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
+class BorrarArticuloView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView):
     
     model = Articulo
     template_name = 'articulo/articulo_borrar.html'
@@ -169,7 +180,7 @@ class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
     
    
     
-class BorrarCategoriaView(IsMiembroRequiredMixin, DeleteView):
+class BorrarCategoriaView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView):
     
     model = Categoria
     template_name = 'articulo/categoria_borrar.html'

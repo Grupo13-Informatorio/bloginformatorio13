@@ -1,4 +1,4 @@
-from django.forms import CheckboxInput, ChoiceField, FileInput, ModelForm, TextInput, Textarea 
+from django.forms import FileInput, ModelForm, TextInput, Textarea 
 from apps.articulo.models import Articulo, Categoria
 
 class ArticuloCreationForm(ModelForm):

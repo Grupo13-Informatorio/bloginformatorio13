@@ -10,6 +10,7 @@ from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
 from apps.usuario.mixins import IsMiembroRequiredMixin
 
+
 def registrarComentario(request, id):
     if request.method == "POST":
         form = ComentarioCreationForm(data = request.POST)
@@ -49,7 +50,7 @@ class EditarComentario(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
     
-class BorrarComentarioView(IsMiembroRequiredMixin, DeleteView):
+class BorrarComentarioView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView):
     
     model = Comentario
     template_name = 'comentario/comentario_borrar.html'

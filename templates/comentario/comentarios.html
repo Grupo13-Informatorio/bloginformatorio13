@@ -25,6 +25,7 @@
             </div>
             <div class="right-content">
               <h4><a href="{% url 'usuario:perfil' pk=comentario.creado_por.id  %}">{{comentario.creado_por}}<span>{{ comentario.creado }}</span></h4></a>
+              {% if user.is_authenticated %}
               <a onclick='showform("form-comentario{{comentario.id}}")'>
                 <small>responder</small>
               </a>
@@ -36,6 +37,7 @@
                   <input class="form-control" name="contenido" type="text" placeholder="ingrese aqui su respuesta...">
                 </div>
               </form>
+              {% endif %}
             </div>
           </li>
           {% for respuesta in comentario.comentario_set.all|is_active %}

@@ -1,4 +1,5 @@
 {% extends "index.html"%}
+{% block title %} Blog G13 - Perfil {{usuario}} {% endblock %}
 {% block contenido %}
 <section class="call-to-action">
   <div class="container">
@@ -44,24 +45,75 @@
                   <hr>
                     <div class="row">
                       <div class="col-sm-6">
-                        <h3>Articulos publicados:</h3>
-                        <table>
-                          <tr>
-                            <th>Fecha</th>
-                            <th>Titulo</th>
-                            <th>link</th>
-                          </tr>
+                        <h3>{{titulo_articulos}}</h3>
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">Titulo</th>
+                              <th scope="col">link</th>
+                              {% if user.is_miembro or user.is_superuser %}
+                              <th colspan="2">edicion</th>
+                              {% endif %}
+                            </tr>
+                          </thead>
+                          <tbody>
                           {% for articulo in articulos %}
-                          <tr>
-                            <td>{{articulo.fecha}}</td>
-                            <td>{{articulo.titulo}}</td>
-                            <td><a href="{{articulo.get_url_completo}}">ver articulo</a></td>
-                          </tr>
+                            <tr>
+                              <td>{{articulo.fecha}}</td>
+                              <td>{{articulo.titulo}}</td>
+                              <td><a href="{{articulo.get_url_completo}}">ver articulo</a></td>
+                              {% if user.is_miembro or user.is_superuser %}
+                              <td><a href="{% url 'articulo:editar' pk=articulo.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-pencil center"></i></a></td>
+                              <td><a href="{% url 'articulo:borrar' pk=articulo.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-trash danger center"></i></a></td>
+                              {% endif %}
+                            </tr>
+                          {% empty %}
+                            <tr>
+                              <td colspan="5">No ha publicado comentarios</td>
+                            </tr>
                           {% endfor %}
+                        </tbody>
                         </table>
                       </div>
                       <div class="col-sm-6">
-                        
+                        <h3>{{titulo_comentarios}}</h3>
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">contenido</th>
+                              <th scope="col">comenta</th>
+                              <th scope="col">link</th>
+                              {% if user.is_miembro or user.is_superuser %}
+                              <th colspan="2">edicion</th>
+                              {% endif %}
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for comentario in comentarios %}
+                            <tr>
+                              <td>{{comentario.creado}}</td>
+                              <td>{{comentario.contenido}}</td>
+                              {% if comentario.articulo %}
+                              <td>{{comentario.articulo}}</td>
+                              <td><a href="{{comentario.articulo.get_url_completo}}">ver articulo</a></td>
+                              {% else %}
+                              <td>{{comentario.comentario_padre}}</td>
+                              <td><a href="{{comentario.comentario_padre.articulo.get_url_completo}}">ver articulo</a></td>
+                              {% endif %}
+                              {% if user.is_miembro or user.is_superuser %}
+                              <td><a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-pencil center"></i></a></td>
+                              <td><a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-trash danger center"></i></a></td>
+                              {% endif %}
+                            </tr>
+                          {% empty %}
+                            <tr>
+                              <td colspan="5">No ha publicado comentarios</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                        </table>                        
                       </div>
                     </div>
                   <a href="{% url 'inicio' %}">volver</a>

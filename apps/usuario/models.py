@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.urls import reverse
+from django.urls import reverse_lazy
 
 import datetime
+
 # Create your models here.
 
 
 class Usuario(AbstractUser):
     is_miembro = models.BooleanField(default=False)
-    is_usuario = models.BooleanField(default=True)
     foto_perfil = models.ImageField(
         default="../static/default-user.png", 
         upload_to="usuarios",
@@ -18,12 +18,15 @@ class Usuario(AbstractUser):
         blank=True
     )
     
+   
+    def get_link_verperfil(self):
+        return reverse_lazy('usuario:perfil', args=[ self.pk ])
+    
     def get_edad(self):
         return int((datetime.date.today() - self.fecha_nacimiento).days / 365.25)
     
     def __str__(self):
         return self.username
     
-    def get_link_verperfil(self):
-        return reverse ('usuario:ver', args=[ self.pk ])
+
     

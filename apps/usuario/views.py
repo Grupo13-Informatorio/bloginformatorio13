@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 from apps.articulo.models import Articulo
+from apps.comentario.models import Comentario
 from apps.usuario.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
@@ -85,6 +86,8 @@ class VerPerfilUsuario(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         articulos = Articulo.objects.filter(creado_por=kwargs['object'])
+        comentarios = Comentario.objects.filter(creado_por=kwargs['object'])
+        ctx['comentarios'] = comentarios
         ctx['articulos'] = articulos
         return ctx
 

@@ -1,11 +1,14 @@
-from typing import Any
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
-from django.views import View
-from apps.articulo.models import Articulo
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
+
+from apps.articulo.models import Articulo
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
+from apps.usuario.mixins import IsMiembroRequiredMixin
 
 def registrarComentario(request, id):
     if request.method == "POST":
@@ -32,4 +35,28 @@ def registrarRespuestaAComentario(request, id):
         nuevo_comentario.contenido = contenido
         nuevo_comentario.save()
     return redirect('articulo:mostrarArticulo', id)
+
+
+class EditarArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
+    
+    model = Comentario
+    form_class = ComentarioCreationForm
+    template_name = 'comentario/comentario_editar.html'
+    success_url = ''
+
+    def post(self, request, *args, **kwargs):
+        self.success_url = request.GET.get('next')
+        messages.success(request, "Articulo actualizado correctamente")
+        return super().post(request, *args, **kwargs)
+    
+class BorrarArticuloView(IsMiembroRequiredMixin, DeleteView):
+    
+    model = Articulo
+    template_name = 'comentario/comentario_borrar.html'
+    success_url = ''
+    
+    def get_success_url(self) -> str:
+        self.success_url = self.request.GET.get('next')
+        messages.success(self.request, "Comentario borrado exitosamente")
+        return super().get_success_url()
     

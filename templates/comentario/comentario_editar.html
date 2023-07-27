@@ -1,6 +1,7 @@
 {% extends "index.html"%}
-{% block title %} Blog G13 - Crear articulo {% endblock %}
+{% block title %} Blog G13 - Editar Comentario {% endblock %}
 {% block contenido %}
+
 <section class="call-to-action">
   <div class="container">
     <div class="row">
@@ -8,8 +9,8 @@
         <div class="main-content">
           <div class="row">
             <div class="col-lg-8">
-              <span>PUBLICACION</span>
-              <h4>Cree aqui una nueva publicacion</h4>
+              <span>EDITAR</span>
+              <h4>Edicion<p>Comentario: {{ form.comentario.value }} </p></h4>
             </div>
             <div class="col-lg-4">
             </div>
@@ -28,10 +29,10 @@
             <div class="col-lg-12">
               <div class="sidebar-item submit-comment">
                 <div class="sidebar-heading">
-                  <h2>Ingrese los datos del articulo:</h2>
+                  <h2>Ingrese el nuevo comentario:</h2>
                 </div>
                 <div class="content">
-                  <form action="{% url 'articulo:crear' %}" method="post" enctype="multipart/form-data">
+                  <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                       <div class="col-lg-12">
@@ -39,8 +40,7 @@
                       </div>
                       <div class="col-lg-12">
                         <fieldset>
-                          <button type="submit" id="form-submit" class="main-button">Postear</button>
-                          <!-- <input type="hidden" name="next" value="{{next}}"> -->
+                          <button type="submit" value="Update" id="form-submit" class="main-button">Actualizar</button>
                         </fieldset>
                       </div>
                     </div>

@@ -16,7 +16,7 @@
                       <h4>{{articulo.titulo}}</h4>
                     </a>
                     <ul class="post-info">
-                      <li><a href="">{{articulo.creado_por}}</a></li>
+                      <li><a href="{% url 'usuario:perfil' pk=articulo.creado_por.id  %}">{{articulo.creado_por}}</a></li>
                       <li><a href="">{{articulo.fecha}}</a></li>
                       <li><a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
                       {% if articulo.comentario_set.all|is_active|length == 0 %}

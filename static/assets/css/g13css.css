@@ -883,6 +883,17 @@ ul.page-numbers li a:hover {
 	border: none;
 }
 
+
+.center {
+	text-align: center;
+	width: 100%;
+}
+
+table td a span i.fa-xl{
+    vertical-align: middle;
+    text-align: center;
+}
+
 /* .sidebar .tags ul li div a:hover {
 	background-color: #f48840;
 	border-color: #f48840;
@@ -907,6 +918,18 @@ footer {
 	text-align: center;
 	background-color: #20232e;
 	padding: 60px 0px;
+}
+
+.navbar-brand a{
+	color: #386121;
+}
+
+.navbar-brand a em{
+	color: #f48840;
+}
+
+.navbar-brand a:hover{
+	color: #f48840;
 }
 
 footer ul.social-icons {
@@ -944,7 +967,7 @@ footer ul.social-icons li a {
 }
 
 footer ul.social-icons li a:hover {
-	color: #f48840;
+	color: #386121;
 }
 
 footer p {
@@ -954,11 +977,11 @@ footer p {
 }
 
 footer p a {
-	color: #f48840;
+	color: #386121;
 }
 
 footer p a:hover {
-	color: #f48840;
+	color: #386121;
 }
 
 
@@ -1015,7 +1038,7 @@ footer p a:hover {
 
 .contact-us .contact-form button {
 	display: inline-block;
-	background-color: #f48840;
+	background-color: #386121;
 	color: #fff;
 	font-size: 13px;
 	font-weight: 500;
@@ -1039,6 +1062,8 @@ footer p a:hover {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #eee;
 }
+
+
 
 .fa-solid, .fas {
 	margin-top: 20px;
@@ -1104,7 +1129,7 @@ footer p a:hover {
 }
 
 .about-us ul li a:hover {
-	background-color: #f48840;
+	background-color: #386121;
 }
 
 

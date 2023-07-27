@@ -411,10 +411,11 @@ header .navbar {
 
 .call-to-action .main-content {
 	padding: 40px;
-	background-image: url(../images/cta-bg.jpg);
+	background-image: url(../images/cta-bg.jpg), url(../images/cta-bg2.jpg);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-blend-mode: overlay;
 }
 
 .call-to-action .main-content span {
@@ -967,7 +968,7 @@ footer ul.social-icons li a {
 }
 
 footer ul.social-icons li a:hover {
-	color: #386121;
+	color: #f48840;
 }
 
 footer p {
@@ -977,11 +978,11 @@ footer p {
 }
 
 footer p a {
-	color: #386121;
+	color: #f48840;
 }
 
 footer p a:hover {
-	color: #386121;
+	color: #f48840;
 }
 
 
@@ -1038,7 +1039,7 @@ footer p a:hover {
 
 .contact-us .contact-form button {
 	display: inline-block;
-	background-color: #386121;
+	background-color: #f48840;
 	color: #fff;
 	font-size: 13px;
 	font-weight: 500;
@@ -1068,7 +1069,7 @@ footer p a:hover {
 .fa-solid, .fas {
 	margin-top: 20px;
 	margin-left: 10px;
-	color:#fb9857;
+	color:#f48840;
 }
 
 
@@ -1129,7 +1130,7 @@ footer p a:hover {
 }
 
 .about-us ul li a:hover {
-	background-color: #386121;
+	background-color: #f48840;
 }
 
 

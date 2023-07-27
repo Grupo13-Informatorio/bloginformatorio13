@@ -1,5 +1,6 @@
 from typing import Any, Dict
-from django.http import HttpRequest, HttpResponse
+from django.forms.models import BaseModelForm
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
@@ -7,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
+from django.utils.http import url_has_allowed_host_and_scheme
 
 
 from apps.articulo.models import Articulo
@@ -19,46 +21,46 @@ class registrarUsuario(CreateView):
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
     
-    def get_success_url(self) -> str:
-        url = super().get_success_url()
-        next_url = self.request.GET.get('next')
-        if next_url:
-            url += self.request.GET.get('next')
-        return url
-    
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context['next'] = self.request.GET.get('next')
-        return context
+        ctx = super().get_context_data(**kwargs)
+        ctx['next'] = self.request.GET.get('next', '')
+        return ctx
     
     def form_valid(self, form):
         if form.is_valid():
             usuario = form.save(commit=False)
-            next = self.request.POST.get('next')
             usuario.password = make_password(form.cleaned_data["password"])
             usuario.save()
-            messages.success(self.request, "¡Usuario creado correctamente!")
-            if self.request.POST.get['next']:
-                self.success_url = next
-            else:
-                self.success_url = reverse_lazy('inicio')
-            return self.success_url
+            return super().form_valid(form) 
         else:
             self.form_invalid(form)
+
+    def get_success_url(self) -> str:
+        redirect_to = self.request.POST.get('next', '')
+        messages.warning(self.request, redirect_to)
+        url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')
+        if redirect_to and url_is_safe:
+            messages.success(self.request, "¡Usuario creado correctamente!")
+            return redirect_to
 
 class LoginUsuario(LoginView):
     
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
-        
+        return self.form_invalid(form)   
+
     def get_success_url(self) -> str:
-        messages.success(self.request, "¡Usuario logueado correctamente!")
-        return super().get_success_url()
-    
+        redirect_to = self.request.POST.get('next', '')
+        messages.warning(self.request, redirect_to)
+        url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')
+        if redirect_to and url_is_safe:
+            messages.success(self.request, "¡Usuario logueado correctamente!")
+            return redirect_to
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        next = self.request.GET.get('next')
+        next = self.request.GET.get('next','')
         context['next'] = next
         return context
   
@@ -94,7 +96,7 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             messages.success(self.request, "Usuario actualizado correctamente")
             return response_form
         else:
-            form.is_invalid(form)
+            self.form_invalid(form)
 
 class VerPerfilUsuario(DetailView):
     model = Usuario
@@ -125,4 +127,6 @@ class VerPerfilUsuario(DetailView):
         ctx['articulos'] = articulos
         return ctx
 
-       
+
+
+        

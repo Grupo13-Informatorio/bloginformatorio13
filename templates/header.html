@@ -49,13 +49,13 @@
                         </li>
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:perfil' pk=user.id %}?next={{request.path}}">ver perfil</a></li>
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:actualizar' pk=user.id %}?next={{request.path}}">editar perfil</a></li>
-                        {% if user.is_miembro or user.is_superuser %}
+                        {% if user.is_superuser or user.is_miembro %}
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crear' %}">publicar articulo</a></li>
                         <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crearCategoria' %}?next={{request.path}}">crear categoria</a></li>
                         {% endif %}
                       </ul>
               {% else %}
-                <a class="nav-link" href="{% url 'usuario:login'%}{% if url_name != 'inicio' %}?next=?{{request.path}}{% endif %}">Iniciar Sesion</a>
+                <a class="nav-link" href="{% url 'usuario:login'%}?next=?{{request.path}}">Iniciar Sesion</a>
               {% endif %}
             </li>
           </ul>

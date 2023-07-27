@@ -52,7 +52,7 @@
                               <th scope="col">Fecha</th>
                               <th scope="col">Titulo</th>
                               <th scope="col">link</th>
-                              {% if user.is_miembro or user.is_superuser %}
+                              {% if user.is_superuser or user.is_miembro %}
                               <th colspan="2">edicion</th>
                               {% endif %}
                             </tr>
@@ -63,7 +63,7 @@
                               <td>{{articulo.fecha}}</td>
                               <td>{{articulo.titulo}}</td>
                               <td><a href="{{articulo.get_url_completo}}">ver articulo</a></td>
-                              {% if user.is_miembro or user.is_superuser %}
+                              {% if user.is_superuser or user.is_miembro %}
                               <td><a href="{% url 'articulo:editar' pk=articulo.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-pencil center"></i></a></td>
                               <td><a href="{% url 'articulo:borrar' pk=articulo.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-trash danger center"></i></a></td>
                               {% endif %}
@@ -85,7 +85,7 @@
                               <th scope="col">contenido</th>
                               <th scope="col">comenta</th>
                               <th scope="col">link</th>
-                              {% if user.is_miembro or user.is_superuser %}
+                              {% if user.is_superuser or user.is_miembro %}
                               <th colspan="2">edicion</th>
                               {% endif %}
                             </tr>
@@ -102,7 +102,7 @@
                               <td>{{comentario.comentario_padre}}</td>
                               <td><a href="{{comentario.comentario_padre.articulo.get_url_completo}}">ver articulo</a></td>
                               {% endif %}
-                              {% if user.is_miembro or user.is_superuser %}
+                              {% if user.is_superuser or user.is_miembro %}
                               <td><a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-pencil center"></i></a></td>
                               <td><a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-trash danger center"></i></a></td>
                               {% endif %}

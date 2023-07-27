@@ -1,3 +1,4 @@
+from typing import Optional
 from django.http import HttpRequest 
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -6,16 +7,17 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import CreateView, ListView
 from django.contrib import messages
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from apps.articulo.forms import ArticuloCreationForm, CategoriaForm
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
-from apps.usuario.mixins import IsMiembroRequiredMixin
 
 from .models import Articulo, Categoria
 
 # Create your views here.
+
+
 
 class ArticuloView(View):
     def get(self, request, id):
@@ -49,7 +51,13 @@ class ArticuloResumidoView(View):
 
 
 
-class EditarArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
+class EditarArticulo(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
     
     model = Articulo
     form_class = ArticuloCreationForm
@@ -61,10 +69,17 @@ class EditarArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
 
 
 
-class CrearArticulo(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
+class CrearArticulo(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     
+
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_crear.html'
+    
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
     
     def form_valid(self, form):
         if form.is_valid:
@@ -147,10 +162,17 @@ class ArticuloBusquedaView(ListView):
 
 
 
-class CrearCategoria(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
+class CrearCategoria(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     
     form_class = CategoriaForm
     template_name = 'articulo/categoria_crear.html'
+     
+     
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
      
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -168,7 +190,13 @@ class CrearCategoria(LoginRequiredMixin, IsMiembroRequiredMixin, CreateView):
     
         
         
-class BorrarArticuloView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView):
+class BorrarArticuloView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
     
     model = Articulo
     template_name = 'articulo/articulo_borrar.html'
@@ -180,7 +208,13 @@ class BorrarArticuloView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView)
     
    
     
-class BorrarCategoriaView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView):
+class BorrarCategoriaView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
     
     model = Categoria
     template_name = 'articulo/categoria_borrar.html'

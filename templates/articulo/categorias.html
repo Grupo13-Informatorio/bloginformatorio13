@@ -10,7 +10,7 @@
         <li >
           <div>
             <a href="{% url 'articulo:categoria' pk=categoria.pk %}">{{categoria.nombre}}</a>
-            {% if user.is_miembro or user.is_superuser %}
+            {% if user.is_superuser or user.is_miembro %}
             <a href="{% url 'articulo:borrarCategoria' pk=categoria.pk %}?next={{request.path}}">
               <button ><span><i class="fa-solid fa-trash"></i></span></button></a>
             {% endif %}

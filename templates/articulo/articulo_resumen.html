@@ -20,7 +20,7 @@
             </a>
           </li>
         </ul>
-        {% if user.is_superuser or user == articulo.creado_por %}
+        {% if user.is_superuser or user.is_miembro %}
         <a class="fa-solid fa-pencil fa-xl" href="{% url 'articulo:editar' pk=articulo.id %}">
          <i ></i>
         </a>

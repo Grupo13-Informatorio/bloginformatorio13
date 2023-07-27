@@ -28,15 +28,7 @@ class Usuario(AbstractUser):
     
     def __str__(self):
         return self.username
-    
-    def save(self, force_insert, force_update, using, update_fields):
-        if self.is_miembro:
-            pass            
-        else:
-            pass
-        return super().save(force_insert, force_update, using, update_fields)
-    
-    
+        
     
 
     

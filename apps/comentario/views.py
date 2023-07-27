@@ -1,14 +1,13 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 
 
 from apps.articulo.models import Articulo
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
-from apps.usuario.mixins import IsMiembroRequiredMixin
 
 
 def registrarComentario(request, id):
@@ -38,24 +37,36 @@ def registrarRespuestaAComentario(request, id):
     return redirect('articulo:mostrarArticulo', id)
 
 
-class EditarComentario(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
+class EditarComentario(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     model = Comentario
     form_class = ComentarioCreationForm
     template_name = 'comentario/comentario_editar.html'
     success_url = ''
+    
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False    
 
     def post(self, request, *args, **kwargs):
         self.success_url = request.GET.get('next')
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
     
-class BorrarComentarioView(LoginRequiredMixin, IsMiembroRequiredMixin, DeleteView):
+class BorrarComentarioView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     model = Comentario
     template_name = 'comentario/comentario_borrar.html'
     success_url = ''
-    
+
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
+        
     def get_success_url(self) -> str:
         self.success_url = self.request.GET.get('next')
         messages.success(self.request, "Comentario borrado exitosamente")

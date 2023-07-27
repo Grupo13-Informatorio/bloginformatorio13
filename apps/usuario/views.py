@@ -3,13 +3,12 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 
 
-from apps.usuario.mixins import IsMiembroRequiredMixin
 from apps.articulo.models import Articulo
 from apps.comentario.models import Comentario
 from apps.usuario.forms import UserCreationForm
@@ -19,23 +18,33 @@ class registrarUsuario(CreateView):
     
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+    
+    def get_success_url(self) -> str:
+        url = super().get_success_url()
+        next_url = self.request.GET.get('next')
+        if next_url:
+            url += self.request.GET.get('next')
+        return url
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next')
         return context
     
     def form_valid(self, form):
         if form.is_valid():
-            response_form = super().form_valid(form)
             usuario = form.save(commit=False)
             next = self.request.POST.get('next')
             usuario.password = make_password(form.cleaned_data["password"])
             usuario.save()
             messages.success(self.request, "¡Usuario creado correctamente!")
-            return response_form
+            if self.request.POST.get['next']:
+                self.success_url = next
+            else:
+                self.success_url = reverse_lazy('inicio')
+            return self.success_url
         else:
-            form.is_invalid(form)
+            self.form_invalid(form)
 
 class LoginUsuario(LoginView):
     
@@ -63,12 +72,18 @@ class LogoutUsuario(LoginRequiredMixin, LogoutView):
 
 
 
-class UpdateUsuarioView(LoginRequiredMixin, IsMiembroRequiredMixin, UpdateView):
+class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     template_name = "usuario/editar_perfil.html"
     model = Usuario
     form_class = UserCreationForm
     success_url = reverse_lazy('inicio')
+    
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False    
     
     def form_valid(self, form):
         if form.is_valid():

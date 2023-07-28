@@ -93,9 +93,22 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         else:
             return False    
     
+    def get_success_url(self) -> str:
+        redirect_to = self.request.POST.get('next', '')
+        url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')
+        if redirect_to != None and url_is_safe:
+            messages.success(self.request, "¡Usuario actualizado correctamente!")
+            return redirect_to
+        
+    def get_context_data(self, **kwargs) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        next = self.request.GET.get('next','')
+        context['next'] = next
+        return context
+    
     def form_valid(self, form):
         if form.is_valid():
-            messages.success(self.request, "Usuario actualizado correctamente")
+            messages.success(self.request, "¡Usuario actualizado correctamente!")
             return super().form_valid(form)
         else:
             self.form_invalid(form)

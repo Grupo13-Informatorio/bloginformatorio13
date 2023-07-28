@@ -42,7 +42,8 @@
                 </a>
                 {% endif %}
                 <div class="down-content">
-                  <span>{{articulo.categoria}}</span>
+                  <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">
+                  <span>{{articulo.categoria}}</span></a>
                   <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{articulo.titulo}}</h4></a>
                   <ul class="post-info">
                     <li><a href="{{ articulo.creado_por.get_link_verperfil }}">{{articulo.creado_por}}</a></li>

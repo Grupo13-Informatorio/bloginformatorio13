@@ -34,6 +34,7 @@
                         {% csrf_token %}
                         {{form.as_p}}
                         {{form.non_field_errors}}
+                        <input type="hidden" value="{{ next }}" name="next">
                         <input type="submit" value="Actualizar perfil" >
                       </form>
                     </div>

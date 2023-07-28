@@ -10,7 +10,8 @@
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
-                      <span>{{articulo.categoria}}</span>
+                      <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">
+                      <span>{{articulo.categoria}}</span></a>
                     </div>
                     <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
                       <h4>{{articulo.titulo}}</h4>

@@ -102,6 +102,7 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         
     def get_context_data(self, **kwargs) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        context['usuario'] = self.get_object(self.queryset)
         next = self.request.GET.get('next','')
         context['next'] = next
         return context

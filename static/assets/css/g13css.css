@@ -5,6 +5,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.col-6, .col-sm-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 100%!important;
+}
+
 p {
 	margin-bottom: 0px;
 	font-size: 15px;
@@ -208,7 +215,7 @@ header .navbar {
     transition: all .3s ease 0s;
 }
 .navbar .navbar-brand h2 em {
-	font-size: 44px;
+	/* font-size: 44px; */
 	font-style: normal;
 	color: #f48840;
 }
@@ -1250,6 +1257,17 @@ a {
 	object-fit: cover;
 	
 }
+
+.image-container img {
+	max-width: 300px; 
+	max-height: 300px;
+	height: auto;
+	width: auto;
+	border-radius: 10px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); 
+  }
+
+
 
 
 .form-respuesta {

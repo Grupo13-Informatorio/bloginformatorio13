@@ -30,25 +30,49 @@
                 <div class="content">
                   <div class="row">
                     <div class="col-sm-6">
-                      <p><h5>Usuario: </h5>{{usuario.username}}</p>
-                      <p><h5>Nombre: </h5>{{usuario.first_name}}</p>
-                      <p><h5>Apellido: </h5>{{usuario.last_name}}</p>
-                      <p><h5>Fecha nacimiento: </h5>{{usuario.fecha_nacimiento}}</p>
-                      <p><h5>Edad: </h5>{{usuario.get_edad}}</p>
-                      <p><h5>Email: </h5>{{usuario.email}}</p>
-                      <p><h5>Registrado: </h5>{{usuario.date_joined}}</p>
-                      <p><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}"><button>EDITAR PERFIL</button></a></p>
+                      <table class="table">
+                        <tr>
+                          <td><h5>Nombre:</h5></td>
+                          <td>{{usuario.first_name}}</td>
+                        </tr>
+                        <tr>
+                          <td><h5>Apellido:</h5></td>
+                          <td>{{usuario.last_name}}</td>
+                        </tr>
+                        <tr>
+                          <td><h5>Fecha de nacimiento:</h5></td>
+                          <td>{{usuario.fecha_nacimiento}}</td>
+                        </tr>
+                        <tr>
+                          <td><h5>Edad:</h5></td>
+                          <td>{{usuario.get_edad}}</td>
+                        </tr>
+                        <tr>
+                          <td><h5>Email:</h5></td>
+                          <td>{{usuario.email}}</td>
+                        </tr>
+                        <tr>
+                          <td><h5>Registrado:</h5></td>
+                          <td>{{usuario.date_joined}}</td>
+                        </tr>
+                      </table>
+                      <p><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}"><button class="">EDITAR PERFIL</button></a></p>
                     </div>
                     <div class="col-sm-6">
-                      <img src="{{usuario.foto_perfil.url}}" style="border-radius:5%; max-height:400px; max-width:400px;" alt="foto perfil {{usuario}}">
-                    </div>
+                      <p>Foto de perfil:</p>
+                      <div class="image-container center">
+                        <img src="{{usuario.foto_perfil.url}}" alt="foto perfil {{usuario}}">
+                      </div>
+                      <br>
+                      <br>
                   </div>
                   <hr>
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <h3>{{titulo_articulos}}</h3>
-                        <table class="table table-bordered">
-                          <thead class="thead-dark">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <h3>{{titulo_articulos}}</h3>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead class="table-dark">
                             <tr>
                               <th scope="col">Fecha</th>
                               <th scope="col">Titulo</th>
@@ -71,16 +95,18 @@
                             </tr>
                           {% empty %}
                             <tr>
-                              <td colspan="5">No ha publicado comentarios</td>
+                              <td colspan="5">No ha publicado articulos</td>
                             </tr>
                           {% endfor %}
                         </tbody>
                         </table>
                       </div>
-                      <div class="col-sm-6">
-                        <h3>{{titulo_comentarios}}</h3>
-                        <table class="table table-bordered">
-                          <thead class="thead-dark">
+                    </div>
+                    <div class="col-sm-6">
+                      <h3>{{titulo_comentarios}}</h3>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead class="table-dark">
                             <tr>
                               <th scope="col">Fecha</th>
                               <th scope="col">contenido</th>
@@ -117,6 +143,7 @@
                         </table>                        
                       </div>
                     </div>
+                  </div>
                   <a href="{% url 'inicio' %}">volver</a>
                 </div>
               </div>

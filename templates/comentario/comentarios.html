@@ -29,11 +29,12 @@
                 <small>responder</small>
               </a>
               <p>{{ comentario.contenido }}</p>
-              <form id="form-comentario{{comentario.id}}" method="post" action="{{articulo.get_responder_url}}" style="display:none;">
+              <form id="form-comentario{{comentario.id}}" class="form-respuesta" method="post" action="{{articulo.get_responder_url}}" style="display:none;">
                 {% csrf_token %}
                 <div class="input-group">
                   <input type="hidden" name="comentario" value="{{comentario.id}}">
                   <input class="form-control" name="contenido" type="text" placeholder="ingrese aqui su respuesta...">
+                  <button type="submit"><small>ENVIAR</small></button>
                 </div>
               </form>
               {% endif %}

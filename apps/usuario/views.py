@@ -60,9 +60,8 @@ class LoginUsuario(LoginView):
 
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get('next', '')
-        messages.warning(self.request, redirect_to)
         url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')
-        if redirect_to and url_is_safe:
+        if redirect_to != None and url_is_safe:
             messages.success(self.request, "¡Usuario logueado correctamente!")
             return redirect_to
 
@@ -87,7 +86,6 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "usuario/editar_perfil.html"
     model = Usuario
     form_class = UserEditionForm
-    success_url = reverse_lazy('inicio')
     
     def test_func(self):
         if (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user == self.get_object()):
@@ -101,6 +99,9 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return super().form_valid(form)
         else:
             self.form_invalid(form)
+      
+
+
 
 class VerPerfilUsuario(DetailView):
     model = Usuario

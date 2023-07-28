@@ -18,11 +18,11 @@
         </li>
         {% endfor %}
         <li>
-          <div>
           {% if user.is_superuser or user.is_miembro %}
-          <a href="{% url 'articulo:crearCategoria' %}?next={{request.path}}"><i class="fa-solid fa-xl fa-add"></i></a>
+          <a href="{% url 'articulo:crearCategoria' %}?next={{request.path}}">
+            <i class="fa-solid fa-xl fa-add center"></i>
+          </a>
           {% endif %}
-        </div>
         </li>
       </ul>
     </div>

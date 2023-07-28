@@ -768,6 +768,10 @@ ul.page-numbers li a:hover {
 	margin-top: 50px;
 }
 
+input {
+	border-bottom: black solid 1px;
+}
+
 .sidebar-item.comments .content li {
 	width: 100%;
 }

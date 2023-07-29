@@ -56,7 +56,15 @@
                           <td>{{usuario.date_joined}}</td>
                         </tr>
                       </table>
-                      <p><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}"><button class="">EDITAR PERFIL</button></a></p>
+                     
+                      <p>
+                        {% if user.is_miembro or user.is_superusuario or user == usuario %}
+                          <a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}"><button>EDITAR PERFIL</button></a>
+                        {% if user.is_miembro or user.is_superuser %}
+                          <a href="{% url 'contacto:verContactos' %}"><button>ver mensajes</button></a>
+                        {% endif %}
+                        {% endif %}
+                      </p>
                     </div>
                     <div class="col-sm-6">
                       <p>Foto de perfil:</p>

@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -45,6 +45,21 @@ class DetalleContactoView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
         else:
             return False     
 
+
+class BorrarContactoView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    
+    model = Contacto
+    template_name = 'contacto/contacto_borrar.html'
+    success_url = reverse_lazy('contacto:verContactos')
+
+    def test_func(self):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
         
+    def get_success_url(self) -> str:
+        messages.success(self.request, "Contacto borrado exitosamente")
+        return super().get_success_url()   
         
    

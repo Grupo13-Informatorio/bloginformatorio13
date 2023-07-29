@@ -41,7 +41,7 @@
                     </tr>
                     {% for mensaje in contactos %}
                     <tr>
-                      <td><a href="{% url 'contacto:detalle' pk=mensaje.id %}">{{mensaje.id}}</a></td>
+                      <td><a href="{% url 'contacto:detalle' pk=mensaje.id %}">{{forloop.counter}}</a></td>
                       <td>{{mensaje.fecha}}</td>
                       <td>{{mensaje.nombre_apellido}}</td>
                       <td>{{mensaje.email}}</td>

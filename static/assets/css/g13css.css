@@ -453,6 +453,7 @@ header .navbar {
 }
 
 .all-blog-posts{
+	padding: 0px 15px;
 	margin-top: 00px;
 }
 
@@ -465,9 +466,6 @@ header .navbar {
 	color:#f48840;
 }
 
-.blog-posts {
-	margin-top: 0px;
-}
 
 .blog-posts .blog-post {
 	margin-bottom: 30px;

@@ -1,6 +1,5 @@
 from typing import Any, Dict
-from django.forms.models import BaseModelForm
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
@@ -16,6 +15,8 @@ from apps.articulo.models import Articulo
 from apps.comentario.models import Comentario
 from apps.usuario.forms import UserCreationForm, UserEditionForm
 from apps.usuario.models import Usuario
+
+
 
 class registrarUsuario(CreateView):
     
@@ -51,13 +52,22 @@ class registrarUsuario(CreateView):
 
 
 
-class LoginUsuario(LoginView):
+class LoginUsuario(UserPassesTestMixin,LoginView):
+    
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return False
+        else:
+            return True
+        
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('usuario:logout'))
     
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
-        return self.form_invalid(form)   
-
+        return self.form_invalid(form)
+    
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get('next', '')
         url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')
@@ -74,6 +84,9 @@ class LoginUsuario(LoginView):
   
   
 class LogoutUsuario(LoginRequiredMixin, LogoutView):
+    
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('usuario:login'))
     
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         messages.success(self.request, "¡Sesion cerrada correctamente!")

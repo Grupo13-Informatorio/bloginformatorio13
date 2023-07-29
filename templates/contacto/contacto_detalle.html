@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col-lg-8">
               <span>MENSAJES</span>
-              <h4>Aqui se listan todos los mensajes recibidos<p></p></h4>
+              <h4>Aqui se muestar el mensaje con ID: {{contacto.id}}<p></p></h4>
             </div>
             <div class="col-lg-4">
             </div>
@@ -34,19 +34,25 @@
                   <table class="table">
                     <tr>
                       <th><h5>ID:</h5></td>
-                      <th><h5>Fecha:</h5></td>
-                      <th><h5>Nombre:</h5></td>
-                      <th><h5>email:</h5></td>
-                      <th><h5>Asunto:</h5></td>
-                      <th><h5>Mensaje:</h5></td>
+                      <th><h5>Fecha</h5></td>
+                      <th><h5>Nombre</h5></td>
+                      <th><h5>Email</h5></td>
+                      <th><h5>Eliminar</h5></td>
                     </tr>
                     <tr>
                       <td>{{contacto.id}}</td>
                       <td>{{contacto.fecha}}</td>
                       <td>{{contacto.nombre_apellido}}</td>
                       <td>{{contacto.email}}</td>
-                      <td>{{contacto.asunto}}</td>
-                      <td>{{contacto.mensaje}}</td>
+                      <td><a href="{% url 'contacto:borrar' pk=contacto.pk %}"><i class="fa-xl fa-solid fa-trash center"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>Asunto:</td>
+                      <td colspan="5">{{contacto.asunto}}</td>
+                    </tr>
+                    <tr>
+                      <td>Mensaje:</td>
+                      <td colspan="5">{{contacto.mensaje}}</td>
                     </tr>
                   </table>
                 </div>

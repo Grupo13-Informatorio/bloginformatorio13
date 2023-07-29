@@ -77,8 +77,9 @@
             {% include "../comentario/comentarios.html" %}
             {% if user.is_authenticated  %}
             {% include "../comentario/form-comentarios.html" %}
-            {% endif %}
+            {% else %}
             <small>Para comentar ustede debe <a href="{% url 'usuario:login' %}?next={{request.path}}">iniciar sesion</a> o <a href="{% url 'usuario:registro' %}?next={{request.path}}">registrarse</a></small>
+            {% endif %}
           </div>
       </div>
       <div class="col-lg-4">

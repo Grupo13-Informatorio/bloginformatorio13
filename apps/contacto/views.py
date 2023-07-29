@@ -1,4 +1,3 @@
-from typing import Any, Optional
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
@@ -6,7 +5,8 @@ from django.contrib import messages
 
 from apps.contacto.forms import ContactoForm
 from apps.contacto.models import Contacto
-# Create your views here.
+
+
 
 class ContactoUsuario(CreateView):
     
@@ -17,6 +17,8 @@ class ContactoUsuario(CreateView):
         messages.success(self.request, "Mensaje enviado exitosamente!")
         return super().form_valid(form)
     
+
+
 class ListarContactosView(UserPassesTestMixin, LoginRequiredMixin, ListView):
 
     model = Contacto
@@ -29,6 +31,7 @@ class ListarContactosView(UserPassesTestMixin, LoginRequiredMixin, ListView):
         else:
             return False    
     
+
 
 class DetalleContactoView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
     

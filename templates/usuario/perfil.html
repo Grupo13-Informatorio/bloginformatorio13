@@ -44,8 +44,10 @@
                           <td>{{usuario.fecha_nacimiento}}</td>
                         </tr>
                         <tr>
+                          {% if usuario.fecha_nacimiento %}
                           <td><h5>Edad:</h5></td>
                           <td>{{usuario.get_edad}}</td>
+                          {% endif %}
                         </tr>
                         <tr>
                           <td><h5>Email:</h5></td>

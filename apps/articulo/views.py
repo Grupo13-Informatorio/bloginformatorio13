@@ -13,29 +13,39 @@ from apps.articulo.forms import ArticuloCreationForm, CategoriaForm
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
 
+from hitcount.views import HitCountDetailView
+
 from .models import Articulo, Categoria
 
 # Create your views here.
 
 
 
-class ArticuloView(View):
-    def get(self, request, id):
-        articulo = Articulo.objects.filter(is_active = True).get(id=id)
+class ArticuloView(HitCountDetailView):
+    model=Articulo
+    template_name='articulo/articulo_mostrar.html'
+    context_object_name='articulo'
+    pk_url_kwarg='id'
+    queryset=Articulo.objects.all()
+    count_hit = True
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        articulo = Articulo.objects.filter(is_active = True).get(id=self.kwargs['id'])
         articulos = Articulo.objects.filter(is_active = True).order_by('-fecha','-id')[:5]
         comentarios = Comentario.objects.filter(is_active = True, articulo = articulo)
         categorias = Categoria.objects.all()
         cant_comentarios = comentarios.count()
         form = ComentarioCreationForm()
-        context = { 
+        context.update({  
                 'articulos_banner' : articulos,
                 'articulo' : articulo,
                 'cant_comentarios' : cant_comentarios,
                 'comentarios' : comentarios,
                 'categorias' : categorias,
                 'form' : form,
-                   }
-        return render(request, 'articulo/articulo_mostrar.html', context)
+                   })
+        return  context
    
    
         
@@ -102,6 +112,7 @@ class ArticuloListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
+        context['mas_visitados'] = Articulo.objects.filter(is_active = True).order_by('-hit_count_generic__hits')[:5]
         context['categorias'] = Categoria.objects.all()
         context['registros'] = self.cantidad_registros
         return context

@@ -1,7 +1,7 @@
 {% extends "index.html"%}
 {% block title %} Blog G13 - Articulo {% endblock %}
 {% block articulo %}
-
+{% load hitcount_tags %}
 <section class="call-to-action">
   <div class="container">
     <div class="row">
@@ -49,6 +49,8 @@
                     <li><a href="{{ articulo.creado_por.get_link_verperfil }}">{{articulo.creado_por}}</a></li>
                     <li><a href="#">{{articulo.fecha}}</a></li>
                     <li><a href="#">{{articulo.comentario_set.all.count }} Comentarios</a></li>
+                    <li><a href="#">{{ hitcount.total_hits }} Visitas</a></li>
+
                   </ul>
                   <p>{{articulo.contenido}}</p>
                   <div class="post-options">

@@ -4,7 +4,8 @@ from django.db.models import Count
 
 from datetime import datetime
 from time import strftime
-
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCountMixin, HitCount
 
 
 from apps.usuario.models import Usuario
@@ -30,7 +31,7 @@ class Categoria(models.Model):
         return str(self.nombre)
 
 # ARTICULO
-class Articulo(models.Model):
+class Articulo(models.Model, HitCountMixin):
     fecha = models.DateField(editable = False,
                              verbose_name = "Fecha de publicacion"
                              )
@@ -61,7 +62,11 @@ class Articulo(models.Model):
                                    null=True,blank=True,
                                    verbose_name="creador"
                                    )    
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
+                                        related_query_name='hit_count_generic_relation'
+                                        )
     
+
     class Meta:
         ordering = ('-fecha',)
     
@@ -75,7 +80,7 @@ class Articulo(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse("articulo:mostrarArticulo", kwargs={"id": self.pk})
-        
+    
     def get_articulos_recientes():
         ultimos_cinco_ascendente = Articulo.objects.order_by('-fecha','-id')[:5]
         return ultimos_cinco_ascendente

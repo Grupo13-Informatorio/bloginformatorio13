@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'apps.usuario',
     'apps.contacto',
     'blog',
+
+    'hitcount',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,154 @@
+{% extends "index.html"%}  
+{% block title %} Blog G13 - Articulos {% endblock %}
+{% block articulo %}
+{% load articulo_tags %}
+{% load hitcount_tags %}
+<section class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>Noticas</span>
+              <h4>Aqui todas las noticias
+                <p>
+                  {% if categoria %}
+                  {{categoria|upper}}: 
+                  {% endif %}
+                  {% if query %}
+                   - Resultados que incluyen {{query}} - 
+                  {% endif %}
+                  {{registros}} registros
+                </p>
+              </h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blog-posts grid-system">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8">
+        <div class="">
+          <div class="row">
+<!-- Aca en esta seccion empiezan los articulos -->
+            {% for articulo in page_obj %}
+            <div class="col-lg-6">
+              <div class="blog-post">
+                <div class="blog-thumb">
+                  <img src="{{ articulo.imagen.url }}" alt="">
+                </div>
+                {% if user.is_superuser or user.is_miembro %}
+                <a class="fa-solid fa-pencil fa-xl" href="{% url 'articulo:editar' pk=articulo.id %}">
+                 <i ></i>
+                </a>
+                <a class="fa-solid fa-trash fa-xl" href="{% url 'articulo:borrar' pk=articulo.id %}">
+                  <i ></i>
+                </a>
+                {% endif %}
+                <div class="down-content">
+                  
+                  <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">
+                  <span>{{ articulo.categoria }}</span></a>
+                  <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
+                  <ul class="post-info">
+                    <li><a href="{% url 'usuario:perfil' pk=articulo.creado_por.id  %}">{{ articulo.creado_por }}</a></li>
+                    <li><a href="#">{{ articulo.fecha }}</a></li>
+                    <li><a href="#">{{articulo.comentario_set.all.count }} Comentarios</a></li>
+                    <li><a href="#">Visitas: {% get_hit_count for articulo %}</a></li>
+                  </ul>
+                  <p>{{ articulo.resumen }}</p>
+                  <div class="post-options">
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+<!-- Aca va la parte de paginacion y demas hierbas -->
+            <div class="col-lg-12">
+              <ul class="page-numbers">
+                {% if page_obj.has_previous %}
+                <li>
+                  <a href="?{% url_replace page=1 %}"><i class="fa-solid fa-xl fa-angles-left"></i></a>
+                  <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+                </li>
+                {% endif %}
+                <li class="active">
+                  <a href="">{{ page_obj.number }}</a>
+                </li>
+                {% if page_obj.has_next %}
+                <li>
+                  <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+                  <a href="?{% url_replace page=page_obj.paginator.num_pages %}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="sidebar">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="sidebar-item search">
+                {% include 'articulo/busqueda_form.html' %}
+              </div>
+            </div>
+            <!-- Comienzan los ultimos posteos -->
+            <div class="col-lg-12">
+              <div class="sidebar-item recent-posts">
+                <div class="sidebar-heading">
+                  <h2>Posteos mas comentados</h2>
+                </div>
+                <div class="content">
+                  <ul>
+                    {% for articulo in articulos_banner %}
+                    <li><a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
+                      <h5>{{articulo.titulo}}</h5>
+                      <span>{{articulo.fecha}}</span>
+                    </a></li>
+                    {% endfor %}
+                    <!-- aca finalizan los ultimos posteos -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="sidebar-item recent-posts">
+                <div class="sidebar-heading">
+                  <h2>Posteos mas visitados</h2>
+                </div>
+                <div class="content">
+                  <ul>
+                    {% for articulo in mas_visitados %}
+                    <li><a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}">
+                      <h5>{{articulo.titulo}}</h5>
+                      <span>{{articulo.fecha}}</span>
+                    </a></li>
+                    {% endfor %}
+                    <!-- aca finalizan los ultimos posteos -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Aca empiezan las categorias -->
+            {% include "articulo/categorias.html" %}
+            <!-- Aca terminan las categorias -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+    

@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -66,8 +67,7 @@ class LoginUsuario(UserPassesTestMixin,LoginView):
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
-        return self.form_invalid(form)
-    
+
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get('next', '')
         url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')

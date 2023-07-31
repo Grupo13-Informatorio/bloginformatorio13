@@ -11,7 +11,6 @@ INTEGRANTES:
    - MIRANDA, Federico
    - HIEBL, Darian   
 
-   - VERA, Franco
    - GOMEZ, Jonatan   
    - VAERNET, Bianca
    - LOPEZ, Andres

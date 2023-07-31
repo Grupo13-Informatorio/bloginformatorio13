@@ -142,23 +142,30 @@ class ArticuloBusquedaView(ListView):
     model = Articulo
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
+    ordering = '-fecha'
     cantidad_registros = 0
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        query = self.request.GET.get("q")
         context['registros'] = self.cantidad_registros
-        context['query'] = query
-        context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['categorias'] = Categoria.objects.all()
+        context['filter'] = self.request.GET.get('filter', '')
+        context['orderby'] = self.request.GET.get('orderby', '-fecha')        
         return context
 
     def get_queryset(self):
-        query = self.request.GET.get("q")
-        articulos = Articulo.objects.filter( \
-            Q(titulo__icontains=query) | Q(resumen__icontains=query) | Q(contenido__icontains=query))
-        self.cantidad_registros = articulos.count()
-        return articulos
+        filter_val = self.request.GET.get('filter')
+        order = self.request.GET.get('orderby')
+        if not order:
+            order = '-fecha'
+        if not filter_val:
+            filter_val = ''
+        new_context = Articulo.objects  \
+            .filter(    \
+            Q(titulo__icontains=filter_val) | Q(resumen__icontains=filter_val) | Q(contenido__icontains=filter_val))    \
+            .order_by(order)
+        return new_context
+
 
 
 

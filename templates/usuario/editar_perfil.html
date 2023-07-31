@@ -40,9 +40,9 @@
                     </div>
                     <div class="col-6">
                       <p class="">Foto de perfil:</p>
-                      <div class="image-container">
+                      <div class="circular--profile">
                         <img id="imagePreviewOne" class="" style="display:none;"/>
-                        <img id="id_foto_actual" src="{{usuario.foto_perfil.url}}"/>
+                        <img id="id_foto_actual" class="" src="{{usuario.foto_perfil.url}}"/>
                     </div>
                   </div>
                   <hr>
@@ -58,7 +58,7 @@
 </section>
 <script>
   id_foto_perfil.onchange = evt => {
-  imagePreviewOne.style.display = "block";
+  imagePreviewOne.style.display = "inline";
   id_foto_actual.style.display = "none"
   const [file] = id_foto_perfil.files
   console.log(id_foto_perfil.files)

@@ -13,7 +13,7 @@
                   <h2>Iniciar sesion</h2>
                 </div>
                 <div class="content">
-              <form action="{% url 'usuario:login' %}" method="post" >
+              <form action="{% url 'usuario:login' %}{% if next %}?next={{next}}{% endif %}" method="post" >
                 {% csrf_token %}
                 <table>
                   <tr>

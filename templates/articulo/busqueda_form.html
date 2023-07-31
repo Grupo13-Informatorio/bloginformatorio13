@@ -1,5 +1,13 @@
-<form action="{% url 'articulo:buscar' %}" method="GET">
-    <div class="input-group">
-      <input type="text" name="q" class="form-control" placeholder="ingrese su busqueda...">
-    </div>
+<form method="get" action="{% url 'articulo:buscar' %}">
+  <input class="form-control" placeholder="ingrese aqui su busqueda..." type="text" name="filter" value={{filter}} >
+  <p>Ordenar por:</p>
+  <select class="form-control" name="orderby" value={{orderby}}>
+    <option value="creado_por">Autor (a-z)</option>
+    <option value="-creado_por">Autor (z-a)</option>
+    <option value="fecha">Fecha: mas antiguos primero</option>
+    <option value="-fecha">Fecha: mas recientes primero</option>
+    <option value="titulo">Titulo (a-z)</option>
+    <option value="-titulo">Titulo (z-a)</option>
+  </select>
+  <input class="mt-2" type="submit" value="aceptar">
 </form>

@@ -30,6 +30,7 @@
       </div>
     </div>
   </div>
+  
 </section>
 
 <section class="blog-posts grid-system">
@@ -76,8 +77,10 @@
               <ul class="page-numbers">
                 {% if page_obj.has_previous %}
                 <li>
-                  <a href="?{% url_replace page=1 %}"><i class="fa-solid fa-xl fa-angles-left"></i></a>
-                  <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+                  <a href="?page=1{% if orderby %}&orderby={{orderby}}{% endif %}{% if filter %}&filter={{filter}}{% endif %}">
+                    <i class="fa-solid fa-xl fa-angles-left"></i>
+                  </a>
+                  <a href="?page={{ page_obj.previous_page_number }}{% if orderby %}&orderby={{orderby}}{% endif %}{% if filter %}&filter={{filter}}{% endif %}">{{ page_obj.previous_page_number }}</a>
                 </li>
                 {% endif %}
                 <li class="active">
@@ -85,8 +88,8 @@
                 </li>
                 {% if page_obj.has_next %}
                 <li>
-                  <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
-                  <a href="?{% url_replace page=page_obj.paginator.num_pages %}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
+                  <a href="?page={{ page_obj.next_page_number }}{% if orderby %}&orderby={{orderby}}{% endif %}{% if filter %}&filter={{filter}}{% endif %}">{{ page_obj.next_page_number }}</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}{% if orderby %}&orderby={{orderby}}{% endif %}{% if filter %}&filter={{filter}}{% endif %}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
                 </li>
                 {% endif %}
               </ul>

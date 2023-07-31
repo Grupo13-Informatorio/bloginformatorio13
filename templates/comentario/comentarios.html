@@ -28,7 +28,9 @@
               <a onclick='showform("form-comentario{{comentario.id}}")'>
                 <small>responder</small>
               </a>
+              {% endif %}
               <p>{{ comentario.contenido }}</p>
+              {% if user.is_authenticated %}
               <form id="form-comentario{{comentario.id}}" class="form-respuesta" method="post" action="{{articulo.get_responder_url}}" style="display:none;">
                 {% csrf_token %}
                 <div class="input-group">

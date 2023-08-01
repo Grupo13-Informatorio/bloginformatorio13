@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from apps.articulo.forms import ArticuloCreationForm, CategoriaForm
 from apps.comentario.forms import ComentarioCreationForm
 from apps.comentario.models import Comentario
+from apps.usuario.models import Usuario
 
 from .models import Articulo, Categoria
 
@@ -122,7 +123,6 @@ class CategoriaListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articulos_banner'] = Articulo.get_articulos_mas_comentados()
         context['registros'] = self.cantidad_registros
         context['categorias'] = Categoria.objects.all()
         context['categoria'] = Categoria.objects.get(id=self.kwargs['pk'])
@@ -131,6 +131,27 @@ class CategoriaListView(ListView):
     def get_queryset(self):
         articulos = Articulo.objects \
                 .filter(is_active=True, categoria=Categoria.objects.get(id=self.kwargs['pk'])) \
+                .order_by('-fecha')
+        self.cantidad_registros = articulos.count()
+        return articulos
+    
+class AutorListView(ListView):
+    
+    model = Articulo
+    paginate_by = 4
+    template_name = 'articulo/articulos_todos.html'
+    cantidad_registros = 0
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['registros'] = self.cantidad_registros
+        context['categorias'] = Categoria.objects.all()
+        context['autor'] = Usuario.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def get_queryset(self):
+        articulos = Articulo.objects \
+                .filter(is_active=True, creado_por=Usuario.objects.get(id=self.kwargs['pk'])) \
                 .order_by('-fecha')
         self.cantidad_registros = articulos.count()
         return articulos
@@ -143,13 +164,13 @@ class ArticuloBusquedaView(ListView):
     paginate_by = 4
     template_name = 'articulo/articulos_todos.html'
     ordering = '-fecha'
-    cantidad_registros = 0
+    registros = 0
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['registros'] = self.cantidad_registros
         context['categorias'] = Categoria.objects.all()
         context['filter'] = self.request.GET.get('filter', '')
+        context['registros'] = self.registros
         context['orderby'] = self.request.GET.get('orderby', '-fecha')        
         return context
 
@@ -164,6 +185,7 @@ class ArticuloBusquedaView(ListView):
             .filter(    \
             Q(titulo__icontains=filter_val) | Q(resumen__icontains=filter_val) | Q(contenido__icontains=filter_val))    \
             .order_by(order)
+        self.registros = new_context.count()
         return new_context
 
 

@@ -8,7 +8,7 @@
         <span>{{articulo.categoria}}</span>
         <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
         <ul class="post-info">
-          <li><a href="{{ articulo.creado_por.get_link_verperfil }}">{{articulo.creado_por}}</a></li>
+          <li><a href="{% url 'articulo:autor' pk=articulo.creado_por.id %}">{{articulo.creado_por}}</a></li>
           <li><a href="#">{{articulo.fecha}}</a></li>
           <li>
             <a href="">

@@ -524,21 +524,44 @@ header .navbar {
 
 .owl-banner .item .item-content {
 	position: absolute;
-	bottom: 10px;
-	left: 15%;
+	box-sizing: border-box;
+	width: 100%;
+	left: 0px;
+	bottom: 0px;
+	/* left: 15%; */
+	padding-top: 15px;
+	padding-bottom: 10px;
+	padding-right: -15%;
+	padding-left: 15%;
+	background-color: black;
+	opacity: 0.6;
 }
 
-.orla{
+.owl-banner .item .item-content a {
+	opacity: 2;
+}
+
+/* .owl-banner .item .item-content {
+	text-align: center;
+	width: 80%;
+	left: 50%;
+	top: 50%;
+	bottom: auto;
+	transform: translate(-50%,-50%);
+} */
+
+
+
+/* .orla{
 	box-sizing: border-box;
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	height: 33%;
+	height: auto;
 	width: 100%;
-	background-color: black;
-	opacity: 0.7;
+
 	z-index: 10;
-}
+} */
 
 .blog-posts .down-content ul.post-info li:after {
 	content: '|';
@@ -1225,14 +1248,7 @@ footer p a:hover {
 	.owl-banner .item .item-content .meta-category span {
 		font-size: 18px;
 	}
-	.owl-banner .item .item-content {
-		text-align: center;
-		width: 80%;
-		left: 50%;
-		top: 50%;
-		bottom: auto;
-		transform: translate(-50%,-50%);
-	}
+
 	.owl-banner .item .item-content h4 {
 		font-size: 24px;
 	}

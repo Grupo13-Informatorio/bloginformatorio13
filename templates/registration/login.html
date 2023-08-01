@@ -1,6 +1,24 @@
 {% extends "index.html"%}
 {% block title %} Blog G13 - Iniciar Sesion {% endblock %}
 {% block contenido %}
+<section class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>INICIAR SESION</span>
+              <h4>Ingrese sus credenciales para iniciar sesion...</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="blog-posts">
   <div class="container">
     <div class="row">
@@ -10,7 +28,6 @@
             <div class="col-lg-6">
               <div class="sidebar-item submit-comment">
                 <div class="sidebar-heading">
-                  <h2>Iniciar sesion</h2>
                 </div>
                 <div class="content">
               <form action="{% url 'usuario:login' %}{% if next %}?next={{next}}{% endif %}" method="post" >

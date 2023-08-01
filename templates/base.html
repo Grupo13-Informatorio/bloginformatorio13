@@ -38,10 +38,16 @@
   </head>
   <body>
     {% if messages %}
-      {% for m in messages %}
-          <script>
-            suceso("{{ m }}", "")
-          </script>
+        {% for m in messages %}
+          {% if m.tags == 'success' %}
+              <script>
+                suceso("{{ m }}", "")
+              </script>
+          {% else %}
+              <script>
+                alert("{{ m }}", "")
+              </script>
+          {% endif %}
       {% endfor %}
     {% endif %}
     {% include "header.html" %}

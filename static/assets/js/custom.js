@@ -103,7 +103,7 @@ const suceso = (titulo, mensaje) => {
 
 const alert = (titulo, mensaje) => {
     Swal.fire({
-        icon: 'danger',
+        icon: 'error',
         title: titulo,
         text: mensaje
     });

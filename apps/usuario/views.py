@@ -1,6 +1,9 @@
 from typing import Any, Dict
+from django import http
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpRequest, HttpResponse
+from django.forms.models import BaseModelForm
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
@@ -34,7 +37,6 @@ class registrarUsuario(CreateView):
             usuario = form.save(commit=False)
             usuario.password = make_password(form.cleaned_data["password"])
             usuario.save()
-            messages.success(self.request, "Thanks for registering. You are now logged in.")
             usuario = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password'],
                                     )
@@ -67,6 +69,12 @@ class LoginUsuario(UserPassesTestMixin,LoginView):
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
+        else:
+            self.form_invalid(form)
+    
+    def form_invalid(self, form: AuthenticationForm):
+        messages.warning(self.request, "¡Usuario o contraseña incorrectos, intente nuevamente!")
+        return super().form_invalid(form)
 
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get('next', '')

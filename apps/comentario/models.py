@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Iterable, Optional
 from django.db import models
 from apps.articulo.models import Articulo
 from apps.usuario.models import Usuario
@@ -32,7 +31,7 @@ class Comentario(models.Model):
         null = True,
         blank = True
         )
-    creado_por = models.ForeignKey(
+    usuario = models.ForeignKey(
         Usuario,
         on_delete = models.CASCADE,
         null=True,

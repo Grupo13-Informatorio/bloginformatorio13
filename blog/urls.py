@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from .views import IndexView, contacto, registration_success, sobre_nosotros
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('jpqifepfnapkjdfnapdjk/', admin.site.urls),
     path('',IndexView.as_view(), name = "inicio"),
     path('nosotros/', sobre_nosotros, name="nosotros"),
     path("accounts/", include("django.contrib.auth.urls")),

@@ -533,8 +533,7 @@ header .navbar {
 	padding-bottom: 10px;
 	padding-right: -15%;
 	padding-left: 15%;
-	background-color: black;
-	opacity: 0.6;
+	background-color: rgba(0, 0, 0, 0.60);
 }
 
 .owl-banner .item .item-content a {

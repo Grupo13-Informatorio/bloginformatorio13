@@ -4,9 +4,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'green13',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
+        'USER' : 'Infogrupo13',
+        'PASSWORD' : 'grupo13grupo13',
+        'HOST' : 'Infogrupo13.mysql.pythonanywhere-services.com',
         'PORT' : '3306',
     }
 }

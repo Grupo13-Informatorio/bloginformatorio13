@@ -150,13 +150,13 @@ class VerPerfilUsuario(DetailView):
         if cant_comentarios == 0:
             titulo_comentarios = 'Sin comentarios'
         elif cant_comentarios == 1:
-            titulo_comentarios = 'Comentario'
+            titulo_comentarios = '1 Comentario'
         else:
             titulo_comentarios = str(cant_comentarios) + ' ' + 'Comentarios'
         if cant_articulos == 0:
             titulo_articulos = 'Sin articulos'
         elif cant_articulos == 1:
-            titulo_articulos = 'Articulo'
+            titulo_articulos = '1 Articulo'
         else:
             titulo_articulos = str(cant_comentarios) + ' ' + 'Articulos'
         ctx['titulo_articulos'] = titulo_articulos

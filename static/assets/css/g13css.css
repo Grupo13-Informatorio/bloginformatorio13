@@ -699,7 +699,7 @@ ul.page-numbers li a:hover {
 }
 
 .blog-posts .comments ul li.replied {
-	padding-left: 130px;
+	padding-left: 50px;
 }
 
 .blog-posts .comments ul li:last-child {

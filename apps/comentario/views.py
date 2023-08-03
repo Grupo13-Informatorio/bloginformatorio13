@@ -46,7 +46,7 @@ class EditarComentario(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user==self.object.creado_por):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False    
@@ -63,7 +63,7 @@ class BorrarComentarioView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = ''
 
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user==self.object.creado_por):
+        if (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False

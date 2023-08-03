@@ -30,9 +30,11 @@
               </a>
               {% endif %}
               <p>{{ comentario.contenido }}</p>
-              {% if user.is_miembro or user.is_superuser %}
-              <a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-pencil center"></i></a>
-              <a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-trash danger center"></i></a>
+              {% if user.is_miembro or user.is_superuser or user==comentario.creado_por%}
+              <p>
+                <a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}"></a>
+                <a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}"></a>
+              </p>
               {% endif %}
               {% if user.is_authenticated %}
               <form id="form-comentario{{comentario.id}}" class="form-respuesta" method="post" action="{{articulo.get_responder_url}}" style="display:none;">
@@ -54,9 +56,11 @@
             <div class="right-content">
               <h4><a href="{% url 'usuario:perfil' pk=respuesta.creado_por.id  %}">{{respuesta.creado_por}}<span>{{ respuesta.creado }}</span></h4></a>
               <p>{{respuesta.contenido}}</p>
-              {% if user.is_miembro or user.is_superuser %}
-              <a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-pencil center"></i></a>
-              <a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}"><i class="fa-xl fa-solid fa-trash danger center"></i></a>
+              {% if user.is_miembro or user.is_superuser or user==comentario.creado_por%}
+              <p>
+                <a href="{% url 'comentario:editar' pk=respuesta.pk %}?next={{request.path}}"></a>
+                <a href="{% url 'comentario:borrar' pk=respuesta.pk %}?next={{request.path}}"></a>
+              </p>
               {% endif %}
             </div>
           </li>

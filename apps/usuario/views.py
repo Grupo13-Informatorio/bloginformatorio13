@@ -1,8 +1,5 @@
 from typing import Any, Dict
-from django import http
 from django.contrib.auth.forms import AuthenticationForm
-from django.forms.models import BaseModelForm
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -23,15 +20,16 @@ from apps.usuario.models import Usuario
 
 
 class registrarUsuario(CreateView):
-    
+
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
-    
+    model = Usuario
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
         ctx['next'] = self.request.GET.get('next', '')
         return ctx
-    
+
     def form_valid(self, form):
         if form.is_valid():
             usuario = form.save(commit=False)
@@ -41,7 +39,7 @@ class registrarUsuario(CreateView):
                                     password=form.cleaned_data['password'],
                                     )
             login(self.request, usuario)
-            return super().form_valid(form) 
+            return super().form_valid(form)
         else:
             self.form_invalid(form)
 
@@ -56,22 +54,22 @@ class registrarUsuario(CreateView):
 
 
 class LoginUsuario(UserPassesTestMixin,LoginView):
-    
+
     def test_func(self):
         if self.request.user.is_authenticated:
             return False
         else:
             return True
-        
+
     def handle_no_permission(self):
         return redirect(reverse_lazy('usuario:logout'))
-    
+
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
         else:
             self.form_invalid(form)
-    
+
     def form_invalid(self, form: AuthenticationForm):
         messages.warning(self.request, "¡Usuario o contraseña incorrectos, intente nuevamente!")
         return super().form_invalid(form)
@@ -88,53 +86,53 @@ class LoginUsuario(UserPassesTestMixin,LoginView):
         next = self.request.GET.get('next','')
         context['next'] = next
         return context
-  
-  
-  
+
+
+
 class LogoutUsuario(LoginRequiredMixin, LogoutView):
-    
+
     def handle_no_permission(self):
         return redirect(reverse_lazy('usuario:login'))
-    
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+
+    def get(self, request, *args: Any, **kwargs) -> HttpResponse:
         messages.success(self.request, "¡Sesion cerrada correctamente!")
         return super().get(request, *args, **kwargs)
 
 
 
 class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    
-    template_name = "usuario/editar_perfil.html"
+
+    template_name = "usuario/editarperfil.html"
     model = Usuario
     form_class = UserEditionForm
-    
+
     def test_func(self):
         if (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user == self.get_object()):
             return True
         else:
-            return False    
-    
+            return False
+
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get('next', '')
         url_is_safe = url_has_allowed_host_and_scheme(redirect_to, '*')
         if redirect_to != None and url_is_safe:
             messages.success(self.request, "¡Usuario actualizado correctamente!")
             return redirect_to
-        
+
     def get_context_data(self, **kwargs) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['usuario'] = self.get_object(self.queryset)
         next = self.request.GET.get('next','')
         context['next'] = next
         return context
-    
+
     def form_valid(self, form):
         if form.is_valid():
             messages.success(self.request, "¡Usuario actualizado correctamente!")
             return super().form_valid(form)
         else:
             self.form_invalid(form)
-      
+
 
 
 
@@ -142,7 +140,7 @@ class VerPerfilUsuario(DetailView):
     model = Usuario
     template_name = 'usuario/perfil.html'
     context_object_name = 'usuario'
-    
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         articulos = Articulo.objects.filter(creado_por=kwargs['object'])
@@ -169,4 +167,4 @@ class VerPerfilUsuario(DetailView):
 
 
 
-        
+

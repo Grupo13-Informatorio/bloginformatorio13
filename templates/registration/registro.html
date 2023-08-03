@@ -30,13 +30,13 @@
                 <div class="sidebar-heading">
                 </div>
                 <div class="content">
-                  <form id="register_user" method="post">
+                  <form id="register_user" enctype="multipart/form-data" method="post">
                     {% csrf_token %}
                     <div class="row">
                       <div class="col-lg-12">
                         {{form.as_p}}
                       </div>
-                      <input type="hidden" name="next" value="{{ next }}">                      
+                      <input type="hidden" name="next" value="{{ next }}">
                       <div class="col-lg-12">
                         <fieldset>
                           <button type="submit" id="form-submit" class="main-button">Registrarse</button>

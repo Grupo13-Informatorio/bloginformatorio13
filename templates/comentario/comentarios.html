@@ -30,10 +30,10 @@
               </a>
               {% endif %}
               <p>{{ comentario.contenido }}</p>
-              {% if user.is_miembro or user.is_superuser %}
+              {% if user.is_miembro or user.is_superuser or user == respuesta.creado_por %}
               <p>
-                <a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}"></a>
-                <a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}"></a>
+                <a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}">editar</a>
+                <a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}">borrar</a>
               </p>
               {% endif %}
               {% if user.is_authenticated %}
@@ -56,10 +56,10 @@
             <div class="right-content">
               <h4><a href="{% url 'usuario:perfil' pk=respuesta.creado_por.id  %}">{{respuesta.creado_por}}<span>{{ respuesta.creado }}</span></h4></a>
               <p>{{respuesta.contenido}}</p>
-              {% if user.is_miembro or user.is_superuser %}
+              {% if user.is_miembro or user.is_superuser or user == respuesta.creado_por %}
               <p>
-                <a href="{% url 'comentario:editar' pk=respuesta.pk %}?next={{request.path}}"></a>
-                <a href="{% url 'comentario:borrar' pk=respuesta.pk %}?next={{request.path}}"></a>
+                <a href="{% url 'comentario:editar' pk=respuesta.pk %}?next={{request.path}}">editar</a>
+                <a href="{% url 'comentario:borrar' pk=respuesta.pk %}?next={{request.path}}">borrar</a>
               </p>
               {% endif %}
             </div>

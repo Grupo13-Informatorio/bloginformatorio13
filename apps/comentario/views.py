@@ -24,7 +24,7 @@ def registrarComentario(request, id):
 
 
 def registrarRespuestaAComentario(request, id):
-    if request.method == "POST": 
+    if request.method == "POST":
         comentario_id = request.POST.get('comentario')
         comentario = Comentario.objects.get(id=comentario_id)
         contenido = request.POST.get('contenido')
@@ -38,38 +38,37 @@ def registrarRespuestaAComentario(request, id):
 
 
 class EditarComentario(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    
+
     model = Comentario
     form_class = ComentarioCreationForm
     template_name = 'comentario/comentario_editar.html'
     success_url = ''
-    
-    
+
+
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if (self.request.user.is_miembro or self.request.user.is_superuser or self.get_object().creado_por == self.request.user):
             return True
         else:
-            return False    
+            return False
 
     def post(self, request, *args, **kwargs):
         self.success_url = request.GET.get('next')
         messages.success(request, "Articulo actualizado correctamente")
         return super().post(request, *args, **kwargs)
-    
+
 class BorrarComentarioView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    
+
     model = Comentario
     template_name = 'comentario/comentario_borrar.html'
     success_url = ''
 
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if (self.request.user.is_miembro or self.request.user.is_superuser or self.get_object().creado_por == self.request.user):
             return True
         else:
             return False
-        
+
     def get_success_url(self) -> str:
         self.success_url = self.request.GET.get('next')
         messages.success(self.request, "Comentario borrado exitosamente")
         return super().get_success_url()
-    

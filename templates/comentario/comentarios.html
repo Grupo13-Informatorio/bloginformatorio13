@@ -6,7 +6,7 @@
       {% if cant_comentarios == 0 %}
         <h2>sin comentarios</h2>
       {% else %}
-        <h2>{{cant_comentarios}} 
+        <h2>{{cant_comentarios}}
           {%if cant_comentarios == 1%}
             comentario
           {%else%}
@@ -30,7 +30,7 @@
               </a>
               {% endif %}
               <p>{{ comentario.contenido }}</p>
-              {% if user.is_miembro or user.is_superuser or user == respuesta.creado_por %}
+              {% if user.is_miembro or user.is_superuser or user == comentario.creado_por %}
               <p>
                 <a href="{% url 'comentario:editar' pk=comentario.pk %}?next={{request.path}}">editar</a>
                 <a href="{% url 'comentario:borrar' pk=comentario.pk %}?next={{request.path}}">borrar</a>

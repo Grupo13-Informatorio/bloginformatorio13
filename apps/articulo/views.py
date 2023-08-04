@@ -21,6 +21,7 @@ from .models import Articulo, Categoria
 
 
 class ArticuloView(View):
+    
     def get(self, request, id):
         articulo = Articulo.objects.filter(is_active = True).get(id=id)
         articulos = Articulo.objects.filter(is_active = True).order_by('-fecha','-id')[:5]
@@ -41,6 +42,7 @@ class ArticuloView(View):
    
         
 class ArticuloResumidoView(View):
+
     def get(self, request, id):
         articulo = Articulo.objects.get(id=id)
         categorias = Categoria.objects.all()
@@ -55,11 +57,11 @@ class ArticuloResumidoView(View):
 class EditarArticulo(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False
-    
+
     model = Articulo
     form_class = ArticuloCreationForm
     template_name = 'articulo/articulo_editar.html'
@@ -77,11 +79,11 @@ class CrearArticulo(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'articulo/articulo_crear.html'
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False
-    
+
     def form_valid(self, form):
         if form.is_valid:
             form.instance.creado_por = self.request.user
@@ -198,7 +200,7 @@ class CrearCategoria(LoginRequiredMixin, UserPassesTestMixin, CreateView):
      
      
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False
@@ -222,7 +224,7 @@ class CrearCategoria(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class BorrarArticuloView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False
@@ -240,11 +242,11 @@ class BorrarArticuloView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class BorrarCategoriaView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False
-    
+
     model = Categoria
     template_name = 'articulo/categoria_borrar.html'
     

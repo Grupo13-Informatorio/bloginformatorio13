@@ -64,6 +64,7 @@
                           <a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}"><button>EDITAR PERFIL</button></a>
                         {% if user.is_miembro or user.is_superuser %}
                           <a href="{% url 'contacto:verContactos' %}"><button>ver mensajes</button></a>
+                          <a href="{% url 'usuario:usuarios' %}"><button>ver usuarios</button></a>
                         {% endif %}
                         {% endif %}
                       </p>

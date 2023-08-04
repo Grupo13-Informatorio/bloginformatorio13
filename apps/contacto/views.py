@@ -26,11 +26,11 @@ class ListarContactosView(UserPassesTestMixin, LoginRequiredMixin, ListView):
     context_object_name = 'contactos'
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
-            return False    
-    
+            return False
+
 
 
 class DetalleContactoView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
@@ -40,10 +40,10 @@ class DetalleContactoView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
     context_object_name = 'contacto'
     
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
-            return False     
+            return False
 
 
 class BorrarContactoView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -53,11 +53,11 @@ class BorrarContactoView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('contacto:verContactos')
 
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
             return True
         else:
             return False
-        
+
     def get_success_url(self) -> str:
         messages.success(self.request, "Contacto borrado exitosamente")
         return super().get_success_url()   

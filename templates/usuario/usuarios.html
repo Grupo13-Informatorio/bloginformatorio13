@@ -1,0 +1,90 @@
+{% extends "index.html"%}
+{% load articulo_tags %}
+{% block title %} Blog G13 - Perfil {{usuario}} {% endblock %}
+{% block contenido %}
+<section class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>USUARIOS</span>
+              <h4>Estas viendo todos los usuarios</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="blog-posts">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog-posts">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="sidebar-item submit-comment">
+                <div class="content">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h3>{{usuarios|length}} Usuarios</h3>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead class="table-dark">
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Nombre usuario</th>
+                              <th scope="col">e-mail</th>
+                              <th scope="col">fecha registro</th>
+                              <th scope="col">ultima actividad</th>
+                              <th scope="col">Activo</th>
+                              <th scope="col">Miembro</th>
+                              <th colspan="2" style="text-align:center;">edicion</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for usuario in usuarios %}
+                            <tr>
+                              <td>{{usuario.id}}</td>
+                              <td>{{usuario.username}}</td>
+                              <td>{{usuario.email}}</td>
+                              <td>{{usuario.date_joined}}</td>
+                              <td>{{usuario.last_login}}</td>
+                              <td>{{usuario.is_active|si_no}}</td>
+                              <td>{{usuario.is_miembro|si_no}}</td>
+                              <td><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}">editar</a></td>
+                              <td>
+                                <a href="{% url 'usuario:cambiar_estado' pk=usuario.pk %}?next={{request.path}}">
+                                {% if usuario.is_active %}
+                                  suspender
+                                {% else %}
+                                  habilitar
+                                {% endif %}
+                                </a>
+                              </td>
+                            </tr>
+                          {% empty %}
+                            <tr>
+                              <td colspan="5">No hay usuarios</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="{% url 'inicio' %}">volver</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

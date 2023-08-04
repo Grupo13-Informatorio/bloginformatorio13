@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6t9=is5x&6)@3-kq0ru_-&0bn3khooh=k#w4ah+klsgj@r+68g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['infogreen13.pythonanywhere.com']
+ALLOWED_HOSTS = ['infogreen13.pythonanywhere.com', '127.0.0.1']
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 

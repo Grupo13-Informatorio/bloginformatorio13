@@ -18,9 +18,18 @@ def last_5(lista):
 @register.filter
 def si_no(booleano):
     if booleano:
-        return "Si"
+        return "Activo"
     else:
-        return "No"
+        return "Suspendido"
+    
+@register.filter
+def rol(usuario):
+    if usuario.is_superuser:
+        return "Administrador"
+    elif usuario.is_miembro:
+        return "Colaborador"
+    else:
+        return "Visitante"
 
 
 @register.simple_tag(takes_context=True)

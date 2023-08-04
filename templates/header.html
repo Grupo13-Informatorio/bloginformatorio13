@@ -42,7 +42,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li class="dropdown-item"><a class="nav-link active">¡hola {{user.username}}!</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:perfil' pk=user.id %}?next={{request.path}}">ver perfil</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'usuario:perfil' pk=user.id %}?next={{request.path}}">menu usuario</a></li>
                   {% if user.is_superuser or user.is_miembro %}
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crear' %}">publicar articulo</a></li>
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'articulo:crearCategoria' %}?next={{request.path}}">crear categoria</a></li>

@@ -174,6 +174,8 @@ class VerUsuariosView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Usuario
     template_name = 'usuario/usuarios.html'
     context_object_name = 'usuarios'
+    paginate_by = 10
+  
 
     def test_func(self):
         if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
@@ -182,7 +184,7 @@ class VerUsuariosView(LoginRequiredMixin, UserPassesTestMixin, ListView):
             return False
 
 
-class EstadoUsuariosView(LoginRequiredMixin, UserPassesTestMixin, View):
+class CambiarEstadoView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def test_func(self):
         if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
@@ -195,6 +197,26 @@ class EstadoUsuariosView(LoginRequiredMixin, UserPassesTestMixin, View):
             usuario = Usuario.objects.get(id=kwargs['pk'])
             usuario.is_active = not usuario.is_active
             usuario.save()
+            return redirect(reverse_lazy('usuario:usuarios'))
+        else:
+            return redirect(reverse_lazy('usuario:usuarios'))
+
+class CambiarRolView(LoginRequiredMixin, UserPassesTestMixin, View):
+
+    def test_func(self):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == "GET":
+            usuario = Usuario.objects.get(id=kwargs['pk'])
+            if usuario != self.request.user:
+                usuario.is_miembro = not usuario.is_miembro
+                usuario.save()
+            else:
+                messages.warning(request, "Usted no puede cambiar su propio estado")
             return redirect(reverse_lazy('usuario:usuarios'))
         else:
             return redirect(reverse_lazy('usuario:usuarios'))

@@ -15,6 +15,13 @@ def count_is_active(lista):
 def last_5(lista):
     return lista.filter(is_active=True).order_by('-fecha','-id')[:5]
 
+@register.filter
+def si_no(booleano):
+    if booleano:
+        return "Si"
+    else:
+        return "No"
+
 
 @register.simple_tag(takes_context=True)
 def url_replace(context, **kwargs):

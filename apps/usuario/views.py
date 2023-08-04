@@ -1,9 +1,11 @@
 from typing import Any, Dict
+from django import http
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views import View   
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login
@@ -107,7 +109,7 @@ class UpdateUsuarioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = UserEditionForm
 
     def test_func(self):
-        if (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user == self.get_object()):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser or self.request.user == self.get_object()):
             return True
         else:
             return False
@@ -167,4 +169,32 @@ class VerPerfilUsuario(DetailView):
 
 
 
+class VerUsuariosView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
+    model = Usuario
+    template_name = 'usuario/usuarios.html'
+    context_object_name = 'usuarios'
+
+    def test_func(self):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
+
+
+class EstadoUsuariosView(LoginRequiredMixin, UserPassesTestMixin, View):
+
+    def test_func(self):
+        if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
+            return True
+        else:
+            return False
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == "GET":
+            usuario = Usuario.objects.get(id=kwargs['pk'])
+            usuario.is_active = not usuario.is_active
+            usuario.save()
+            return redirect(reverse_lazy('usuario:usuarios'))
+        else:
+            return redirect(reverse_lazy('usuario:usuarios'))

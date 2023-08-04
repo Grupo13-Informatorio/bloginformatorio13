@@ -2,6 +2,12 @@
 {% load articulo_tags %}
 {% block title %} Blog G13 - Perfil {{usuario}} {% endblock %}
 {% block contenido %}
+<style>
+  .usuario {
+    background-color: rgb(212, 236, 193);
+    color: #f48840;
+  }
+</style>
 <section class="call-to-action">
   <div class="container">
     <div class="row">
@@ -35,28 +41,30 @@
                       <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                           <thead class="table-dark">
-                            <tr>
+                            <tr style="text-align: center;">
                               <th scope="col">ID</th>
                               <th scope="col">Nombre usuario</th>
                               <th scope="col">e-mail</th>
                               <th scope="col">fecha registro</th>
                               <th scope="col">ultima actividad</th>
-                              <th scope="col">Activo</th>
-                              <th scope="col">Miembro</th>
-                              <th colspan="2" style="text-align:center;">edicion</th>
+                              <th scope="col">editar</th>
+                              <th scope="col">rol</th>
+                              <th scope="col">activo</th>
+                              <th scope="col">cambiar estado</th>
                             </tr>
                           </thead>
                           <tbody>
                           {% for usuario in usuarios %}
-                            <tr>
+                            <tr  style="text-align: center;" class="{% if user == usuario %}usuario{% endif %}">
                               <td>{{usuario.id}}</td>
                               <td>{{usuario.username}}</td>
                               <td>{{usuario.email}}</td>
                               <td>{{usuario.date_joined}}</td>
                               <td>{{usuario.last_login}}</td>
-                              <td>{{usuario.is_active|si_no}}</td>
-                              <td>{{usuario.is_miembro|si_no}}</td>
                               <td><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}">editar</a></td>
+                              {% if user != usuario %}
+                              <td><a href="{% url 'usuario:cambiar_rol' pk=usuario.pk %}?next={{request.path}}">{{usuario|rol}}</a></td>
+                              <td>{{usuario.is_active|si_no}}</td>
                               <td>
                                 <a href="{% url 'usuario:cambiar_estado' pk=usuario.pk %}?next={{request.path}}">
                                 {% if usuario.is_active %}
@@ -66,6 +74,9 @@
                                 {% endif %}
                                 </a>
                               </td>
+                              {% else %}
+                              <td colspan="3" style="text-align: center;">Usuario actual</td>
+                              {% endif %}
                             </tr>
                           {% empty %}
                             <tr>
@@ -75,6 +86,27 @@
                         </tbody>
                         </table>
                       </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <ul class="page-numbers">
+                        {% if page_obj.has_previous %}
+                        <li>
+                          <a href="?page=1">
+                            <i class="fa-solid fa-xl fa-angles-left"></i>
+                          </a>
+                          <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                        </li>
+                        {% endif %}
+                        <li class="active">
+                          <a href="">{{ page_obj.number }}</a>
+                        </li>
+                        {% if page_obj.has_next %}
+                        <li>
+                          <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                          <a href="?page={{ page_obj.paginator.num_pages }}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
+                        </li>
+                        {% endif %}
+                      </ul>
                     </div>
                   </div>
                   <a href="{% url 'inicio' %}">volver</a>

@@ -29,7 +29,7 @@
               <div class="sidebar-item submit-comment">
                 <div class="content">
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-lg-6">
                       <table class="table">
                         <tr>
                           <td><h5>Nombre:</h5></td>
@@ -60,16 +60,26 @@
                       </table>
 
                       <p>
+                      <div class="row">
+                        <div class="col-lg-12">
                         {% if user.is_miembro or user.is_superusuario or user == usuario %}
-                          <a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}"><button>EDITAR PERFIL</button></a>
+                          <a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}">
+                            <button>EDITAR PERFIL</button>
+                          </a>
                         {% if user.is_miembro or user.is_superuser %}
-                          <a href="{% url 'contacto:verContactos' %}"><button>ver mensajes</button></a>
-                          <a href="{% url 'usuario:usuarios' %}"><button>ver usuarios</button></a>
+                          <a href="{% url 'contacto:verContactos' %}">
+                            <button>ver mensajes</button>
+                          </a>
+                          <a href="{% url 'usuario:usuarios' %}">
+                            <button>ver usuarios</button>
+                          </a>
                         {% endif %}
                         {% endif %}
+                        </div>
+                      </div>
                       </p>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-lg-6">
                       <p>Foto de perfil:</p>
                       <div class="circular--profile center">
                         <img src="{{usuario.foto_perfil.url}}" alt="foto perfil {{usuario}}">
@@ -77,9 +87,10 @@
                       <br>
                       <br>
                   </div>
+                  </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-lg-6">
                       <h3>{{articulos|length}} articulos</h3>
                       <div class="table-responsive">
                         <table class="table table-bordered table-striped">
@@ -113,7 +124,7 @@
                         </table>
                       </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-lg-6">
                       <h3>{{titulo_comentarios}}</h3>
                       <div class="table-responsive">
                         <table class="table table-bordered table-striped">

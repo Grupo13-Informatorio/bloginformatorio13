@@ -194,12 +194,18 @@ class CambiarEstadoView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == "GET":
+            success_url = reverse_lazy(request.GET.get('next'))
             usuario = Usuario.objects.get(id=kwargs['pk'])
-            usuario.is_active = not usuario.is_active
-            usuario.save()
-            return redirect(reverse_lazy('usuario:usuarios'))
+            if usuario != self.request.user:
+                usuario.is_active = not usuario.is_active
+                usuario.save()
+                estado = "activo" if usuario.is_active else "suspendido"
+                messages.success(request, "Se cambio rol de " + usuario + " a " + estado)
+            else:
+                messages.warning(request, "Usted no puede cambiar su propio estado")
+            return redirect(success_url)
         else:
-            return redirect(reverse_lazy('usuario:usuarios'))
+            return redirect(success_url)
 
 class CambiarRolView(LoginRequiredMixin, UserPassesTestMixin, View):
 
@@ -211,12 +217,15 @@ class CambiarRolView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == "GET":
+            success_url = reverse_lazy(request.GET.get('next'))
             usuario = Usuario.objects.get(id=kwargs['pk'])
             if usuario != self.request.user:
                 usuario.is_miembro = not usuario.is_miembro
+                estado = "colaborador" if usuario.is_miembro else "visitante"
                 usuario.save()
+                messages.success(request, "Se cambio rol de " + usuario + " a " + estado)
             else:
                 messages.warning(request, "Usted no puede cambiar su propio estado")
-            return redirect(reverse_lazy('usuario:usuarios'))
+            return redirect(success_url)
         else:
-            return redirect(reverse_lazy('usuario:usuarios'))
+            return redirect(success_url)

@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block contenido %}
+<section class="call-to-action">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-8">
+              <span>GOOGLE Login</span>
+              <h4>Aqui puede registrarse o iniciar sesion con GOOGLE</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="blog-posts">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="all-blog-posts">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="sidebar-item submit-comment">
+                    <div>
+                    <strong>Menu:</strong>
+                    <ul>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'usuario:perfil' %}">Ver perfil</a></li>
+                    {% else %}
+                    <li><a href="{% url 'account_login' %}">Iniciar Sesion con GOOGLE</a></li>
+                    <li><a href="{% url 'account_signup' %}">Registrar una cuenta GOOGLE</a></li>
+                    {% endif %}
+                    </ul>
+                    </div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}
+{% block extra_body %}
+{% endblock %}

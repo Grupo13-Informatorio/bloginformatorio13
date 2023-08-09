@@ -34,11 +34,12 @@
                   <img src="{{articulo.imagen.url}}" alt="">
                 </div>
                 {% if user.is_superuser or user.is_miembro %}
-                <a class="fas fa-pencil fa-xl" href="{% url 'articulo:editar' pk=articulo.id %}">
-                 <i ></i>
+                <a href="{% url 'articulo:editar' pk=articulo.id %}">
+                 <small>Editar</small>
                 </a>
-                <a class="fa-solid fa-trash fa-xl" href="{% url 'articulo:borrar' pk=articulo.id %}">
-                  <i ></i>
+                <small>|</small>
+                <a href="{% url 'articulo:borrar' pk=articulo.id %}">
+                  <small>Borrar</small>
                 </a>
                 {% endif %}
                 <div class="down-content">
@@ -56,6 +57,7 @@
                       <div class="col-6">
                         <ul class="post-tags fa-xl">
                           <li>
+                            <i class="fa-solid fa-xl fa-tag"></i>
                             <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">{{articulo.categoria}}</a>
                           </li>
                         </ul>

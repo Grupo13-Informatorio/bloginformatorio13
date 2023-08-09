@@ -242,7 +242,7 @@ header .navbar {
 }
 
 /* .circular--portrait{
-	position: relative; width: 50px; height: 50px; overflow: hidden; border-radius: 50%; 
+	position: relative; width: 50px; height: 50px; overflow: hidden; border-radius: 50%;
 } */
 
 .formulario{
@@ -258,7 +258,7 @@ header .navbar {
 	text-align: end;
 }
 
-.circular--portrait img { 
+.circular--portrait img {
 		border-radius: 50%;
 		height: 50px;
 		object-fit: cover;
@@ -266,7 +266,7 @@ header .navbar {
 		width: 50px;
 	}
 
-.circular--comment img { 
+.circular--comment img {
 	border-radius: 50%;
 	height: 75px;
 	object-fit: cover;
@@ -280,7 +280,7 @@ header .navbar {
 	object-fit: cover;
 	object-position: center;
 	width: 300px;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); 
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 
 }
 
@@ -309,7 +309,7 @@ header .navbar {
 
 .navbar .navbar-toggler {
 	border-color: #fff;
-	background-color: #f48840;	
+	background-color: #f48840;
 	height: 46px;
 	outline: none;
 	border-radius: 0px;
@@ -917,7 +917,7 @@ input {
 	align-content: center;
 }
 
-.sidebar .tags ul li div button, 
+.sidebar .tags ul li div button,
 .sidebar .tags ul li div a{
 	align-content: center;
 	background-color:transparent;
@@ -1278,16 +1278,16 @@ a {
 	max-height: 35vh;
 	resize: both;
 	object-fit: cover;
-	
+
 }
 
 .image-container img {
-	max-width: 300px; 
+	max-width: 300px;
 	max-height: 300px;
 	height: auto;
 	width: auto;
 	border-radius: 10px;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); 
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   }
 
 
@@ -1297,29 +1297,29 @@ a {
 	/* This bit sets up the horizontal layout */
 	display:flex;
 	flex-direction:row;
-	
+
 	/* This bit draws the box around it */
 	border:1px solid rgb(231, 231, 231);
-  
+
   }
-  
+
   .form-respuesta input {
 	/* Tell the input to use all the available space */
 	flex-grow:2;
 	/* And hide the input's outline, so the form looks like the outline */
 	border:none;
   }
-  
+
   /* remove the input focus blue box, it will be in the wrong place. */
   .form-respuesta input:focus {
 	outline: none;
   }
-  
+
   /* Add the focus effect to the form so it contains the button */
-  form.form-respuesta:focus-within { 
-	outline: 1px solid #a7a7a7 
+  form.form-respuesta:focus-within {
+	outline: 1px solid #a7a7a7
   }
-  
+
   .form-respuesta button{
 	/* Just a little styling to make it pretty */
 	border:1px solid #f48840;

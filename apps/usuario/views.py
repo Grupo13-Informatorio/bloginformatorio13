@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views import View   
+from django.views import View
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.hashers import make_password
@@ -175,7 +175,12 @@ class VerUsuariosView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'usuario/usuarios.html'
     context_object_name = 'usuarios'
     paginate_by = 10
-  
+
+    def get_context_data(self, **kwargs) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        cantidad_usuarios = Usuario.objects.count()
+        context['cantidad_usuarios'] = cantidad_usuarios
+        return context
 
     def test_func(self):
         if self.request.user.is_active and (self.request.user.is_miembro or self.request.user.is_superuser):
@@ -194,13 +199,13 @@ class CambiarEstadoView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == "GET":
-            success_url = reverse_lazy(request.GET.get('next'))
+            success_url = request.GET.get('next')
             usuario = Usuario.objects.get(id=kwargs['pk'])
             if usuario != self.request.user:
                 usuario.is_active = not usuario.is_active
                 usuario.save()
                 estado = "activo" if usuario.is_active else "suspendido"
-                messages.success(request, "Se cambio rol de " + usuario + " a " + estado)
+                messages.success(request, "Se cambio estado de " + str(usuario) + " a " + estado)
             else:
                 messages.warning(request, "Usted no puede cambiar su propio estado")
             return redirect(success_url)
@@ -217,15 +222,15 @@ class CambiarRolView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == "GET":
-            success_url = reverse_lazy(request.GET.get('next'))
+            success_url = request.GET.get('next')
             usuario = Usuario.objects.get(id=kwargs['pk'])
             if usuario != self.request.user:
                 usuario.is_miembro = not usuario.is_miembro
                 estado = "colaborador" if usuario.is_miembro else "visitante"
                 usuario.save()
-                messages.success(request, "Se cambio rol de " + usuario + " a " + estado)
+                messages.success(request, "Se cambio rol de " + str(usuario) + " a " + estado)
             else:
-                messages.warning(request, "Usted no puede cambiar su propio estado")
+                messages.warning(request, "Usted no puede cambiar su rol")
             return redirect(success_url)
         else:
             return redirect(success_url)

@@ -1,4 +1,4 @@
-{% extends "index.html"%}  
+{% extends "index.html"%}
 {% block title %} Blog G13 - Articulos {% endblock %}
 {% block articulo %}
 {% load articulo_tags %}
@@ -14,13 +14,13 @@
               <h4>Aqui todas las noticias
                 <p style="color:lightgrey">
                   {% if categoria %}
-                  Categoria '{{categoria|upper}}': 
+                  Categoria '{{categoria|upper}}':
                   {% endif %}
                   {% if autor %}
-                  Publicaciones de {{autor|upper}}: 
-                  {% endif %}                  
+                  Publicaciones de {{autor|upper}}:
+                  {% endif %}
                   {% if filter %}
-                   - Resultados que incluyen '{{filter}}': 
+                   - Resultados que incluyen '{{filter}}':
                   {% endif %}
                   {{registros}} registros
                 </p>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  
+
 </section>
 
 <section class="blog-posts grid-system">
@@ -50,15 +50,16 @@
                   <img src="{{ articulo.imagen.url }}" alt="">
                 </div>
                 {% if user.is_superuser or user.is_miembro %}
-                <a class="fa-solid fa-pencil fa-xl" href="{% url 'articulo:editar' pk=articulo.id %}">
-                 <i ></i>
+                <a href="{% url 'articulo:editar' pk=articulo.id %}">
+                 <small>Editar</small>
                 </a>
-                <a class="fa-solid fa-trash fa-xl" href="{% url 'articulo:borrar' pk=articulo.id %}">
-                  <i ></i>
+                <small>|</small>
+                <a href="{% url 'articulo:borrar' pk=articulo.id %}">
+                  <small>Borrar</small>
                 </a>
                 {% endif %}
                 <div class="down-content">
-                  
+
                   <a href="{% url 'articulo:categoria' pk=articulo.categoria.pk %}">
                   <span>{{ articulo.categoria }}</span></a>
                   <a href="{% url 'articulo:mostrarArticulo' id=articulo.id %}"><h4>{{ articulo.titulo }}</h4></a>
@@ -138,4 +139,4 @@
 </section>
 
 {% endblock %}
-    
+

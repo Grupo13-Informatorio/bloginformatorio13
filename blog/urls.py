@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 
-from .views import IndexView, contacto, registration_success, sobre_nosotros
+from .views import IndexView, registration_success, sobre_nosotros
 
 urlpatterns = [
     path('jpqifepfnapkjdfnapdjk/', admin.site.urls),
@@ -15,5 +15,6 @@ urlpatterns = [
     path('', include('apps.usuario.urls')),
     path('', include('apps.comentario.urls')),
     path('', include('apps.contacto.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+    path("", include("allauth.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

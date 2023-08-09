@@ -37,7 +37,29 @@
                 <div class="content">
                   <div class="row">
                     <div class="col-sm-12">
-                      <h3>{{usuarios|length}} Usuarios</h3>
+                      <h5>{{cantidad_usuarios}} usuarios registrados</h5>
+                      <div class="col-sm-12">
+                      <ul class="page-numbers">
+                        {% if page_obj.has_previous %}
+                        <li>
+                          <a href="?page=1">
+                            <i class="fa-solid fa-xl fa-angles-left"></i>
+                          </a>
+                          <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                        </li>
+                        {% endif %}
+                        <li class="active">
+                          <a href="">{{ page_obj.number }}</a>
+                        </li>
+                        {% if page_obj.has_next %}
+                        <li>
+                          <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                          <a href="?page={{ page_obj.paginator.num_pages }}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                    </div>
                       <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                           <thead class="table-dark">
@@ -61,12 +83,12 @@
                               <td>{{usuario.email}}</td>
                               <td>{{usuario.date_joined}}</td>
                               <td>{{usuario.last_login}}</td>
-                              <td><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.path}}">editar</a></td>
+                              <td><a href="{% url 'usuario:actualizar' pk=usuario.pk %}?next={{request.get_full_path}}">editar</a></td>
                               {% if user != usuario %}
-                              <td><a href="{% url 'usuario:cambiar_rol' pk=usuario.pk %}?next={{request.path}}">{{usuario|rol}}</a></td>
+                              <td><a href="{% url 'usuario:cambiar_rol' pk=usuario.pk %}?next={{request.get_full_path}}">{{usuario|rol}}</a></td>
                               <td>{{usuario.is_active|si_no}}</td>
                               <td>
-                                <a href="{% url 'usuario:cambiar_estado' pk=usuario.pk %}?next={{request.path}}">
+                                <a href="{% url 'usuario:cambiar_estado' pk=usuario.pk %}?next={{request.get_full_path}}">
                                 {% if usuario.is_active %}
                                   suspender
                                 {% else %}
@@ -87,27 +109,6 @@
                         </table>
                       </div>
                     </div>
-                    <div class="col-sm-12">
-                      <ul class="page-numbers">
-                        {% if page_obj.has_previous %}
-                        <li>
-                          <a href="?page=1">
-                            <i class="fa-solid fa-xl fa-angles-left"></i>
-                          </a>
-                          <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
-                        </li>
-                        {% endif %}
-                        <li class="active">
-                          <a href="">{{ page_obj.number }}</a>
-                        </li>
-                        {% if page_obj.has_next %}
-                        <li>
-                          <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                          <a href="?page={{ page_obj.paginator.num_pages }}" sytle="color:orange;"><i class="fa-solid fa-xl fa-angles-right"></i></a>
-                        </li>
-                        {% endif %}
-                      </ul>
-                    </div>
                   </div>
                   <a href="{% url 'inicio' %}">volver</a>
                 </div>
@@ -117,6 +118,5 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 {% endblock %}
